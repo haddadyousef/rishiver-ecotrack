@@ -1,0 +1,116 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.9 (swiftlang-5.9.0.128.108 clang-1500.0.40.1)
+// swift-module-flags: -target arm64-apple-ios13.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name StripeIdentity
+// swift-module-flags-ignorable: -enable-bare-slash-regex
+import AVKit
+import Accelerate
+import CoreGraphics
+import CoreML
+import CoreMedia
+import CoreVideo
+import Foundation
+import Metal
+import MetalKit
+import MetalPerformanceShaders
+import SafariServices
+@_spi(STP) import StripeCameraCore
+@_exported @_spi(STP) import StripeCore
+@_exported import StripeIdentity
+@_spi(STP) import StripeUICore
+import Swift
+import UIKit
+import Vision
+import WebKit
+import _Concurrency
+import _StringProcessing
+import _SwiftConcurrencyShims
+@_spi(STP) public enum Image : Swift.String, Swift.CaseIterable, StripeUICore.ImageMaker {
+  @_spi(STP) public typealias BundleLocator = StripeIdentity.StripeIdentityBundleLocator
+  @_spi(STP) case iconAdd
+  @_spi(STP) case iconEllipsis
+  @_spi(STP) case iconCheckmark
+  @_spi(STP) case iconCheckmark92
+  @_spi(STP) case iconClock
+  @_spi(STP) case iconInfo
+  @_spi(STP) case iconWarning
+  @_spi(STP) case iconWarning2
+  @_spi(STP) case iconWarning92
+  @_spi(STP) case iconCamera
+  @_spi(STP) case iconSelfieWarmup
+  @_spi(STP) case iconIdFront
+  @_spi(STP) case iconCloud
+  @_spi(STP) case iconDocument
+  @_spi(STP) case iconLock
+  @_spi(STP) case iconMoved
+  @_spi(STP) case iconCreateIdentityVerification
+  @_spi(STP) case iconWallet
+  @_spi(STP) case iconCameraClassic
+  @_spi(STP) case iconDisputeProtection
+  @_spi(STP) case iconPhone
+  @_spi(STP) public init?(rawValue: Swift.String)
+  @_spi(STP) public typealias AllCases = [StripeIdentity.Image]
+  @_spi(STP) public typealias RawValue = Swift.String
+  @_spi(STP) public static var allCases: [StripeIdentity.Image] {
+    @_spi(STP) get
+  }
+  @_spi(STP) public var rawValue: Swift.String {
+    @_spi(STP) get
+  }
+}
+@_spi(STP) @_hasMissingDesignatedInitializers final public class StripeIdentityBundleLocator : StripeCore.BundleLocatorProtocol {
+  @_spi(STP) public static let internalClass: Swift.AnyClass
+  @_spi(STP) public static let bundleName: Swift.String
+  @_spi(STP) public static let resourcesBundle: Foundation.Bundle
+  @_spi(STP) @objc deinit
+}
+@_hasMissingDesignatedInitializers final public class IdentityVerificationSheet {
+  @frozen public enum VerificationFlowResult {
+    case flowCompleted
+    case flowCanceled
+    case flowFailed(error: any Swift.Error)
+  }
+  public struct Configuration {
+    public var brandLogo: UIKit.UIImage
+    public init(brandLogo: UIKit.UIImage)
+  }
+  final public let verificationSessionClientSecret: Swift.String
+  @available(iOS 14.3, *)
+  convenience public init(verificationSessionClientSecret: Swift.String)
+  convenience public init(verificationSessionId: Swift.String, ephemeralKeySecret: Swift.String, configuration: StripeIdentity.IdentityVerificationSheet.Configuration)
+  final public func present(from presentingViewController: UIKit.UIViewController, completion: @escaping (StripeIdentity.IdentityVerificationSheet.VerificationFlowResult) -> Swift.Void)
+  public static var simulatorDocumentCameraImages: [UIKit.UIImage]
+  public static var simulatorSelfieCameraImages: [UIKit.UIImage]
+  @_spi(STP) final public var verificationPageAPIVersion: Swift.Int {
+    get
+    set
+  }
+  @objc deinit
+}
+@_spi(STP) extension StripeIdentity.IdentityVerificationSheet : StripeCore.STPAnalyticsProtocol {
+  @_spi(STP) public static var stp_analyticsIdentifier: Swift.String
+}
+public enum IdentityVerificationSheetError : Swift.Error {
+  case invalidClientSecret
+  case unknown(debugDescription: Swift.String)
+  case testModeSampleError
+}
+extension StripeIdentity.IdentityVerificationSheetError : Foundation.LocalizedError {
+  public var localizedDescription: Swift.String {
+    get
+  }
+}
+extension StripeIdentity.IdentityVerificationSheetError : Swift.CustomDebugStringConvertible {
+  public var debugDescription: Swift.String {
+    get
+  }
+}
+@_spi(STP) extension StripeIdentity.IdentityVerificationSheetError : StripeCore.AnalyticLoggableErrorV2 {
+  @_spi(STP) public var errorCode: Swift.Int {
+    @_spi(STP) get
+  }
+  @_spi(STP) public func analyticLoggableSerializeForLogging() -> [Swift.String : Any]
+}
+@_spi(STP) extension StripeIdentity.Image : Swift.Equatable {}
+@_spi(STP) extension StripeIdentity.Image : Swift.Hashable {}
+@_spi(STP) extension StripeIdentity.Image : Swift.RawRepresentable {}
+extension StripeIdentity.IdentityVerificationSheet.VerificationFlowResult : Swift.Sendable {}

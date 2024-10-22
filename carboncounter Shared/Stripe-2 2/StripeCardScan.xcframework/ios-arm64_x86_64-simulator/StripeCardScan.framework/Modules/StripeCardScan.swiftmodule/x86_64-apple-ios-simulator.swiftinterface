@@ -1,0 +1,81 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.9 (swiftlang-5.9.0.128.108 clang-1500.0.40.1)
+// swift-module-flags: -target x86_64-apple-ios13.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name StripeCardScan
+// swift-module-flags-ignorable: -enable-bare-slash-regex
+import AVFoundation
+import AVKit
+import Accelerate
+import CoreGraphics
+import CoreML
+import CoreTelephony
+import Foundation
+@_exported import StripeCardScan
+@_exported import StripeCore
+import Swift
+import UIKit
+import VideoToolbox
+import Vision
+import _Concurrency
+import _StringProcessing
+import _SwiftConcurrencyShims
+import os.log
+import os
+@frozen public enum CardScanSheetResult {
+  case completed(card: StripeCardScan.ScannedCard)
+  case canceled
+  case failed(error: any Swift.Error)
+}
+public class CardScanSheet {
+  public init()
+  public func present(from presentingViewController: UIKit.UIViewController, completion: @escaping (StripeCardScan.CardScanSheetResult) -> Swift.Void, animated: Swift.Bool = true)
+  @objc deinit
+}
+public enum CancellationReason : Swift.String, Swift.Equatable {
+  case back
+  case closed
+  case userCannotScan
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+@frozen public enum CardImageVerificationSheetResult {
+  case completed(scannedCard: StripeCardScan.ScannedCard)
+  case canceled(reason: StripeCardScan.CancellationReason)
+  case failed(error: any Swift.Error)
+}
+final public class CardImageVerificationSheet {
+  public init(cardImageVerificationIntentId: Swift.String, cardImageVerificationIntentSecret: Swift.String, configuration: StripeCardScan.CardImageVerificationSheet.Configuration = Configuration())
+  final public func present(from presentingViewController: UIKit.UIViewController, completion: @escaping (StripeCardScan.CardImageVerificationSheetResult) -> Swift.Void, animated: Swift.Bool = true)
+  @objc deinit
+}
+extension StripeCardScan.CardImageVerificationSheet {
+  public struct Configuration {
+    public var apiClient: StripeCore.STPAPIClient
+    public init()
+  }
+}
+public enum CardScanSheetError : Swift.Error {
+  case invalidClientSecret
+  case unknown(debugDescription: Swift.String)
+}
+extension StripeCardScan.CardScanSheetError : Foundation.LocalizedError {
+  public var localizedDescription: Swift.String {
+    get
+  }
+}
+extension StripeCardScan.CardScanSheetError : Swift.CustomDebugStringConvertible {
+  public var debugDescription: Swift.String {
+    get
+  }
+}
+public struct ScannedCard : Swift.Equatable {
+  public let pan: Swift.String
+  public let expiryMonth: Swift.String?
+  public let expiryYear: Swift.String?
+  public let name: Swift.String?
+  public static func == (a: StripeCardScan.ScannedCard, b: StripeCardScan.ScannedCard) -> Swift.Bool
+}
+extension StripeCardScan.CancellationReason : Swift.Hashable {}
+extension StripeCardScan.CancellationReason : Swift.RawRepresentable {}

@@ -1,0 +1,4760 @@
+2024,Acura,ILX,265
+2024,Acura,MDX,300
+2024,Acura,NSX,320
+2024,Acura,RDX,285
+2024,Acura,TLX,275
+2024,Alfa Romeo,Giulia,295
+2024,Alfa Romeo,Stelvio,310
+2024,Audi,A3,260
+2024,Audi,A4,275
+2024,Audi,A5,280
+2024,Audi,A6,290
+2024,Audi,A7,295
+2024,Audi,A8,305
+2024,Audi,Q3,255
+2024,Audi,Q5,270
+2024,Audi,Q7,295
+2024,Audi,Q8,310
+2024,Audi,R8,330
+2024,Audi,RS3,265
+2024,Audi,RS5,295
+2024,Audi,S3,260
+2024,Audi,S4,280
+2024,Audi,S5,285
+2024,Audi,S6,295
+2024,Audi,S7,305
+2024,Audi,S8,320
+2024,BMW,2 Series,255
+2024,BMW,3 Series,270
+2024,BMW,4 Series,280
+2024,BMW,5 Series,290
+2024,BMW,6 Series,300
+2024,BMW,7 Series,310
+2024,BMW,8 Series,320
+2024,BMW,M2,275
+2024,BMW,M3,285
+2024,BMW,M4,305
+2024,BMW,M5,315
+2024,BMW,M8,330
+2024,BMW,X1,250
+2024,BMW,X2,255
+2024,BMW,X3,265
+2024,BMW,X4,270
+2024,BMW,X5,290
+2024,BMW,X6,300
+2024,BMW,X7,310
+2024,Buick,Encore,240
+2024,Buick,Enclave,285
+2024,Buick,Envision,270
+2024,Cadillac,CT4,275
+2024,Cadillac,CT5,285
+2024,Cadillac,CT6,300
+2024,Cadillac,Escalade,325
+2024,Cadillac,XT4,260
+2024,Cadillac,XT5,275
+2024,Cadillac,XT6,290
+2024,Chevrolet,Blazer,270
+2024,Chevrolet,Camaro,300
+2024,Chevrolet,Colorado,280
+2024,Chevrolet,Corvette,310
+2024,Chevrolet,Equinox,260
+2024,Chevrolet,Malibu,275
+2024,Chevrolet,Silverado,330
+2024,Chevrolet,Suburban,320
+2024,Chevrolet,Tahoe,325
+2024,Chevrolet,Trailblazer,255
+2024,Chevrolet,Traverse,295
+2024,Chevrolet,Trax,250
+2024,Chrysler,300,305
+2024,Chrysler,Pacifica,265
+2024,Dodge,Challenger,310
+2024,Dodge,Charger,325
+2024,Dodge,Durango,315
+2024,Dodge,Grand Caravan,255
+2024,Dodge,Journey,270
+2024,Fiat,500,230
+2024,Fiat,500X,240
+2024,Ford,Bronco,305
+2024,Ford,Edge,280
+2024,Ford,Escape,265
+2024,Ford,Expedition,320
+2024,Ford,Explorer,300
+2024,Ford,F-150,335
+2024,Ford,Fusion,270
+2024,Ford,Mustang,315
+2024,Ford,Ranger,300
+2024,Genesis,G70,270
+2024,Genesis,G80,295
+2024,Genesis,G90,310
+2024,GMC,Acadia,275
+2024,GMC,Canyon,280
+2024,GMC,Savana,290
+2024,GMC,Sierra,330
+2024,GMC,Terrain,260
+2024,GMC,Yukon,325
+2024,Honda,Accord,280
+2024,Honda,Civic,270
+2024,Honda,Clarity,255
+2024,Honda,CR-V,265
+2024,Honda,Fit,245
+2024,Honda,HR-V,250
+2024,Honda,Insight,250
+2024,Honda,Odyssey,275
+2024,Honda,Pilot,295
+2024,Honda,Ridgeline,290
+2024,Hyundai,Accent,245
+2024,Hyundai,Elantra,255
+2024,Hyundai,Ioniq,240
+2024,Hyundai,Kona,250
+2024,Hyundai,Nexo,230
+2024,Hyundai,Palisade,300
+2024,Hyundai,Santa Fe,270
+2024,Hyundai,Sonata,265
+2024,Hyundai,Tucson,260
+2024,Hyundai,Veloster,250
+2024,Infiniti,Q50,280
+2024,Infiniti,Q60,305
+2024,Infiniti,QX50,270
+2024,Infiniti,QX55,275
+2024,Infiniti,QX60,290
+2024,Infiniti,QX80,335
+2024,Jaguar,E-Pace,265
+2024,Jaguar,F-Pace,280
+2024,Jaguar,F-Type,315
+2024,Jaguar,I-Pace,255
+2024,Jaguar,XE,270
+2024,Jaguar,XF,290
+2024,Jaguar,XJ,305
+2024,Jeep,Cherokee,275
+2024,Jeep,Compass,255
+2024,Jeep,Grand Cherokee,305
+2024,Jeep,Renegade,245
+2024,Jeep,Wrangler,290
+2024,Kia,Forte,250
+2024,Kia,K5,260
+2024,Kia,Niro,240
+2024,Kia,Seltos,245
+2024,Kia,Sorento,275
+2024,Kia,Soul,235
+2024,Kia,Sportage,255
+2024,Lamborghini,Aventador,350
+2024,Lamborghini,Huracan,335
+2024,Lamborghini,Urus,320
+2024,Land Rover,Defender,300
+2024,Land Rover,Discovery,315
+2024,Land Rover,Discovery Sport,285
+2024,Land Rover,Range Rover,330
+2024,Land Rover,Range Rover Evoque,290
+2024,Land Rover,Range Rover Sport,320
+2024,Land Rover,Range Rover Velar,310
+2024,Lexus,ES,280
+2024,Lexus,GS,295
+2024,Lexus,IS,270
+2024,Lexus,LC,310
+2024,Lexus,LX,325
+2024,Lexus,NX,265
+2024,Lexus,RC,300
+2024,Lexus,RX,290
+2024,Lexus,UX,255
+2024,Lincoln,Aviator,300
+2024,Lincoln,Continental,305
+2024,Lincoln,Corsair,270
+2024,Lincoln,MKC,265
+2024,Lincoln,MKT,285
+2024,Lincoln,Nautilus,280
+2024,Lincoln,Navigator,330
+2024,Lotus,Evora,325
+2024,Lotus,Exige,315
+2024,Maserati,Ghibli,300
+2024,Maserati,Levante,310
+2024,Maserati,Quattroporte,320
+2024,Mazda,3,260
+2024,Mazda,6,275
+2024,Mazda,CX-3,245
+2024,Mazda,CX-30,255
+2024,Mazda,CX-5,265
+2024,Mazda,CX-9,290
+2024,Mazda,MX-5 Miata,230
+2024,McLaren,570S,320
+2024,McLaren,720S,335
+2024,McLaren,Artura,305
+2024,McLaren,GT,330
+2024,Mercedes-Benz,A-Class,250
+2024,Mercedes-Benz,C-Class,270
+2024,Mercedes-Benz,CLA-Class,255
+2024,Mercedes-Benz,CLS-Class,285
+2024,Mercedes-Benz,E-Class,290
+2024,Mercedes-Benz,G-Class,340
+2024,Mercedes-Benz,GLA-Class,255
+2024,Mercedes-Benz,GLB-Class,260
+2024,Mercedes-Benz,GLC-Class,275
+2024,Mercedes-Benz,GLE-Class,300
+2024,Mercedes-Benz,GLS-Class,315
+2024,Mercedes-Benz,S-Class,320
+2024,Mini,Cooper,240
+2024,Mini,Countryman,255
+2024,Mini,Clubman,265
+2024,Mitsubishi,Outlander,255
+2024,Mitsubishi,Eclipse Cross,270
+2024,Mitsubishi,Mirage,220
+2024,Nissan,Altima,265
+2024,Nissan,Armada,315
+2024,Nissan,Frontier,280
+2024,Nissan,Maxima,285
+2024,Nissan,Pathfinder,290
+2024,Nissan,Rogue,250
+2024,Nissan,Sentra,235
+2024,Nissan,Titan,325
+2024,Porsche,718 Cayman,275
+2024,Porsche,911,300
+2024,Porsche,Taycan,315
+2024,Ram,1500,320
+2024,Ram,2500,335
+2024,Ram,3500,340
+2024,Subaru,Ascent,270
+2024,Subaru,Crosstrek,245
+2024,Subaru,Forester,255
+2024,Subaru,Impreza,265
+2024,Subaru,Outback,270
+2024,Tesla,Model 3,195
+2024,Tesla,Model S,205
+2024,Tesla,Model X,215
+2024,Tesla,Model Y,200
+2024,Toyota,4Runner,305
+2024,Toyota,Highlander,295
+2024,Toyota,RAV4,240
+2024,Toyota,Sienna,260
+2024,Toyota,Tacoma,280
+2024,Toyota,Tundra,315
+2024,Volkswagen,Arteon,245
+2024,Volkswagen,Atlas,285
+2024,Volkswagen,Beetle,240
+2024,Volkswagen,Golf,225
+2024,Volkswagen,Jetta,245
+2024,Volkswagen,Tiguan,265
+2024,Volvo,XC40,240
+2024,Volvo,XC60,270
+2024,Volvo,XC90,295
+2023,Acura,ILX,260
+2023,Acura,MDX,295
+2023,Acura,NSX,315
+2023,Acura,RDX,280
+2023,Acura,TLX,270
+2023,Alfa Romeo,Giulia,290
+2023,Alfa Romeo,Stelvio,305
+2023,Audi,A3,250
+2023,Audi,A4,265
+2023,Audi,A5,270
+2023,Audi,A6,280
+2023,Audi,A7,285
+2023,Audi,A8,300
+2023,Audi,Q3,245
+2023,Audi,Q5,260
+2023,Audi,Q7,285
+2023,Audi,Q8,300
+2023,Audi,R8,320
+2023,Audi,RS3,255
+2023,Audi,RS5,285
+2023,Audi,S3,250
+2023,Audi,S4,270
+2023,Audi,S5,275
+2023,Audi,S6,285
+2023,Audi,S7,300
+2023,Audi,S8,315
+2023,BMW,2 Series,245
+2023,BMW,3 Series,260
+2023,BMW,4 Series,270
+2023,BMW,5 Series,280
+2023,BMW,6 Series,290
+2023,BMW,7 Series,300
+2023,BMW,8 Series,310
+2023,BMW,M2,265
+2023,BMW,M3,275
+2023,BMW,M4,295
+2023,BMW,M5,305
+2023,BMW,M8,320
+2023,BMW,X1,240
+2023,BMW,X2,245
+2023,BMW,X3,255
+2023,BMW,X4,260
+2023,BMW,X5,280
+2023,BMW,X6,290
+2023,BMW,X7,300
+2023,Buick,Encore,235
+2023,Buick,Enclave,280
+2023,Buick,Envision,265
+2023,Cadillac,CT4,270
+2023,Cadillac,CT5,280
+2023,Cadillac,CT6,295
+2023,Cadillac,Escalade,320
+2023,Cadillac,XT4,255
+2023,Cadillac,XT5,270
+2023,Cadillac,XT6,285
+2023,Chevrolet,Blazer,265
+2023,Chevrolet,Camaro,295
+2023,Chevrolet,Colorado,275
+2023,Chevrolet,Corvette,305
+2023,Chevrolet,Equinox,250
+2023,Chevrolet,Malibu,265
+2023,Chevrolet,Silverado,325
+2023,Chevrolet,Suburban,315
+2023,Chevrolet,Tahoe,320
+2023,Chevrolet,Trailblazer,245
+2023,Chevrolet,Traverse,285
+2023,Chevrolet,Trax,240
+2023,Chrysler,300,300
+2023,Chrysler,Pacifica,260
+2023,Dodge,Challenger,305
+2023,Dodge,Charger,320
+2023,Dodge,Durango,310
+2023,Dodge,Grand Caravan,250
+2023,Dodge,Journey,265
+2023,Fiat,500,225
+2023,Fiat,500X,235
+2023,Ford,Bronco,300
+2023,Ford,Edge,275
+2023,Ford,Escape,260
+2023,Ford,Expedition,315
+2023,Ford,Explorer,295
+2023,Ford,F-150,330
+2023,Ford,Fusion,270
+2023,Ford,Mustang,305
+2023,Ford,Ranger,290
+2023,Genesis,G70,265
+2023,Genesis,G80,290
+2023,Genesis,G90,305
+2023,GMC,Acadia,270
+2023,GMC,Canyon,275
+2023,GMC,Savana,285
+2023,GMC,Sierra,325
+2023,GMC,Terrain,255
+2023,GMC,Yukon,320
+2023,Honda,Accord,275
+2023,Honda,Civic,265
+2023,Honda,Clarity,250
+2023,Honda,CR-V,260
+2023,Honda,Fit,240
+2023,Honda,HR-V,245
+2023,Honda,Insight,245
+2023,Honda,Odyssey,270
+2023,Honda,Pilot,290
+2023,Honda,Ridgeline,285
+2023,Hyundai,Accent,240
+2023,Hyundai,Elantra,250
+2023,Hyundai,Ioniq,235
+2023,Hyundai,Kona,245
+2023,Hyundai,Nexo,225
+2023,Hyundai,Palisade,295
+2023,Hyundai,Santa Fe,265
+2023,Hyundai,Sonata,260
+2023,Hyundai,Tucson,255
+2023,Hyundai,Veloster,245
+2023,Infiniti,Q50,275
+2023,Infiniti,Q60,300
+2023,Infiniti,QX50,265
+2023,Infiniti,QX55,270
+2023,Infiniti,QX60,285
+2023,Infiniti,QX80,330
+2023,Jaguar,E-Pace,255
+2023,Jaguar,F-Pace,270
+2023,Jaguar,F-Type,305
+2023,Jaguar,I-Pace,240
+2023,Jaguar,XE,265
+2023,Jaguar,XF,285
+2023,Jaguar,XJ,300
+2023,Jeep,Cherokee,270
+2023,Jeep,Compass,245
+2023,Jeep,Grand Cherokee,300
+2023,Jeep,Renegade,235
+2023,Jeep,Wrangler,285
+2023,Kia,Forte,245
+2023,Kia,K5,255
+2023,Kia,Niro,235
+2023,Kia,Seltos,240
+2023,Kia,Sorento,270
+2023,Kia,Soul,230
+2023,Kia,Sportage,250
+2023,Lamborghini,Aventador,340
+2023,Lamborghini,Huracan,325
+2023,Lamborghini,Urus,310
+2023,Land Rover,Defender,295
+2023,Land Rover,Discovery,310
+2023,Land Rover,Discovery Sport,280
+2023,Land Rover,Range Rover,325
+2023,Land Rover,Range Rover Evoque,285
+2023,Land Rover,Range Rover Sport,315
+2023,Land Rover,Range Rover Velar,305
+2023,Lexus,ES,270
+2023,Lexus,GS,285
+2023,Lexus,IS,260
+2023,Lexus,LC,300
+2023,Lexus,LX,315
+2023,Lexus,NX,260
+2023,Lexus,RC,295
+2023,Lexus,RX,285
+2023,Lexus,UX,250
+2023,Lincoln,Aviator,295
+2023,Lincoln,Continental,300
+2023,Lincoln,Corsair,265
+2023,Lincoln,MKC,260
+2023,Lincoln,MKT,280
+2023,Lincoln,Nautilus,275
+2023,Lincoln,Navigator,325
+2023,Lotus,Evora,320
+2023,Lotus,Exige,310
+2023,Maserati,Ghibli,295
+2023,Maserati,Levante,305
+2023,Maserati,Quattroporte,315
+2023,Mazda,3,255
+2023,Mazda,6,270
+2023,Mazda,CX-3,240
+2023,Mazda,CX-30,250
+2023,Mazda,CX-5,260
+2023,Mazda,CX-9,285
+2023,Mazda,MX-5 Miata,225
+2023,McLaren,570S,315
+2023,McLaren,720S,330
+2023,McLaren,Artura,300
+2023,McLaren,GT,320
+2023,Mercedes-Benz,A-Class,245
+2023,Mercedes-Benz,C-Class,265
+2023,Mercedes-Benz,CLA-Class,250
+2023,Mercedes-Benz,CLS-Class,280
+2023,Mercedes-Benz,E-Class,285
+2023,Mercedes-Benz,G-Class,335
+2023,Mercedes-Benz,GLA-Class,250
+2023,Mercedes-Benz,GLB-Class,255
+2023,Mercedes-Benz,GLC-Class,270
+2023,Mercedes-Benz,GLE-Class,295
+2023,Mercedes-Benz,GLS-Class,310
+2023,Mercedes-Benz,S-Class,315
+2023,Mercedes-Benz,SL-Class,330
+2023,Mercedes-Benz,SLC-Class,270
+2023,Maserati,Ghibli,295
+2023,Maserati,Levante,305
+2023,Maserati,Quattroporte,315
+2023,Mini,Cooper,245
+2023,Mini,Countryman,260
+2023,Mini,Clubman,270
+2023,Mitsubishi,Outlander,260
+2023,Mitsubishi,Eclipse Cross,275
+2023,Mitsubishi,Mirage,225
+2023,Nissan,Altima,270
+2023,Nissan,Armada,310
+2023,Nissan,Frontier,285
+2023,Nissan,Maxima,290
+2023,Nissan,Pathfinder,295
+2023,Nissan,Rogue,255
+2023,Nissan,Sentra,240
+2023,Nissan,Titan,330
+2023,Porsche,718 Cayman,280
+2023,Porsche,911,305
+2023,Porsche,Taycan,320
+2023,Ram,1500,325
+2023,Ram,2500,330
+2023,Ram,3500,335
+2023,Subaru,Ascent,275
+2023,Subaru,Crosstrek,240
+2023,Subaru,Forester,250
+2023,Subaru,Impreza,260
+2023,Subaru,Outback,265
+2023,Tesla,Model 3,200
+2023,Tesla,Model S,210
+2023,Tesla,Model X,220
+2023,Tesla,Model Y,205
+2023,Toyota,4Runner,300
+2023,Toyota,Highlander,290
+2023,Toyota,RAV4,245
+2023,Toyota,Sienna,265
+2023,Toyota,Tacoma,275
+2023,Toyota,Tundra,320
+2023,Volkswagen,Arteon,250
+2023,Volkswagen,Atlas,290
+2023,Volkswagen,Beetle,245
+2023,Volkswagen,Golf,235
+2023,Volkswagen,Jetta,240
+2023,Volkswagen,Tiguan,260
+2023,Volvo,XC40,250
+2023,Volvo,XC60,275
+2023,Volvo,XC90,300
+2023,Zenvo,TSR-S,400
+2022,Acura,ILX,255
+2022,Acura,MDX,290
+2022,Acura,NSX,310
+2022,Acura,RDX,275
+2022,Acura,TLX,265
+2022,Alfa Romeo,Giulia,285
+2022,Alfa Romeo,Stelvio,300
+2022,Audi,A3,240
+2022,Audi,A4,255
+2022,Audi,A5,260
+2022,Audi,A6,270
+2022,Audi,A7,280
+2022,Audi,A8,295
+2022,Audi,Q3,235
+2022,Audi,Q5,250
+2022,Audi,Q7,280
+2022,Audi,Q8,295
+2022,Audi,R8,315
+2022,Audi,RS3,245
+2022,Audi,RS5,280
+2022,Audi,S3,240
+2022,Audi,S4,260
+2022,Audi,S5,265
+2022,Audi,S6,280
+2022,Audi,S7,295
+2022,Audi,S8,310
+2022,BMW,2 Series,235
+2022,BMW,3 Series,250
+2022,BMW,4 Series,260
+2022,BMW,5 Series,270
+2022,BMW,6 Series,280
+2022,BMW,7 Series,295
+2022,BMW,8 Series,305
+2022,BMW,M2,255
+2022,BMW,M3,265
+2022,BMW,M4,285
+2022,BMW,M5,295
+2022,BMW,M8,315
+2022,BMW,X1,230
+2022,BMW,X2,235
+2022,BMW,X3,245
+2022,BMW,X4,250
+2022,BMW,X5,270
+2022,BMW,X6,280
+2022,BMW,X7,295
+2022,Buick,Encore,225
+2022,Buick,Enclave,270
+2022,Buick,Envision,255
+2022,Cadillac,CT4,260
+2022,Cadillac,CT5,270
+2022,Cadillac,CT6,290
+2022,Cadillac,Escalade,315
+2022,Cadillac,XT4,250
+2022,Cadillac,XT5,265
+2022,Cadillac,XT6,280
+2022,Chevrolet,Blazer,255
+2022,Chevrolet,Camaro,285
+2022,Chevrolet,Colorado,270
+2022,Chevrolet,Corvette,300
+2022,Chevrolet,Equinox,245
+2022,Chevrolet,Malibu,260
+2022,Chevrolet,Silverado,320
+2022,Chevrolet,Suburban,310
+2022,Chevrolet,Tahoe,315
+2022,Chevrolet,Trailblazer,235
+2022,Chevrolet,Traverse,280
+2022,Chevrolet,Trax,230
+2022,Chrysler,300,295
+2022,Chrysler,Pacifica,255
+2022,Dodge,Challenger,300
+2022,Dodge,Charger,315
+2022,Dodge,Durango,305
+2022,Dodge,Grand Caravan,245
+2022,Dodge,Journey,260
+2022,Fiat,500,215
+2022,Fiat,500X,225
+2022,Ford,Bronco,295
+2022,Ford,Edge,270
+2022,Ford,Escape,255
+2022,Ford,Expedition,310
+2022,Ford,Explorer,290
+2022,Ford,F-150,325
+2022,Ford,Fusion,265
+2022,Ford,Mustang,300
+2022,Ford,Ranger,285
+2022,Genesis,G70,260
+2022,Genesis,G80,280
+2022,Genesis,G90,300
+2022,GMC,Acadia,265
+2022,GMC,Canyon,270
+2022,GMC,Savana,280
+2022,GMC,Sierra,320
+2022,GMC,Terrain,250
+2022,GMC,Yukon,315
+2022,Honda,Accord,270
+2022,Honda,Civic,260
+2022,Honda,Clarity,245
+2022,Honda,CR-V,250
+2022,Honda,Fit,235
+2022,Honda,HR-V,240
+2022,Honda,Insight,240
+2022,Honda,Odyssey,265
+2022,Honda,Pilot,285
+2022,Honda,Ridgeline,280
+2022,Hyundai,Accent,235
+2022,Hyundai,Elantra,245
+2022,Hyundai,Ioniq,225
+2022,Hyundai,Kona,235
+2022,Hyundai,Nexo,215
+2022,Hyundai,Palisade,290
+2022,Hyundai,Santa Fe,260
+2022,Hyundai,Sonata,255
+2022,Hyundai,Tucson,250
+2022,Hyundai,Veloster,235
+2022,Infiniti,Q50,270
+2022,Infiniti,Q60,295
+2022,Infiniti,QX50,260
+2022,Infiniti,QX55,265
+2022,Infiniti,QX60,280
+2022,Infiniti,QX80,325
+2022,Jaguar,E-Pace,250
+2022,Jaguar,F-Pace,265
+2022,Jaguar,F-Type,300
+2022,Jaguar,I-Pace,230
+2022,Jaguar,XE,255
+2022,Jaguar,XF,280
+2022,Jaguar,XJ,295
+2022,Jeep,Cherokee,260
+2022,Jeep,Compass,235
+2022,Jeep,Grand Cherokee,295
+2022,Jeep,Renegade,225
+2022,Jeep,Wrangler,280
+2022,Kia,Forte,235
+2022,Kia,K5,245
+2022,Kia,Niro,225
+2022,Kia,Seltos,230
+2022,Kia,Sorento,260
+2022,Kia,Soul,220
+2022,Kia,Sportage,240
+2022,Lamborghini,Aventador,330
+2022,Lamborghini,Huracan,315
+2022,Lamborghini,Urus,300
+2022,Land Rover,Defender,290
+2022,Land Rover,Discovery,305
+2022,Land Rover,Discovery Sport,275
+2022,Land Rover,Range Rover,320
+2022,Land Rover,Range Rover Evoque,280
+2022,Land Rover,Range Rover Sport,310
+2022,Land Rover,Range Rover Velar,300
+2022,Lexus,ES,265
+2022,Lexus,GS,280
+2022,Lexus,IS,255
+2022,Lexus,LC,295
+2022,Lexus,LX,310
+2022,Lexus,NX,255
+2022,Lexus,RC,290
+2022,Lexus,RX,280
+2022,Lexus,UX,245
+2022,Lincoln,Aviator,290
+2022,Lincoln,Continental,295
+2022,Lincoln,Corsair,260
+2022,Lincoln,MKC,255
+2022,Lincoln,MKT,275
+2022,Lincoln,Nautilus,270
+2022,Lincoln,Navigator,320
+2022,Lotus,Evora,315
+2022,Lotus,Exige,305
+2022,Maserati,Ghibli,290
+2022,Maserati,Levante,300
+2022,Maserati,Quattroporte,310
+2022,Mazda,3,250
+2022,Mazda,6,265
+2022,Mazda,CX-3,230
+2022,Mazda,CX-30,240
+2022,Mazda,CX-5,250
+2022,Mazda,CX-9,280
+2022,Mazda,MX-5 Miata,220
+2022,McLaren,570S,310
+2022,McLaren,720S,325
+2022,McLaren,Artura,295
+2022,McLaren,GT,315
+2022,Mercedes-Benz,A-Class,240
+2022,Mercedes-Benz,C-Class,260
+2022,Mercedes-Benz,CLA-Class,245
+2022,Mercedes-Benz,CLS-Class,275
+2022,Mercedes-Benz,E-Class,280
+2022,Mercedes-Benz,G-Class,330
+2022,Mercedes-Benz,GLA-Class,245
+2022,Mercedes-Benz,GLB-Class,250
+2022,Mercedes-Benz,GLC-Class,265
+2022,Mercedes-Benz,GLE-Class,290
+2022,Mercedes-Benz,GLS-Class,305
+2022,Mercedes-Benz,S-Class,310
+2022,Mercedes-Benz,SL-Class,315
+2022,Mercedes-Benz,SLC-Class,270
+2022,Mini,Clubman,245
+2022,Mini,Convertible,235
+2022,Mini,Countryman,250
+2022,Mitsubishi,Mirage,215
+2022,Mitsubishi,Outlander,260
+2022,Mitsubishi,Outlander Sport,235
+2022,Nissan,370Z,300
+2022,Nissan,Altima,265
+2022,Nissan,Armada,315
+2022,Nissan,Frontier,280
+2022,Nissan,Kicks,230
+2022,Nissan,Leaf,220
+2022,Nissan,Maxima,275
+2022,Nissan,Murano,255
+2022,Nissan,Pathfinder,290
+2022,Nissan,Rogue,250
+2022,Nissan,Sentra,240
+2022,Nissan,Titan,305
+2022,Nissan,Versa,225
+2022,Polestar,2,245
+2022,Porsche,718 Cayman,285
+2022,Porsche,718 Boxster,280
+2022,Porsche,911,310
+2022,Porsche,Cayenne,290
+2022,Porsche,Macan,275
+2022,Porsche,Panamera,300
+2022,Ram,1500,305
+2022,Ram,2500,320
+2022,Ram,3500,335
+2022,Ram,ProMaster City,245
+2022,Rivian,R1S,310
+2022,Rivian,R1T,315
+2022,Subaru,Ascent,280
+2022,Subaru,BRZ,250
+2022,Subaru,Crosstrek,240
+2022,Subaru,Forester,255
+2022,Subaru,Impreza,230
+2022,Subaru,Legacy,245
+2022,Subaru,Outback,265
+2022,Subaru,WRX,270
+2022,Toyota,4Runner,285
+2022,Toyota,Avalon,280
+2022,Toyota,C-HR,235
+2022,Toyota,Camry,265
+2022,Toyota,Corolla,250
+2022,Toyota,Highlander,275
+2022,Toyota,Land Cruiser,330
+2022,Toyota,Mirai,215
+2022,Toyota,RAV4,260
+2022,Toyota,Sequoia,320
+2022,Toyota,Sienna,270
+2022,Toyota,Supra,300
+2022,Toyota,Tacoma,290
+2022,Toyota,Tundra,305
+2022,Toyota,Venza,255
+2022,Toyota,Yaris,225
+2022,Volkswagen,Arteon,270
+2022,Volkswagen,Atlas,290
+2022,Volkswagen,Atlas Cross Sport,280
+2022,Volkswagen,Golf,245
+2022,Volkswagen,ID.4,250
+2022,Volkswagen,Jetta,255
+2022,Volkswagen,Passat,260
+2022,Volkswagen,Taigun,235
+2022,Volvo,S60,265
+2022,Volvo,S90,285
+2022,Volvo,V60,255
+2022,Volvo,V90,280
+2022,Volvo,XC40,250
+2022,Volvo,XC60,270
+2022,Volvo,XC90,295
+2021,Acura,ILX,273
+2021,Acura,MDX,330
+2021,Acura,RDX,278
+2021,Acura,TLX,282
+2021,Audi,A3,231
+2021,Audi,A4,251
+2021,Audi,A5,274
+2021,Audi,A6,291
+2021,Audi,Q3,234
+2021,Audi,Q5,266
+2021,Audi,Q7,291
+2021,Audi,Q8,312
+2021,BMW,2 Series,234
+2021,BMW,3 Series,243
+2021,BMW,4 Series,259
+2021,BMW,5 Series,275
+2021,BMW,7 Series,315
+2021,BMW,8 Series,308
+2021,BMW,X1,232
+2021,BMW,X2,237
+2021,BMW,X3,252
+2021,BMW,X4,269
+2021,BMW,X5,298
+2021,BMW,X6,299
+2021,BMW,X7,316
+2021,Buick,Enclave,305
+2021,Buick,Encore,269
+2021,Buick,Envision,277
+2021,Cadillac,CT4,278
+2021,Cadillac,CT5,279
+2021,Cadillac,CT6,314
+2021,Cadillac,Escalade,342
+2021,Chevrolet,Blazer,275
+2021,Chevrolet,Camaro,318
+2021,Chevrolet,Colorado,302
+2021,Chevrolet,Corvette,311
+2021,Chevrolet,Equinox,261
+2021,Chevrolet,Malibu,280
+2021,Chevrolet,Silverado 1500,362
+2021,Chevrolet,Suburban,352
+2021,Chevrolet,Tahoe,349
+2021,Chevrolet,Trailblazer,255
+2021,Chevrolet,Traverse,293
+2021,Chevrolet,Trax,266
+2021,Chrysler,300,317
+2021,Chrysler,Pacifica,263
+2021,Chrysler,Voyager,270
+2021,Dodge,Challenger,314
+2021,Dodge,Charger,310
+2021,Dodge,Durango,326
+2021,Dodge,Grand Caravan,277
+2021,Dodge,Journey,295
+2021,Ford,Bronco,307
+2021,Ford,Edge,287
+2021,Ford,Escape,263
+2021,Ford,Expedition,349
+2021,Ford,Explorer,294
+2021,Ford,F-150,326
+2021,Ford,Mustang,324
+2021,Ford,Ranger,305
+2021,Ford,Transit Connect,246
+2021,GMC,Acadia,293
+2021,GMC,Canyon,301
+2021,GMC,Sierra 1500,355
+2021,GMC,Terrain,271
+2021,GMC,Yukon,354
+2021,GMC,Yukon XL,352
+2021,Honda,Accord,255
+2021,Honda,Civic,239
+2021,Honda,CR-V,244
+2021,Honda,Fit,262
+2021,Honda,HR-V,265
+2021,Honda,Insight,228
+2021,Honda,Odyssey,287
+2021,Honda,Passport,279
+2021,Honda,Pilot,283
+2021,Honda,Ridgeline,289
+2021,Hyundai,Accent,242
+2021,Hyundai,Elantra,237
+2021,Hyundai,Ioniq,180
+2021,Hyundai,Kona,246
+2021,Hyundai,Nexo,0
+2021,Hyundai,Palisade,281
+2021,Hyundai,Santa Fe,260
+2021,Hyundai,Sonata,251
+2021,Hyundai,Tucson,257
+2021,Hyundai,Veloster,266
+2021,Hyundai,Venue,243
+2021,Infiniti,Q50,272
+2021,Infiniti,Q60,290
+2021,Infiniti,QX50,259
+2021,Infiniti,QX60,275
+2021,Infiniti,QX80,399
+2021,Jeep,Cherokee,288
+2021,Jeep,Compass,258
+2021,Jeep,Gladiator,322
+2021,Jeep,Grand Cherokee,319
+2021,Jeep,Wrangler,321
+2021,Kia,Forte,234
+2021,Kia,K5,238
+2021,Kia,Niro,199
+2021,Kia,Optima,246
+2021,Kia,Rio,225
+2021,Kia,Seltos,237
+2021,Kia,Sorento,273
+2021,Kia,Soul,243
+2021,Kia,Sportage,255
+2021,Kia,Stinger,263
+2021,Land Rover,Defender 110,355
+2021,Land Rover,Discovery,350
+2021,Land Rover,Discovery Sport,300
+2021,Land Rover,Range Rover,386
+2021,Land Rover,Range Rover Evoque,286
+2021,Land Rover,Range Rover Sport,355
+2021,Land Rover,Range Rover Velar,308
+2021,Lexus,ES,276
+2021,Lexus,GS,283
+2021,Lexus,IS,255
+2021,Lexus,LX,372
+2021,Lexus,NX,259
+2021,Lexus,RX,267
+2021,Lexus,UX,219
+2021,Lincoln,Aviator,315
+2021,Lincoln,Corsair,267
+2021,Lincoln,MKC,275
+2021,Lincoln,Nautilus,283
+2021,Lincoln,Navigator,348
+2021,Mazda,3,228
+2021,Mazda,6,252
+2021,Mazda,CX-3,261
+2021,Mazda,CX-30,246
+2021,Mazda,CX-5,261
+2021,Mazda,CX-9,283
+2021,Mercedes-Benz,A-Class,236
+2021,Mercedes-Benz,C-Class,263
+2021,Mercedes-Benz,CLA,259
+2021,Mercedes-Benz,E-Class,275
+2021,Mercedes-Benz,GLA,244
+2021,Mercedes-Benz,GLB,252
+2021,Mercedes-Benz,GLC,273
+2021,Mercedes-Benz,GLE,301
+2021,Mercedes-Benz,GLS,315
+2021,Mercedes-Benz,S-Class,325
+2021,Mini,Cooper,220
+2021,Mini,Countryman,232
+2021,Mitsubishi,Mirage,231
+2021,Mitsubishi,Outlander,280
+2021,Mitsubishi,Outlander Sport,267
+2021,Nissan,Altima,245
+2021,Nissan,Armada,383
+2021,Nissan,Kicks,229
+2021,Nissan,Leaf,0
+2021,Nissan,Maxima,268
+2021,Nissan,Murano,272
+2021,Nissan,Pathfinder,282
+2021,Nissan,Rogue,253
+2021,Nissan,Rogue Sport,251
+2021,Nissan,Sentra,239
+2021,Nissan,Titan,351
+2021,Nissan,Versa,236
+2021,Porsche,911,319
+2021,Porsche,Cayenne,336
+2021,Porsche,Macan,292
+2021,Porsche,Panamera,325
+2021,Ram,1500,345
+2021,Ram,2500,453
+2021,Ram,3500,499
+2021,Ram,ProMaster City,234
+2021,Ram,ProMaster,398
+2021,Subaru,Ascent,276
+2021,Subaru,Crosstrek,255
+2021,Subaru,Forester,245
+2021,Subaru,Impreza,241
+2021,Subaru,Legacy,258
+2021,Subaru,Outback,258
+2021,Subaru,Wrx,296
+2021,Tesla,Model 3,0
+2021,Tesla,Model S,0
+2021,Tesla,Model X,0
+2021,Tesla,Model Y,0
+2021,Toyota,4Runner,296
+2021,Toyota,Avalon,276
+2021,Toyota,C-HR,235
+2021,Toyota,Camry,243
+2021,Toyota,Corolla,234
+2021,Toyota,Highlander,282
+2021,Toyota,Land Cruiser,410
+2021,Toyota,Prius,181
+2021,Toyota,Rav4,255
+2021,Toyota,Sequoia,375
+2021,Toyota,Sienna,272
+2021,Toyota,Supra,278
+2021,Toyota,Tacoma,329
+2021,Toyota,Tundra,384
+2021,Toyota,Venza,266
+2021,Toyota,Yaris,230
+2021,Volkswagen,Arteon,264
+2021,Volkswagen,Atlas,292
+2021,Volkswagen,Atlas Cross Sport,291
+2021,Volkswagen,Golf,234
+2021,Volkswagen,ID.4,250
+2021,Volkswagen,Jetta,238
+2021,Volkswagen,Passat,246
+2021,Volvo,S60,264
+2021,Volvo,S90,273
+2021,Volvo,V60,261
+2021,Volvo,V90,276
+2021,Volvo,XC40,252
+2021,Volvo,XC60,263
+2021,Volvo,XC90,282
+2020,Acura,ILX,274
+2020,Acura,MDX,332
+2020,Acura,RDX,279
+2020,Acura,TLX,283
+2020,Audi,A3,233
+2020,Audi,A4,252
+2020,Audi,A5,275
+2020,Audi,A6,292
+2020,Audi,Q3,235
+2020,Audi,Q5,267
+2020,Audi,Q7,292
+2020,Audi,Q8,313
+2020,BMW,2 Series,235
+2020,BMW,3 Series,244
+2020,BMW,4 Series,260
+2020,BMW,5 Series,276
+2020,BMW,7 Series,316
+2020,BMW,8 Series,309
+2020,BMW,X1,233
+2020,BMW,X2,238
+2020,BMW,X3,253
+2020,BMW,X4,270
+2020,BMW,X5,299
+2020,BMW,X6,300
+2020,BMW,X7,317
+2020,Buick,Enclave,306
+2020,Buick,Encore,270
+2020,Buick,Envision,278
+2020,Cadillac,CT4,279
+2020,Cadillac,CT5,280
+2020,Cadillac,CT6,315
+2020,Cadillac,Escalade,343
+2020,Chevrolet,Blazer,276
+2020,Chevrolet,Camaro,319
+2020,Chevrolet,Colorado,303
+2020,Chevrolet,Corvette,312
+2020,Chevrolet,Equinox,262
+2020,Chevrolet,Malibu,281
+2020,Chevrolet,Silverado 1500,363
+2020,Chevrolet,Suburban,353
+2020,Chevrolet,Tahoe,350
+2020,Chevrolet,Trailblazer,256
+2020,Chevrolet,Traverse,294
+2020,Chevrolet,Trax,267
+2020,Chrysler,300,318
+2020,Chrysler,Pacifica,264
+2020,Chrysler,Voyager,271
+2020,Dodge,Challenger,315
+2020,Dodge,Charger,311
+2020,Dodge,Durango,327
+2020,Dodge,Grand Caravan,278
+2020,Dodge,Journey,296
+2020,Ford,Bronco,308
+2020,Ford,Edge,288
+2020,Ford,Escape,264
+2020,Ford,Expedition,350
+2020,Ford,Explorer,295
+2020,Ford,F-150,327
+2020,Ford,Mustang,325
+2020,Ford,Ranger,306
+2020,Ford,Transit Connect,247
+2020,GMC,Acadia,294
+2020,GMC,Canyon,302
+2020,GMC,Sierra 1500,356
+2020,GMC,Terrain,272
+2020,GMC,Yukon,355
+2020,GMC,Yukon XL,353
+2020,Honda,Accord,256
+2020,Honda,Civic,240
+2020,Honda,CR-V,245
+2020,Honda,Fit,263
+2020,Honda,HR-V,266
+2020,Honda,Insight,229
+2020,Honda,Odyssey,288
+2020,Honda,Passport,280
+2020,Honda,Pilot,284
+2020,Honda,Ridgeline,290
+2020,Hyundai,Accent,243
+2020,Hyundai,Elantra,238
+2020,Hyundai,Ioniq,180
+2020,Hyundai,Kona,247
+2020,Hyundai,Nexo,0
+2020,Hyundai,Palisade,282
+2020,Hyundai,Santa Fe,261
+2020,Hyundai,Sonata,252
+2020,Hyundai,Tucson,258
+2020,Hyundai,Veloster,267
+2020,Hyundai,Venue,244
+2020,Infiniti,Q50,273
+2020,Infiniti,Q60,291
+2020,Infiniti,QX50,260
+2020,Infiniti,QX60,276
+2020,Infiniti,QX80,400
+2020,Jeep,Cherokee,289
+2020,Jeep,Compass,259
+2020,Jeep,Gladiator,323
+2020,Jeep,Grand Cherokee,320
+2020,Jeep,Wrangler,322
+2020,Kia,Forte,235
+2020,Kia,K5,239
+2020,Kia,Niro,200
+2020,Kia,Optima,247
+2020,Kia,Rio,226
+2020,Kia,Seltos,238
+2020,Kia,Sorento,274
+2020,Kia,Soul,244
+2020,Kia,Sportage,256
+2020,Kia,Stinger,264
+2020,Land Rover,Defender 110,356
+2020,Land Rover,Discovery,351
+2020,Land Rover,Discovery Sport,301
+2020,Land Rover,Range Rover,387
+2020,Land Rover,Range Rover Evoque,287
+2020,Land Rover,Range Rover Sport,356
+2020,Land Rover,Range Rover Velar,309
+2020,Lexus,ES,277
+2020,Lexus,GS,284
+2020,Lexus,IS,256
+2020,Lexus,LX,373
+2020,Lexus,NX,260
+2020,Lexus,RX,268
+2020,Lexus,UX,220
+2020,Lincoln,Aviator,316
+2020,Lincoln,Corsair,268
+2020,Lincoln,MKC,276
+2020,Lincoln,Nautilus,284
+2020,Lincoln,Navigator,349
+2020,Mazda,3,229
+2020,Mazda,6,253
+2020,Mazda,CX-3,262
+2020,Mazda,CX-30,247
+2020,Mazda,CX-5,262
+2020,Mazda,CX-9,284
+2020,Mercedes-Benz,A-Class,237
+2020,Mercedes-Benz,C-Class,264
+2020,Mercedes-Benz,CLA,260
+2020,Mercedes-Benz,E-Class,276
+2020,Mercedes-Benz,GLA,245
+2020,Mercedes-Benz,GLB,253
+2020,Mercedes-Benz,GLC,274
+2020,Mercedes-Benz,GLE,302
+2020,Mercedes-Benz,GLS,316
+2020,Mercedes-Benz,S-Class,326
+2020,Mini,Cooper,221
+2020,Mini,Countryman,233
+2020,Mitsubishi,Mirage,232
+2020,Mitsubishi,Outlander,281
+2020,Mitsubishi,Outlander Sport,268
+2020,Nissan,Altima,246
+2020,Nissan,Armada,384
+2020,Nissan,Kicks,230
+2020,Nissan,Leaf,0
+2020,Nissan,Maxima,269
+2020,Nissan,Murano,273
+2020,Nissan,Pathfinder,283
+2020,Nissan,Rogue,254
+2020,Nissan,Rogue Sport,252
+2020,Nissan,Sentra,240
+2020,Nissan,Titan,352
+2020,Nissan,Versa,237
+2020,Porsche,911,320
+2020,Porsche,Cayenne,337
+2020,Porsche,Macan,293
+2020,Porsche,Panamera,326
+2020,Ram,1500,346
+2020,Ram,2500,454
+2020,Ram,3500,500
+2020,Ram,ProMaster City,235
+2020,Ram,ProMaster,399
+2020,Subaru,Ascent,277
+2020,Subaru,Crosstrek,256
+2020,Subaru,Forester,246
+2020,Subaru,Impreza,242
+2020,Subaru,Legacy,259
+2020,Subaru,Outback,259
+2020,Subaru,Wrx,297
+2020,Tesla,Model 3,0
+2020,Tesla,Model S,0
+2020,Tesla,Model X,0
+2020,Tesla,Model Y,0
+2020,Toyota,4Runner,297
+2020,Toyota,Avalon,277
+2020,Toyota,C-HR,236
+2020,Toyota,Camry,244
+2020,Toyota,Corolla,235
+2020,Toyota,Highlander,283
+2020,Toyota,Land Cruiser,411
+2020,Toyota,Prius,182
+2020,Toyota,Rav4,256
+2020,Toyota,Sequoia,376
+2020,Toyota,Sienna,273
+2020,Toyota,Supra,290
+2020,Toyota,Tacoma,328
+2020,Toyota,Tundra,385
+2020,Toyota,Venza,267
+2020,Toyota,Yaris,230
+2020,Volkswagen,Arteon,276
+2020,Volkswagen,Atlas,292
+2020,Volkswagen,Atlas Cross Sport,294
+2020,Volkswagen,Golf,236
+2020,Volkswagen,Jetta,236
+2020,Volkswagen,Passat,244
+2020,Volvo,S60,266
+2020,Volvo,S90,276
+2020,Volvo,V60,262
+2020,Volvo,V90,276
+2020,Volvo,XC40,252
+2020,Volvo,XC60,263
+2020,Volvo,XC90,282
+2019,Acura,ILX,278
+2019,Acura,MDX,340
+2019,Acura,RDX,283
+2019,Acura,TLX,287
+2019,Audi,A3,237
+2019,Audi,A4,256
+2019,Audi,A5,278
+2019,Audi,A6,295
+2019,Audi,Q3,239
+2019,Audi,Q5,271
+2019,Audi,Q7,295
+2019,Audi,Q8,316
+2019,BMW,2 Series,238
+2019,BMW,3 Series,247
+2019,BMW,4 Series,263
+2019,BMW,5 Series,279
+2019,BMW,7 Series,320
+2019,BMW,8 Series,313
+2019,BMW,X1,236
+2019,BMW,X2,241
+2019,BMW,X3,256
+2019,BMW,X4,273
+2019,BMW,X5,303
+2019,BMW,X6,304
+2019,BMW,X7,320
+2019,Buick,Enclave,310
+2019,Buick,Encore,275
+2019,Buick,Envision,284
+2019,Cadillac,CT6,321
+2019,Cadillac,CTS,315
+2019,Cadillac,Escalade,350
+2019,Cadillac,XT4,276
+2019,Cadillac,XT5,293
+2019,Cadillac,XT6,297
+2019,Cadillac,XTS,295
+2019,Chevrolet,Blazer,278
+2019,Chevrolet,Camaro,322
+2019,Chevrolet,Colorado,306
+2019,Chevrolet,Corvette,316
+2019,Chevrolet,Cruze,261
+2019,Chevrolet,Equinox,266
+2019,Chevrolet,Impala,289
+2019,Chevrolet,Malibu,287
+2019,Chevrolet,Silverado 1500,368
+2019,Chevrolet,Spark,261
+2019,Chevrolet,Suburban,358
+2019,Chevrolet,Tahoe,355
+2019,Chevrolet,Traverse,303
+2019,Chevrolet,Trax,269
+2019,Chrysler,300,323
+2019,Chrysler,Pacifica,270
+2019,Chrysler,Voyager,277
+2019,Dodge,Challenger,322
+2019,Dodge,Charger,317
+2019,Dodge,Durango,332
+2019,Dodge,Grand Caravan,284
+2019,Dodge,Journey,301
+2019,Fiat,500,269
+2019,Fiat,500L,276
+2019,Fiat,500X,277
+2019,Ford,Edge,291
+2019,Ford,Escape,267
+2019,Ford,Expedition,355
+2019,Ford,Explorer,303
+2019,Ford,F-150,332
+2019,Ford,Fiesta,263
+2019,Ford,Flex,312
+2019,Ford,Fusion,284
+2019,Ford,Mustang,329
+2019,Ford,Ranger,312
+2019,Ford,Transit Connect,250
+2019,GMC,Acadia,303
+2019,GMC,Canyon,311
+2019,GMC,Sierra 1500,364
+2019,GMC,Terrain,278
+2019,GMC,Yukon,361
+2019,GMC,Yukon XL,358
+2019,Honda,Accord,261
+2019,Honda,Civic,245
+2019,Honda,Clarity Plug-In Hybrid,194
+2019,Honda,CR-V,250
+2019,Honda,Fit,269
+2019,Honda,HR-V,272
+2019,Honda,Insight,231
+2019,Honda,Odyssey,292
+2019,Honda,Pilot,288
+2019,Honda,Ridgeline,293
+2019,Hyundai,Accent,247
+2019,Hyundai,Elantra,241
+2019,Hyundai,Ioniq,136
+2019,Hyundai,Kona,250
+2019,Hyundai,Nexo,0
+2019,Hyundai,Palisade,286
+2019,Hyundai,Santa Fe,266
+2019,Hyundai,Sonata,256
+2019,Hyundai,Tucson,262
+2019,Hyundai,Veloster,271
+2019,Infiniti,Q50,277
+2019,Infiniti,Q60,296
+2019,Infiniti,Q70,298
+2019,Infiniti,QX50,264
+2019,Infiniti,QX60,279
+2019,Infiniti,QX80,404
+2019,Jeep,Cherokee,294
+2019,Jeep,Compass,265
+2019,Jeep,Grand Cherokee,327
+2019,Jeep,Renegade,275
+2019,Jeep,Wrangler,324
+2019,Kia,Forte,237
+2019,Kia,Niro,194
+2019,Kia,Optima,252
+2019,Kia,Rio,228
+2019,Kia,Sedona,288
+2019,Kia,Sorento,277
+2019,Kia,Soul,250
+2019,Kia,Sportage,260
+2019,Land Rover,Discovery,356
+2019,Land Rover,Discovery Sport,308
+2019,Land Rover,Range Rover,393
+2019,Land Rover,Range Rover Evoque,292
+2019,Land Rover,Range Rover Sport,357
+2019,Land Rover,Range Rover Velar,311
+2019,Lexus,ES,279
+2019,Lexus,GS,288
+2019,Lexus,IS,258
+2019,Lexus,LX,376
+2019,Lexus,NX,264
+2019,Lexus,RX,272
+2019,Lexus,UX,226
+2019,Lincoln,Aviator,319
+2019,Lincoln,Continental,310
+2019,Lincoln,Nautilus,288
+2019,Lincoln,Navigator,358
+2019,Mazda,3,234
+2019,Mazda,6,259
+2019,Mazda,CX-3,269
+2019,Mazda,CX-5,277
+2019,Mazda,CX-9,299
+2019,Mercedes-Benz,A-Class,239
+2019,Mercedes-Benz,C-Class,267
+2019,Mercedes-Benz,CLA,263
+2019,Mercedes-Benz,E-Class,279
+2019,Mercedes-Benz,GLA,249
+2019,Mercedes-Benz,GLC,271
+2019,Mercedes-Benz,GLE,306
+2019,Mercedes-Benz,GLS,321
+2019,Mercedes-Benz,S-Class,330
+2019,Mini,Cooper,223
+2019,Mini,Countryman,236
+2019,Mitsubishi,Mirage,234
+2019,Mitsubishi,Outlander,283
+2019,Mitsubishi,Outlander Sport,270
+2019,Nissan,Altima,250
+2019,Nissan,Armada,390
+2019,Nissan,Frontier,306
+2019,Nissan,Kicks,232
+2019,Nissan,Leaf,0
+2019,Nissan,Maxima,275
+2019,Nissan,Murano,279
+2019,Nissan,Pathfinder,290
+2019,Nissan,Rogue,257
+2019,Nissan,Rogue Sport,255
+2019,Nissan,Sentra,243
+2019,Nissan,Titan,360
+2019,Nissan,Versa,240
+2019,Porsche,911,326
+2019,Porsche,Cayenne,343
+2019,Porsche,Macan,298
+2019,Porsche,Panamera,332
+2019,Ram,1500,352
+2019,Ram,2500,460
+2019,Ram,3500,508
+2019,Ram,ProMaster City,239
+2019,Ram,ProMaster,408
+2019,Subaru,Ascent,283
+2019,Subaru,Crosstrek,260
+2019,Subaru,Forester,250
+2019,Subaru,Impreza,246
+2019,Subaru,Legacy,263
+2019,Subaru,Outback,263
+2019,Subaru,WRX,300
+2019,Tesla,Model 3,0
+2019,Tesla,Model S,0
+2019,Tesla,Model X,0
+2019,Toyota,4Runner,300
+2019,Toyota,Avalon,279
+2019,Toyota,C-HR,238
+2019,Toyota,Camry,247
+2019,Toyota,Corolla,237
+2019,Toyota,Highlander,290
+2019,Toyota,Land Cruiser,419
+2019,Toyota,Prius,182
+2019,Toyota,Rav4,267
+2019,Toyota,Sequoia,372
+2019,Toyota,Sienna,310
+2019,Toyota,Tacoma,315
+2019,Toyota,Tundra,383
+2019,Toyota,Yaris,218
+2019,Volkswagen,Arteon,282
+2019,Volkswagen,Atlas,300
+2019,Volkswagen,Atlas Cross Sport,303
+2019,Volkswagen,Golf,254
+2019,Volkswagen,Jetta,256
+2019,Volkswagen,Passat,270
+2019,Volvo,S60,272
+2019,Volvo,S90,283
+2019,Volvo,V60,267
+2019,Volvo,V90,282
+2019,Volvo,XC40,257
+2019,Volvo,XC60,273
+2019,Volvo,XC90,295
+2018,Acura,ILX,278
+2018,Acura,MDX,340
+2018,Acura,RDX,283
+2018,Acura,TLX,287
+2018,Audi,A3,237
+2018,Audi,A4,256
+2018,Audi,A5,278
+2018,Audi,A6,295
+2018,Audi,Q3,239
+2018,Audi,Q5,271
+2018,Audi,Q7,295
+2018,Audi,Q8,316
+2018,BMW,2 Series,238
+2018,BMW,3 Series,247
+2018,BMW,4 Series,263
+2018,BMW,5 Series,279
+2018,BMW,7 Series,320
+2018,BMW,8 Series,313
+2018,BMW,X1,236
+2018,BMW,X2,241
+2018,BMW,X3,256
+2018,BMW,X4,273
+2018,BMW,X5,303
+2018,BMW,X6,304
+2018,BMW,X7,320
+2018,Buick,Enclave,310
+2018,Buick,Encore,275
+2018,Buick,Envision,284
+2018,Cadillac,CT6,321
+2018,Cadillac,CTS,315
+2018,Cadillac,Escalade,350
+2018,Cadillac,XT5,293
+2018,Cadillac,XTS,295
+2018,Chevrolet,Camaro,322
+2018,Chevrolet,Colorado,306
+2018,Chevrolet,Corvette,316
+2018,Chevrolet,Cruze,261
+2018,Chevrolet,Equinox,266
+2018,Chevrolet,Impala,289
+2018,Chevrolet,Malibu,287
+2018,Chevrolet,Silverado 1500,368
+2018,Chevrolet,Spark,261
+2018,Chevrolet,Suburban,358
+2018,Chevrolet,Tahoe,355
+2018,Chevrolet,Traverse,303
+2018,Chevrolet,Trax,269
+2018,Chrysler,300,323
+2018,Chrysler,Pacifica,270
+2018,Chrysler,Voyager,277
+2018,Dodge,Challenger,322
+2018,Dodge,Charger,317
+2018,Dodge,Durango,332
+2018,Dodge,Grand Caravan,284
+2018,Dodge,Journey,301
+2018,Fiat,500,269
+2018,Fiat,500L,276
+2018,Fiat,500X,277
+2018,Ford,Edge,291
+2018,Ford,Escape,267
+2018,Ford,Expedition,355
+2018,Ford,Explorer,303
+2018,Ford,F-150,332
+2018,Ford,Fiesta,263
+2018,Ford,Flex,312
+2018,Ford,Fusion,284
+2018,Ford,Mustang,329
+2018,Ford,Transit Connect,250
+2018,GMC,Acadia,303
+2018,GMC,Canyon,311
+2018,GMC,Sierra 1500,364
+2018,GMC,Terrain,278
+2018,GMC,Yukon,361
+2018,GMC,Yukon XL,358
+2018,Honda,Accord,261
+2018,Honda,Civic,245
+2018,Honda,Clarity Plug-In Hybrid,194
+2018,Honda,CR-V,250
+2018,Honda,Fit,269
+2018,Honda,HR-V,272
+2018,Honda,Insight,231
+2018,Honda,Odyssey,292
+2018,Honda,Pilot,288
+2018,Honda,Ridgeline,293
+2018,Hyundai,Accent,247
+2018,Hyundai,Elantra,241
+2018,Hyundai,Ioniq,136
+2018,Hyundai,Kona,250
+2018,Hyundai,Santa Fe,266
+2018,Hyundai,Sonata,256
+2018,Hyundai,Tucson,262
+2018,Hyundai,Veloster,271
+2018,Infiniti,Q50,277
+2018,Infiniti,Q60,296
+2018,Infiniti,Q70,298
+2018,Infiniti,QX30,264
+2018,Infiniti,QX50,264
+2018,Infiniti,QX60,279
+2018,Infiniti,QX80,404
+2018,Jeep,Cherokee,294
+2018,Jeep,Compass,265
+2018,Jeep,Grand Cherokee,327
+2018,Jeep,Renegade,275
+2018,Jeep,Wrangler,324
+2018,Kia,Forte,237
+2018,Kia,Niro,194
+2018,Kia,Optima,252
+2018,Kia,Rio,228
+2018,Kia,Sedona,288
+2018,Kia,Sorento,277
+2018,Kia,Soul,250
+2018,Kia,Sportage,260
+2018,Land Rover,Discovery,356
+2018,Land Rover,Discovery Sport,308
+2018,Land Rover,Range Rover,393
+2018,Land Rover,Range Rover Evoque,292
+2018,Land Rover,Range Rover Sport,357
+2018,Land Rover,Range Rover Velar,311
+2018,Lexus,ES,279
+2018,Lexus,GS,288
+2018,Lexus,IS,258
+2018,Lexus,LX,376
+2018,Lexus,NX,264
+2018,Lexus,RX,272
+2018,Lexus,UX,226
+2018,Lincoln,Continental,310
+2018,Lincoln,MKC,267
+2018,Lincoln,MKT,320
+2018,Lincoln,Nautilus,288
+2018,Lincoln,Navigator,358
+2018,Mazda,3,234
+2018,Mazda,6,259
+2018,Mazda,CX-3,269
+2018,Mazda,CX-5,277
+2018,Mazda,CX-9,299
+2018,Mercedes-Benz,A-Class,239
+2018,Mercedes-Benz,C-Class,267
+2018,Mercedes-Benz,CLA,263
+2018,Mercedes-Benz,E-Class,279
+2018,Mercedes-Benz,GLA,249
+2018,Mercedes-Benz,GLC,271
+2018,Mercedes-Benz,GLE,306
+2018,Mercedes-Benz,GLS,321
+2018,Mercedes-Benz,S-Class,330
+2018,Mini,Clubman,239
+2018,Mini,Cooper,223
+2018,Mini,Countryman,236
+2018,Mitsubishi,Mirage,234
+2018,Mitsubishi,Outlander,283
+2018,Mitsubishi,Outlander Sport,270
+2018,Nissan,370Z,317
+2018,Nissan,Altima,250
+2018,Nissan,Armada,390
+2018,Nissan,Frontier,306
+2018,Nissan,Kicks,232
+2018,Nissan,Leaf,0
+2018,Nissan,Maxima,275
+2018,Nissan,Murano,279
+2018,Nissan,Pathfinder,290
+2018,Nissan,Rogue,257
+2018,Nissan,Sentra,243
+2018,Nissan,Titan,360
+2018,Nissan,Versa,240
+2018,Porsche,718 Boxster,303
+2018,Porsche,718 Cayman,295
+2018,Porsche,911,326
+2018,Porsche,Cayenne,343
+2018,Porsche,Macan,298
+2018,Porsche,Panamera,332
+2018,Ram,1500,352
+2018,Ram,2500,460
+2018,Ram,3500,508
+2018,Ram,ProMaster,408
+2018,Subaru,Ascent,283
+2018,Subaru,BRZ,274
+2018,Subaru,Crosstrek,260
+2018,Subaru,Forester,250
+2018,Subaru,Impreza,246
+2018,Subaru,Legacy,263
+2018,Subaru,Outback,263
+2018,Subaru,WRX,300
+2018,Tesla,Model 3,0
+2018,Tesla,Model S,0
+2018,Tesla,Model X,0
+2018,Toyota,4Runner,300
+2018,Toyota,Avalon,279
+2018,Toyota,Camry,247
+2018,Toyota,Corolla,237
+2018,Toyota,Highlander,290
+2018,Toyota,Land Cruiser,419
+2018,Toyota,Prius,182
+2018,Toyota,Rav4,267
+2018,Toyota,Sequoia,372
+2018,Toyota,Sienna,310
+2018,Toyota,Tacoma,315
+2018,Toyota,Tundra,383
+2018,Toyota,Yaris,218
+2018,Volkswagen,Atlas,300
+2018,Volkswagen,Beetle,264
+2018,Volkswagen,Golf,259
+2018,Volkswagen,Jetta,261
+2018,Volkswagen,Passat,271
+2018,Volkswagen,Tiguan,273
+2018,Volvo,S60,272
+2018,Volvo,S90,283
+2018,Volvo,V60,267
+2018,Volvo,V90,282
+2018,Volvo,XC60,273
+2018,Volvo,XC90,295
+2017,Acura,ILX,278
+2017,Acura,MDX,340
+2017,Acura,RDX,283
+2017,Acura,TLX,287
+2017,Audi,A3,237
+2017,Audi,A4,256
+2017,Audi,A5,278
+2017,Audi,A6,295
+2017,Audi,Q3,239
+2017,Audi,Q5,271
+2017,Audi,Q7,295
+2017,BMW,2 Series,238
+2017,BMW,3 Series,247
+2017,BMW,4 Series,263
+2017,BMW,5 Series,279
+2017,BMW,7 Series,320
+2017,BMW,X1,236
+2017,BMW,X3,256
+2017,BMW,X4,273
+2017,BMW,X5,303
+2017,BMW,X6,304
+2017,Buick,Enclave,310
+2017,Buick,Encore,275
+2017,Buick,Envision,284
+2017,Cadillac,ATS,285
+2017,Cadillac,CT6,321
+2017,Cadillac,CTS,315
+2017,Cadillac,Escalade,350
+2017,Cadillac,XT5,293
+2017,Cadillac,XTS,295
+2017,Chevrolet,Camaro,322
+2017,Chevrolet,Colorado,306
+2017,Chevrolet,Corvette,316
+2017,Chevrolet,Cruze,261
+2017,Chevrolet,Equinox,266
+2017,Chevrolet,Impala,289
+2017,Chevrolet,Malibu,287
+2017,Chevrolet,Silverado 1500,368
+2017,Chevrolet,Sonic,265
+2017,Chevrolet,Spark,261
+2017,Chevrolet,Suburban,358
+2017,Chevrolet,Tahoe,355
+2017,Chevrolet,Traverse,303
+2017,Chevrolet,Trax,269
+2017,Chrysler,300,323
+2017,Chrysler,Pacifica,270
+2017,Dodge,Challenger,322
+2017,Dodge,Charger,317
+2017,Dodge,Durango,332
+2017,Dodge,Grand Caravan,284
+2017,Dodge,Journey,301
+2017,Fiat,124 Spider,274
+2017,Fiat,500,269
+2017,Fiat,500L,276
+2017,Fiat,500X,277
+2017,Ford,C-Max Energi,176
+2017,Ford,Edge,291
+2017,Ford,Escape,267
+2017,Ford,Expedition,355
+2017,Ford,Explorer,303
+2017,Ford,F-150,332
+2017,Ford,Fiesta,263
+2017,Ford,Flex,312
+2017,Ford,Focus,262
+2017,Ford,Fusion,284
+2017,Ford,Mustang,329
+2017,Ford,Transit Connect,250
+2017,GMC,Acadia,303
+2017,GMC,Canyon,311
+2017,GMC,Sierra 1500,364
+2017,GMC,Terrain,278
+2017,GMC,Yukon,361
+2017,GMC,Yukon XL,358
+2017,Honda,Accord,261
+2017,Honda,Civic,245
+2017,Honda,Clarity Electric,0
+2017,Honda,CR-V,250
+2017,Honda,Fit,269
+2017,Honda,HR-V,272
+2017,Honda,Insight,231
+2017,Honda,Odyssey,292
+2017,Honda,Pilot,288
+2017,Honda,Ridgeline,293
+2017,Hyundai,Accent,247
+2017,Hyundai,Elantra,241
+2017,Hyundai,Ioniq,139
+2017,Hyundai,Santa Fe,266
+2017,Hyundai,Sonata,256
+2017,Hyundai,Tucson,262
+2017,Hyundai,Veloster,271
+2017,Infiniti,Q50,277
+2017,Infiniti,Q60,296
+2017,Infiniti,Q70,298
+2017,Infiniti,QX30,264
+2017,Infiniti,QX50,264
+2017,Infiniti,QX60,279
+2017,Infiniti,QX70,298
+2017,Infiniti,QX80,404
+2017,Jeep,Cherokee,294
+2017,Jeep,Compass,265
+2017,Jeep,Grand Cherokee,327
+2017,Jeep,Patriot,260
+2017,Jeep,Renegade,275
+2017,Jeep,Wrangler,324
+2017,Kia,Forte,237
+2017,Kia,Niro,194
+2017,Kia,Optima,252
+2017,Kia,Rio,228
+2017,Kia,Sedona,288
+2017,Kia,Sorento,277
+2017,Kia,Soul,250
+2017,Kia,Sportage,260
+2017,Land Rover,Discovery,356
+2017,Land Rover,Discovery Sport,308
+2017,Land Rover,Range Rover,393
+2017,Land Rover,Range Rover Evoque,292
+2017,Land Rover,Range Rover Sport,357
+2017,Lexus,CT,234
+2017,Lexus,ES,279
+2017,Lexus,GS,288
+2017,Lexus,IS,258
+2017,Lexus,LX,376
+2017,Lexus,NX,264
+2017,Lexus,RX,272
+2017,Lincoln,Continental,310
+2017,Lincoln,MKC,267
+2017,Lincoln,MKX,299
+2017,Lincoln,MKZ,278
+2017,Lincoln,Navigator,358
+2017,Mazda,3,234
+2017,Mazda,6,259
+2017,Mazda,CX-3,269
+2017,Mazda,CX-5,277
+2017,Mazda,CX-9,299
+2017,Mercedes-Benz,C-Class,267
+2017,Mercedes-Benz,CLA,263
+2017,Mercedes-Benz,E-Class,279
+2017,Mercedes-Benz,GLA,249
+2017,Mercedes-Benz,GLC,271
+2017,Mercedes-Benz,GLE,306
+2017,Mercedes-Benz,GLS,321
+2017,Mercedes-Benz,S-Class,330
+2017,Mini,Clubman,239
+2017,Mini,Cooper,223
+2017,Mini,Countryman,236
+2017,Mitsubishi,Mirage,234
+2017,Mitsubishi,Outlander,283
+2017,Mitsubishi,Outlander Sport,270
+2017,Nissan,370Z,317
+2017,Nissan,Altima,250
+2017,Nissan,Armada,390
+2017,Nissan,Frontier,306
+2017,Nissan,Juke,290
+2017,Nissan,Leaf,0
+2017,Nissan,Maxima,275
+2017,Nissan,Murano,279
+2017,Nissan,Pathfinder,290
+2017,Nissan,Rogue,257
+2017,Nissan,Sentra,243
+2017,Nissan,Titan,360
+2017,Nissan,Versa,240
+2017,Porsche,718 Boxster,303
+2017,Porsche,718 Cayman,295
+2017,Porsche,911,326
+2017,Porsche,Cayenne,343
+2017,Porsche,Macan,298
+2017,Porsche,Panamera,332
+2017,Ram,1500,352
+2017,Ram,2500,460
+2017,Ram,3500,508
+2017,Ram,ProMaster,408
+2017,Subaru,BRZ,274
+2017,Subaru,Crosstrek,260
+2017,Subaru,Forester,250
+2017,Subaru,Impreza,246
+2017,Subaru,Legacy,263
+2017,Subaru,Outback,263
+2017,Subaru,WRX,300
+2017,Tesla,Model S,0
+2017,Tesla,Model X,0
+2017,Toyota,4Runner,300
+2017,Toyota,Avalon,279
+2017,Toyota,Camry,247
+2017,Toyota,Corolla,237
+2017,Toyota,Highlander,290
+2017,Toyota,Land Cruiser,419
+2017,Toyota,Prius,182
+2017,Toyota,Prius Prime,160
+2017,Toyota,Rav4,267
+2017,Toyota,Sequoia,372
+2017,Toyota,Sienna,310
+2017,Toyota,Tacoma,315
+2017,Toyota,Tundra,383
+2017,Toyota,Yaris,221
+2017,Volkswagen,Atlas,303
+2017,Volkswagen,Beetle,268
+2017,Volkswagen,Golf,269
+2017,Volkswagen,Jetta,267
+2017,Volkswagen,Passat,286
+2017,Volkswagen,Tiguan,281
+2017,Volvo,S60,284
+2017,Volvo,S90,283
+2017,Volvo,V60,276
+2017,Volvo,V90,297
+2017,Volvo,XC60,283
+2017,Volvo,XC90,295
+2016,Acura,ILX,278
+2016,Acura,MDX,340
+2016,Acura,RDX,283
+2016,Acura,RLX,293
+2016,Acura,TLX,287
+2016,Audi,A3,237
+2016,Audi,A4,256
+2016,Audi,A5,278
+2016,Audi,A6,295
+2016,Audi,Q3,239
+2016,Audi,Q5,271
+2016,Audi,Q7,295
+2016,BMW,2 Series,238
+2016,BMW,3 Series,247
+2016,BMW,4 Series,263
+2016,BMW,5 Series,279
+2016,BMW,6 Series,312
+2016,BMW,7 Series,320
+2016,BMW,X1,236
+2016,BMW,X3,256
+2016,BMW,X4,273
+2016,BMW,X5,303
+2016,BMW,X6,304
+2016,Buick,Cascada,265
+2016,Buick,Enclave,310
+2016,Buick,Encore,275
+2016,Buick,Envision,284
+2016,Cadillac,ATS,285
+2016,Cadillac,CT6,321
+2016,Cadillac,CTS,315
+2016,Cadillac,Escalade,350
+2016,Cadillac,SRX,305
+2016,Cadillac,XT5,293
+2016,Cadillac,XTS,295
+2016,Chevrolet,Camaro,322
+2016,Chevrolet,City Express,275
+2016,Chevrolet,Colorado,306
+2016,Chevrolet,Corvette,316
+2016,Chevrolet,Cruze,261
+2016,Chevrolet,Equinox,266
+2016,Chevrolet,Express 2500,437
+2016,Chevrolet,Impala,289
+2016,Chevrolet,Malibu,287
+2016,Chevrolet,Silverado 1500,368
+2016,Chevrolet,Silverado 2500HD,438
+2016,Chevrolet,Silverado 3500HD,490
+2016,Chevrolet,Sonic,265
+2016,Chevrolet,Spark,261
+2016,Chevrolet,SS,355
+2016,Chevrolet,Suburban,358
+2016,Chevrolet,Tahoe,355
+2016,Chevrolet,Traverse,303
+2016,Chevrolet,Trax,269
+2016,Chrysler,200,289
+2016,Chrysler,300,323
+2016,Chrysler,Town and Country,328
+2016,Dodge,Challenger,322
+2016,Dodge,Charger,317
+2016,Dodge,Dart,285
+2016,Dodge,Durango,332
+2016,Dodge,Grand Caravan,284
+2016,Dodge,Journey,301
+2016,Fiat,500,269
+2016,Fiat,500X,277
+2016,Fiat,500L,276
+2016,Ford,C-Max Energi,176
+2016,Ford,Edge,291
+2016,Ford,Escape,267
+2016,Ford,Expedition,355
+2016,Ford,Explorer,303
+2016,Ford,F-150,332
+2016,Ford,Fiesta,263
+2016,Ford,Flex,312
+2016,Ford,Focus,262
+2016,Ford,Fusion,284
+2016,Ford,Mustang,329
+2016,Ford,Transit Connect,250
+2016,GMC,Acadia,303
+2016,GMC,Canyon,311
+2016,GMC,Savana 2500,437
+2016,GMC,Sierra 1500,364
+2016,GMC,Sierra 2500HD,438
+2016,GMC,Sierra 3500HD,490
+2016,GMC,Terrain,278
+2016,GMC,Yukon,361
+2016,GMC,Yukon XL,358
+2016,Honda,Accord,261
+2016,Honda,Civic,245
+2016,Honda,CR-V,250
+2016,Honda,Fit,269
+2016,Honda,HR-V,272
+2016,Honda,Insight,231
+2016,Honda,Odyssey,292
+2016,Honda,Pilot,288
+2016,Honda,Ridgeline,293
+2016,Hyundai,Accent,247
+2016,Hyundai,Azera,278
+2016,Hyundai,Elantra,241
+2016,Hyundai,Equus,297
+2016,Hyundai,Santa Fe,266
+2016,Hyundai,Sonata,256
+2016,Hyundai,Tucson,262
+2016,Hyundai,Veloster,271
+2016,Infiniti,Q50,277
+2016,Infiniti,Q60,296
+2016,Infiniti,Q70,298
+2016,Infiniti,QX50,264
+2016,Infiniti,QX60,279
+2016,Infiniti,QX70,298
+2016,Infiniti,QX80,404
+2016,Jeep,Cherokee,294
+2016,Jeep,Compass,265
+2016,Jeep,Grand Cherokee,327
+2016,Jeep,Patriot,260
+2016,Jeep,Renegade,275
+2016,Jeep,Wrangler,324
+2016,Kia,Cadenza,279
+2016,Kia,Forte,237
+2016,Kia,K900,285
+2016,Kia,Niro,194
+2016,Kia,Optima,252
+2016,Kia,Rio,228
+2016,Kia,Sedona,288
+2016,Kia,Sorento,277
+2016,Kia,Soul,250
+2016,Kia,Sportage,260
+2016,Land Rover,Discovery Sport,308
+2016,Land Rover,LR4,330
+2016,Land Rover,Range Rover,393
+2016,Land Rover,Range Rover Evoque,292
+2016,Land Rover,Range Rover Sport,357
+2016,Lexus,CT,234
+2016,Lexus,ES,279
+2016,Lexus,GS,288
+2016,Lexus,GS F,328
+2016,Lexus,GX,337
+2016,Lexus,IS,258
+2016,Lexus,LX,376
+2016,Lexus,NX,264
+2016,Lexus,RC,275
+2016,Lexus,RX,272
+2016,Lincoln,MKC,267
+2016,Lincoln,MKX,299
+2016,Lincoln,MKZ,278
+2016,Lincoln,Navigator,358
+2016,Mazda,3,234
+2016,Mazda,6,259
+2016,Mazda,CX-3,269
+2016,Mazda,CX-5,277
+2016,Mazda,CX-9,299
+2016,Mercedes-Benz,C-Class,267
+2016,Mercedes-Benz,CLA,263
+2016,Mercedes-Benz,CLS,290
+2016,Mercedes-Benz,E-Class,279
+2016,Mercedes-Benz,G-Class,441
+2016,Mercedes-Benz,GLA,249
+2016,Mercedes-Benz,GLC,271
+2016,Mercedes-Benz,GLE,306
+2016,Mercedes-Benz,GLS,321
+2016,Mercedes-Benz,M-Class,318
+2016,Mercedes-Benz,Maybach S600,330
+2016,Mercedes-Benz,S-Class,330
+2016,Mini,Clubman,239
+2016,Mini,Cooper,223
+2016,Mini,Cooper Countryman,236
+2016,Mitsubishi,Lancer,275
+2016,Mitsubishi,Mirage,234
+2016,Mitsubishi,Outlander,283
+2016,Mitsubishi,Outlander Sport,270
+2016,Nissan,370Z,317
+2016,Nissan,Altima,250
+2016,Nissan,Armada,390
+2016,Nissan,Frontier,306
+2016,Nissan,Juke,290
+2016,Nissan,Leaf,0
+2016,Nissan,Maxima,275
+2016,Nissan,Murano,279
+2016,Nissan,Pathfinder,290
+2016,Nissan,Rogue,257
+2016,Nissan,Sentra,243
+2016,Nissan,Titan,360
+2016,Nissan,Versa,240
+2016,Porsche,718 Boxster,303
+2016,Porsche,718 Cayman,295
+2016,Porsche,911,326
+2016,Porsche,Cayenne,343
+2016,Porsche,Macan,298
+2016,Porsche,Panamera,332
+2016,Ram,1500,352
+2016,Ram,2500,460
+2016,Ram,3500,479
+2016,Ram,Promaster City,261
+2016,Scion,FR-S,285
+2016,Scion,iA,281
+2016,Scion,iM,281
+2016,Subaru,BRZ,282
+2016,Subaru,Crosstrek,278
+2016,Subaru,Forester,292
+2016,Subaru,Impreza,276
+2016,Subaru,Legacy,283
+2016,Subaru,Outback,287
+2016,Subaru,Wrx,286
+2016,Toyota,4runner,321
+2016,Toyota,Avalon,306
+2016,Toyota,Camry,272
+2016,Toyota,Corolla,253
+2016,Toyota,Highlander,319
+2016,Toyota,Land Cruiser,376
+2016,Toyota,Mirai,0
+2016,Toyota,Prius,192
+2016,Toyota,Prius C,180
+2016,Toyota,Prius V,223
+2016,Toyota,Rav4,271
+2016,Toyota,Sequoia,397
+2016,Toyota,Sienna,330
+2016,Toyota,Tacoma,316
+2016,Toyota,Tundra,383
+2016,Toyota,Yaris,221
+2016,Volkswagen,Beetle,268
+2016,Volkswagen,CC,291
+2016,Volkswagen,Eos,268
+2016,Volkswagen,Golf,269
+2016,Volkswagen,Jetta,267
+2016,Volkswagen,Passat,286
+2016,Volkswagen,Tiguan,281
+2016,Volvo,S60,284
+2016,Volvo,S80,287
+2016,Volvo,V60,276
+2016,Volvo,XC60,283
+2016,Volvo,XC70,299
+2016,Volvo,XC90,295
+2015,Acura,ILX,278
+2015,Acura,MDX,340
+2015,Acura,RDX,283
+2015,Acura,RLX,293
+2015,Acura,TLX,287
+2015,Audi,A3,237
+2015,Audi,A4,256
+2015,Audi,A5,278
+2015,Audi,A6,295
+2015,Audi,Q3,239
+2015,Audi,Q5,271
+2015,Audi,Q7,295
+2015,BMW,2 Series,238
+2015,BMW,3 Series,247
+2015,BMW,4 Series,263
+2015,BMW,5 Series,279
+2015,BMW,6 Series,312
+2015,BMW,7 Series,320
+2015,BMW,X1,236
+2015,BMW,X3,256
+2015,BMW,X4,273
+2015,BMW,X5,303
+2015,BMW,X6,304
+2015,Buick,Encore,275
+2015,Buick,Enclave,310
+2015,Buick,LaCrosse,308
+2015,Buick,Regal,281
+2015,Buick,Verano,268
+2015,Cadillac,ATS,285
+2015,Cadillac,CTS,315
+2015,Cadillac,Escalade,350
+2015,Cadillac,SRX,305
+2015,Cadillac,XTS,295
+2015,Chevrolet,Camaro,322
+2015,Chevrolet,City Express,275
+2015,Chevrolet,Colorado,306
+2015,Chevrolet,Corvette,316
+2015,Chevrolet,Cruze,261
+2015,Chevrolet,Equinox,266
+2015,Chevrolet,Express 1500,487
+2015,Chevrolet,Impala,289
+2015,Chevrolet,Malibu,287
+2015,Chevrolet,Silverado 1500,368
+2015,Chevrolet,Silverado 2500HD,438
+2015,Chevrolet,Silverado 3500HD,490
+2015,Chevrolet,Sonic,265
+2015,Chevrolet,Spark,261
+2015,Chevrolet,SS,355
+2015,Chevrolet,Suburban,358
+2015,Chevrolet,Tahoe,355
+2015,Chevrolet,Traverse,303
+2015,Chevrolet,Trax,269
+2015,Chrysler,200,289
+2015,Chrysler,300,323
+2015,Chrysler,Town and Country,328
+2015,Dodge,Challenger,322
+2015,Dodge,Charger,317
+2015,Dodge,Dart,285
+2015,Dodge,Durango,332
+2015,Dodge,Grand Caravan,284
+2015,Dodge,Journey,301
+2015,Fiat,500,269
+2015,Fiat,500L,276
+2015,Fiat,500X,277
+2015,Ford,C-Max Energi,176
+2015,Ford,Edge,291
+2015,Ford,Escape,267
+2015,Ford,Expedition,355
+2015,Ford,Explorer,303
+2015,Ford,F-150,332
+2015,Ford,Fiesta,263
+2015,Ford,Flex,312
+2015,Ford,Focus,262
+2015,Ford,Fusion,284
+2015,Ford,Mustang,329
+2015,Ford,Transit Connect,250
+2015,GMC,Acadia,303
+2015,GMC,Canyon,311
+2015,GMC,Savana 1500,487
+2015,GMC,Sierra 1500,364
+2015,GMC,Sierra 2500HD,438
+2015,GMC,Sierra 3500HD,490
+2015,GMC,Terrain,278
+2015,GMC,Yukon,361
+2015,GMC,Yukon XL,358
+2015,Honda,Accord,261
+2015,Honda,Civic,245
+2015,Honda,CR-V,250
+2015,Honda,Fit,269
+2015,Honda,HR-V,272
+2015,Honda,Insight,231
+2015,Honda,Odyssey,292
+2015,Honda,Pilot,288
+2015,Honda,Ridgeline,293
+2015,Hyundai,Accent,247
+2015,Hyundai,Azera,278
+2015,Hyundai,Elantra,241
+2015,Hyundai,Equus,297
+2015,Hyundai,Santa Fe,266
+2015,Hyundai,Sonata,256
+2015,Hyundai,Tucson,262
+2015,Hyundai,Veloster,271
+2015,Infiniti,Q50,277
+2015,Infiniti,Q60,296
+2015,Infiniti,Q70,298
+2015,Infiniti,QX50,264
+2015,Infiniti,QX60,279
+2015,Infiniti,QX70,298
+2015,Infiniti,QX80,404
+2015,Jeep,Cherokee,294
+2015,Jeep,Compass,265
+2015,Jeep,Grand Cherokee,327
+2015,Jeep,Patriot,260
+2015,Jeep,Renegade,275
+2015,Jeep,Wrangler,324
+2015,Kia,Cadenza,279
+2015,Kia,Forte,237
+2015,Kia,K900,285
+2015,Kia,Optima,252
+2015,Kia,Rio,228
+2015,Kia,Sedona,288
+2015,Kia,Sorento,277
+2015,Kia,Soul,250
+2015,Kia,Sportage,260
+2015,Land Rover,LR2,322
+2015,Land Rover,LR4,330
+2015,Land Rover,Range Rover,393
+2015,Land Rover,Range Rover Evoque,292
+2015,Land Rover,Range Rover Sport,357
+2015,Lexus,CT,234
+2015,Lexus,ES,279
+2015,Lexus,GS,288
+2015,Lexus,GS F,328
+2015,Lexus,GX,337
+2015,Lexus,IS,258
+2015,Lexus,LX,376
+2015,Lexus,NX,264
+2015,Lexus,RC,275
+2015,Lexus,RX,272
+2015,Lincoln,MKC,267
+2015,Lincoln,MKX,299
+2015,Lincoln,MKZ,278
+2015,Lincoln,Navigator,358
+2015,Mazda,3,234
+2015,Mazda,6,259
+2015,Mazda,CX-3,269
+2015,Mazda,CX-5,277
+2015,Mazda,CX-9,299
+2015,Mercedes-Benz,C-Class,267
+2015,Mercedes-Benz,CLA,263
+2015,Mercedes-Benz,CLS,290
+2015,Mercedes-Benz,E-Class,279
+2015,Mercedes-Benz,G-Class,441
+2015,Mercedes-Benz,GLA,249
+2015,Mercedes-Benz,GLK-Class,292
+2015,Mercedes-Benz,ML-Class,318
+2015,Mercedes-Benz,S-Class,330
+2015,Mini,Cooper,223
+2015,Mini,Cooper Countryman,236
+2015,Mini,Cooper Paceman,241
+2015,Mitsubishi,Lancer,275
+2015,Mitsubishi,Mirage,234
+2015,Mitsubishi,Outlander,283
+2015,Mitsubishi,Outlander Sport,270
+2015,Nissan,370Z,317
+2015,Nissan,Altima,250
+2015,Nissan,Armada,390
+2015,Nissan,Frontier,306
+2015,Nissan,Juke,290
+2015,Nissan,Leaf,0
+2015,Nissan,Maxima,275
+2015,Nissan,Murano,279
+2015,Nissan,Pathfinder,290
+2015,Nissan,Qashqai,264
+2015,Nissan,Rogue,257
+2015,Nissan,Sentra,243
+2015,Nissan,Titan,360
+2015,Nissan,Versa,240
+2015,Porsche,911,326
+2015,Porsche,Boxster,303
+2015,Porsche,Cayenne,343
+2015,Porsche,Macan,298
+2015,Porsche,Panamera,332
+2015,Ram,1500,352
+2015,Ram,2500,460
+2015,Ram,3500,479
+2015,Ram,Promaster City,261
+2015,Scion,FR-S,285
+2015,Scion,iQ,186
+2015,Scion,tC,263
+2015,Subaru,BRZ,282
+2015,Subaru,Crosstrek,278
+2015,Subaru,Forester,292
+2015,Subaru,Impreza,276
+2015,Subaru,Legacy,283
+2015,Subaru,Outback,287
+2015,Subaru,WRX,286
+2015,Toyota,4Runner,321
+2015,Toyota,Avalon,306
+2015,Toyota,Camry,272
+2015,Toyota,Corolla,253
+2015,Toyota,Highlander,319
+2015,Toyota,Land Cruiser,376
+2015,Toyota,Mirai,0
+2015,Toyota,Prius,192
+2015,Toyota,Prius c,180
+2015,Toyota,Prius v,223
+2015,Toyota,Rav4,271
+2015,Toyota,Sequoia,397
+2015,Toyota,Sienna,330
+2015,Toyota,Tacoma,316
+2015,Toyota,Tundra,383
+2015,Toyota,Venza,298
+2015,Toyota,Yaris,221
+2015,Volkswagen,Beetle,268
+2015,Volkswagen,CC,291
+2015,Volkswagen,Eos,268
+2015,Volkswagen,Golf,269
+2015,Volkswagen,Jetta,267
+2015,Volkswagen,Passat,286
+2015,Volkswagen,Tiguan,281
+2015,Volvo,S60,284
+2015,Volvo,S80,287
+2015,Volvo,V60,276
+2015,Volvo,XC60,283
+2015,Volvo,XC70,299
+2015,Volvo,XC90,295
+2014,Acura,ILX,278
+2014,Acura,MDX,340
+2014,Acura,RDX,283
+2014,Acura,RLX,293
+2014,Acura,TL,293
+2014,Acura,TSX,282
+2014,Acura,ZDX,310
+2014,Audi,A4,256
+2014,Audi,A5,278
+2014,Audi,A6,295
+2014,Audi,A7,308
+2014,Audi,A8,320
+2014,Audi,Q5,271
+2014,Audi,Q7,295
+2014,BMW,2 Series,238
+2014,BMW,3 Series,247
+2014,BMW,4 Series,263
+2014,BMW,5 Series,279
+2014,BMW,6 Series,312
+2014,BMW,7 Series,320
+2014,BMW,M5,350
+2014,BMW,M6,374
+2014,BMW,X1,236
+2014,BMW,X3,256
+2014,BMW,X5,303
+2014,BMW,X6,304
+2014,Buick,Encore,275
+2014,Buick,Enclave,310
+2014,Buick,LaCrosse,308
+2014,Buick,Regal,281
+2014,Buick,Verano,268
+2014,Cadillac,ATS,285
+2014,Cadillac,CTS,315
+2014,Cadillac,Escalade,350
+2014,Cadillac,SRX,305
+2014,Cadillac,XTS,295
+2014,Chevrolet,Camaro,322
+2014,Chevrolet,Captiva Sport,303
+2014,Chevrolet,City Express,275
+2014,Chevrolet,Colorado,306
+2014,Chevrolet,Corvette,316
+2014,Chevrolet,Cruze,261
+2014,Chevrolet,Equinox,266
+2014,Chevrolet,Express 1500,487
+2014,Chevrolet,Impala,289
+2014,Chevrolet,Malibu,287
+2014,Chevrolet,Silverado 1500,368
+2014,Chevrolet,Silverado 2500HD,438
+2014,Chevrolet,Silverado 3500HD,490
+2014,Chevrolet,Sonic,265
+2014,Chevrolet,Spark,261
+2014,Chevrolet,SS,355
+2014,Chevrolet,Suburban,358
+2014,Chevrolet,Tahoe,355
+2014,Chevrolet,Traverse,303
+2014,Chevrolet,Trax,269
+2014,Chrysler,200,289
+2014,Chrysler,300,323
+2014,Chrysler,Town and Country,328
+2014,Dodge,Avenger,287
+2014,Dodge,Challenger,322
+2014,Dodge,Charger,317
+2014,Dodge,Dart,285
+2014,Dodge,Durango,332
+2014,Dodge,Grand Caravan,284
+2014,Dodge,Journey,301
+2014,Fiat,500,269
+2014,Fiat,500L,276
+2014,Fiat,500X,277
+2014,Ford,C-Max Energi,176
+2014,Ford,Edge,291
+2014,Ford,Escape,267
+2014,Ford,Expedition,355
+2014,Ford,Explorer,303
+2014,Ford,F-150,332
+2014,Ford,Fiesta,263
+2014,Ford,Flex,312
+2014,Ford,Focus,262
+2014,Ford,Fusion,284
+2014,Ford,Mustang,329
+2014,Ford,Taurus,310
+2014,Ford,Transit Connect,250
+2014,GMC,Acadia,303
+2014,GMC,Canyon,311
+2014,GMC,Savana 1500,487
+2014,GMC,Sierra 1500,364
+2014,GMC,Sierra 2500HD,438
+2014,GMC,Sierra 3500HD,490
+2014,GMC,Terrain,278
+2014,GMC,Yukon,361
+2014,GMC,Yukon XL,358
+2014,Honda,Accord,261
+2014,Honda,Civic,245
+2014,Honda,CR-V,250
+2014,Honda,Fit,269
+2014,Honda,Insight,231
+2014,Honda,Odyssey,292
+2014,Honda,Pilot,288
+2014,Honda,Ridgeline,293
+2014,Hyundai,Accent,247
+2014,Hyundai,Azera,278
+2014,Hyundai,Elantra,241
+2014,Hyundai,Equus,297
+2014,Hyundai,Santa Fe,266
+2014,Hyundai,Sonata,256
+2014,Hyundai,Tucson,262
+2014,Hyundai,Veloster,271
+2014,Infiniti,Q50,277
+2014,Infiniti,Q60,296
+2014,Infiniti,Q70,298
+2014,Infiniti,QX50,264
+2014,Infiniti,QX60,279
+2014,Infiniti,QX70,298
+2014,Infiniti,QX80,404
+2014,Jeep,Cherokee,294
+2014,Jeep,Compass,265
+2014,Jeep,Grand Cherokee,327
+2014,Jeep,Patriot,260
+2014,Jeep,Wrangler,324
+2014,Kia,Cadenza,279
+2014,Kia,Forte,237
+2014,Kia,K900,285
+2014,Kia,Optima,252
+2014,Kia,Rio,228
+2014,Kia,Sedona,288
+2014,Kia,Sorento,277
+2014,Kia,Soul,250
+2014,Kia,Sportage,260
+2014,Land Rover,LR2,322
+2014,Land Rover,LR4,330
+2014,Land Rover,Range Rover,393
+2014,Land Rover,Range Rover Evoque,292
+2014,Land Rover,Range Rover Sport,357
+2014,Lexus,CT,234
+2014,Lexus,ES,279
+2014,Lexus,GS,288
+2014,Lexus,GX,337
+2014,Lexus,IS,258
+2014,Lexus,LX,376
+2014,Lexus,RX,272
+2014,Lincoln,MKC,267
+2014,Lincoln,MKX,299
+2014,Lincoln,MKZ,278
+2014,Lincoln,Navigator,358
+2014,Mazda,3,234
+2014,Mazda,6,259
+2014,Mazda,CX-5,277
+2014,Mazda,CX-9,299
+2014,Mercedes-Benz,C-Class,267
+2014,Mercedes-Benz,CLA,263
+2014,Mercedes-Benz,CLS,290
+2014,Mercedes-Benz,E-Class,279
+2014,Mercedes-Benz,G-Class,441
+2014,Mercedes-Benz,GL-Class,318
+2014,Mercedes-Benz,GLA,249
+2014,Mercedes-Benz,GLK-Class,292
+2014,Mercedes-Benz,M-Class,318
+2014,Mercedes-Benz,S-Class,330
+2014,Mercedes-Benz,SL-Class,352
+2014,Mercedes-Benz,SLK-Class,281
+2014,Mini,Cooper,223
+2014,Mini,Cooper Clubman,243
+2014,Mini,Cooper Countryman,236
+2014,Mini,Cooper Paceman,241
+2014,Mitsubishi,Lancer,275
+2014,Mitsubishi,Mirage,234
+2014,Mitsubishi,Outlander,283
+2014,Mitsubishi,Outlander Sport,270
+2014,Nissan,370Z,317
+2014,Nissan,Altima,250
+2014,Nissan,Armada,390
+2014,Nissan,Cube,267
+2014,Nissan,Frontier,306
+2014,Nissan,Juke,290
+2014,Nissan,Leaf,0
+2014,Nissan,Maxima,275
+2014,Nissan,Murano,279
+2014,Nissan,NV200,247
+2014,Nissan,Pathfinder,290
+2014,Nissan,Qashqai,264
+2014,Nissan,Rogue,257
+2014,Nissan,Sentra,243
+2014,Nissan,Titan,360
+2014,Nissan,Versa,240
+2014,Nissan,Xterra,332
+2014,Porsche,911,326
+2014,Porsche,Boxster,303
+2014,Porsche,Cayenne,343
+2014,Porsche,Macan,298
+2014,Porsche,Panamera,332
+2014,Ram,1500,395
+2014,Ram,2500,439
+2014,Ram,3500,496
+2014,Scion,FR-S,294
+2014,Scion,iQ,240
+2014,Scion,tC,292
+2014,Scion,xB,298
+2014,Scion,xD,282
+2014,Subaru,BRZ,298
+2014,Subaru,Forester,293
+2014,Subaru,Impreza,281
+2014,Subaru,Legacy,292
+2014,Subaru,Outback,299
+2014,Subaru,Tribeca,334
+2014,Subaru,XV Crosstrek,292
+2014,Toyota,4Runner,329
+2014,Toyota,Avalon,278
+2014,Toyota,Camry,269
+2014,Toyota,Corolla,259
+2014,Toyota,FJ Cruiser,341
+2014,Toyota,Highlander,316
+2014,Toyota,Land Cruiser,361
+2014,Toyota,Prius,178
+2014,Toyota,Prius c,166
+2014,Toyota,Prius v,213
+2014,Toyota,Rav4,286
+2014,Toyota,Sequoia,386
+2014,Toyota,Sienna,330
+2014,Toyota,Tacoma,321
+2014,Toyota,Tundra,383
+2014,Toyota,Venza,302
+2014,Toyota,Yaris,238
+2014,Volkswagen,Beetle,269
+2014,Volkswagen,CC,272
+2014,Volkswagen,Eos,274
+2014,Volkswagen,Golf,276
+2014,Volkswagen,Jetta,278
+2014,Volkswagen,Passat,285
+2014,Volkswagen,Tiguan,277
+2014,Volvo,S60,282
+2014,Volvo,S80,286
+2014,Volvo,XC60,284
+2014,Volvo,XC70,301
+2014,Volvo,XC90,302
+2013,Acura,ILX,278
+2013,Acura,MDX,340
+2013,Acura,RDX,283
+2013,Acura,RL,304
+2013,Acura,TL,293
+2013,Acura,TSX,282
+2013,Acura,ZDX,310
+2013,Audi,A4,256
+2013,Audi,A5,278
+2013,Audi,A6,295
+2013,Audi,A7,308
+2013,Audi,A8,320
+2013,Audi,Q5,271
+2013,Audi,Q7,295
+2013,BMW,1 Series,249
+2013,BMW,3 Series,247
+2013,BMW,5 Series,279
+2013,BMW,6 Series,312
+2013,BMW,7 Series,320
+2013,BMW,M5,350
+2013,BMW,M6,374
+2013,BMW,X1,236
+2013,BMW,X3,256
+2013,BMW,X5,303
+2013,BMW,X6,304
+2013,Buick,Enclave,310
+2013,Buick,Encore,275
+2013,Buick,Lacrosse,308
+2013,Buick,Regal,281
+2013,Buick,Verano,268
+2013,Cadillac,ATS,285
+2013,Cadillac,CTS,315
+2013,Cadillac,Escalade,350
+2013,Cadillac,SRX,305
+2013,Cadillac,XTS,295
+2013,Chevrolet,Camaro,322
+2013,Chevrolet,Captiva Sport,303
+2013,Chevrolet,City Express,275
+2013,Chevrolet,Colorado,306
+2013,Chevrolet,Cruze,261
+2013,Chevrolet,Equinox,266
+2013,Chevrolet,Express 1500,487
+2013,Chevrolet,Impala,289
+2013,Chevrolet,Malibu,287
+2013,Chevrolet,Silverado 1500,368
+2013,Chevrolet,Silverado 2500HD,438
+2013,Chevrolet,Silverado 3500HD,490
+2013,Chevrolet,Sonic,265
+2013,Chevrolet,Spark,261
+2013,Chevrolet,Suburban,358
+2013,Chevrolet,Tahoe,355
+2013,Chevrolet,Traverse,303
+2013,Chevrolet,Volt,182
+2013,Chrysler,200,289
+2013,Chrysler,300,323
+2013,Chrysler,Town and Country,328
+2013,Dodge,Avenger,287
+2013,Dodge,Challenger,322
+2013,Dodge,Charger,317
+2013,Dodge,Dart,285
+2013,Dodge,Durango,332
+2013,Dodge,Grand Caravan,284
+2013,Dodge,Journey,301
+2013,Fiat,500,269
+2013,Fiat,500e,0
+2013,Fiat,500L,276
+2013,Fiat,500X,277
+2013,Ford,C-Max Energi,176
+2013,Ford,Edge,291
+2013,Ford,Escape,267
+2013,Ford,Expedition,355
+2013,Ford,Explorer,303
+2013,Ford,F-150,332
+2013,Ford,Fiesta,263
+2013,Ford,Flex,312
+2013,Ford,Focus,262
+2013,Ford,Fusion,284
+2013,Ford,Mustang,329
+2013,Ford,Taurus,310
+2013,Ford,Transit Connect,250
+2013,GMC,Acadia,303
+2013,GMC,Canyon,311
+2013,GMC,Savana 1500,487
+2013,GMC,Sierra 1500,364
+2013,GMC,Sierra 2500HD,438
+2013,GMC,Sierra 3500HD,490
+2013,GMC,Terrain,278
+2013,GMC,Yukon,361
+2013,GMC,Yukon XL,358
+2013,Honda,Accord,261
+2013,Honda,Civic,245
+2013,Honda,CR-V,250
+2013,Honda,Fit,269
+2013,Honda,Insight,231
+2013,Honda,Odyssey,292
+2013,Honda,Pilot,288
+2013,Honda,Ridgeline,293
+2013,Hyundai,Accent,247
+2013,Hyundai,Azera,278
+2013,Hyundai,Elantra,241
+2013,Hyundai,Equus,297
+2013,Hyundai,Santa Fe,266
+2013,Hyundai,Sonata,256
+2013,Hyundai,Tucson,262
+2013,Hyundai,Veloster,271
+2013,Infiniti,EX,282
+2013,Infiniti,FX,298
+2013,Infiniti,G,282
+2013,Infiniti,JX,282
+2013,Infiniti,M,294
+2013,Infiniti,Q50,277
+2013,Infiniti,Q60,296
+2013,Infiniti,Q70,298
+2013,Infiniti,QX50,264
+2013,Infiniti,QX56,419
+2013,Infiniti,QX60,279
+2013,Infiniti,QX70,298
+2013,Infiniti,QX80,404
+2013,Jeep,Cherokee,294
+2013,Jeep,Compass,265
+2013,Jeep,Grand Cherokee,327
+2013,Jeep,Patriot,260
+2013,Jeep,Wrangler,324
+2013,Kia,Cadenza,279
+2013,Kia,Forte,237
+2013,Kia,K900,285
+2013,Kia,Optima,252
+2013,Kia,Rio,228
+2013,Kia,Sedona,288
+2013,Kia,Sorento,277
+2013,Kia,Soul,250
+2013,Kia,Sportage,260
+2013,Land Rover,LR2,322
+2013,Land Rover,LR4,330
+2013,Land Rover,Range Rover,393
+2013,Land Rover,Range Rover Evoque,292
+2013,Land Rover,Range Rover Sport,357
+2013,Lexus,CT,234
+2013,Lexus,ES,279
+2013,Lexus,GS,288
+2013,Lexus,GX,337
+2013,Lexus,IS,258
+2013,Lexus,LX,376
+2013,Lexus,RX,272
+2013,Lincoln,MKC,267
+2013,Lincoln,MKX,299
+2013,Lincoln,MKZ,278
+2013,Lincoln,Navigator,358
+2013,Mazda,2,234
+2013,Mazda,3,234
+2013,Mazda,5,260
+2013,Mazda,6,259
+2013,Mazda,CX-5,277
+2013,Mazda,CX-9,299
+2013,Mercedes-Benz,C-Class,267
+2013,Mercedes-Benz,CLA,263
+2013,Mercedes-Benz,CLS,290
+2013,Mercedes-Benz,E-Class,279
+2013,Mercedes-Benz,G-Class,441
+2013,Mercedes-Benz,GL-Class,318
+2013,Mercedes-Benz,GLK-Class,292
+2013,Mercedes-Benz,M-Class,318
+2013,Mercedes-Benz,S-Class,330
+2013,Mercedes-Benz,SL-Class,352
+2013,Mercedes-Benz,SLK-Class,281
+2013,Mini,Cooper,223
+2013,Mini,Cooper Clubman,243
+2013,Mini,Cooper Countryman,236
+2013,Mini,Cooper Paceman,241
+2013,Mitsubishi,i-MiEV,0
+2013,Mitsubishi,Lancer,275
+2013,Mitsubishi,Outlander,283
+2013,Mitsubishi,Outlander Sport,270
+2013,Nissan,370Z,317
+2013,Nissan,Altima,250
+2013,Nissan,Armada,390
+2013,Nissan,Cube,267
+2013,Nissan,Frontier,306
+2013,Nissan,Juke,290
+2013,Nissan,Leaf,0
+2013,Nissan,Maxima,275
+2013,Nissan,Murano,279
+2013,Nissan,NV200,247
+2013,Nissan,Pathfinder,290
+2013,Nissan,Rogue,257
+2013,Nissan,Sentra,243
+2013,Nissan,Titan,360
+2013,Nissan,Versa,240
+2013,Nissan,Xterra,332
+2013,Porsche,911,326
+2013,Porsche,Boxster,275
+2013,Porsche,Cayenne,330
+2013,Porsche,Panamera,317
+2013,Ram,1500,396
+2013,Ram,2500,439
+2013,Ram,3500,496
+2013,Scion,FR-S,294
+2013,Scion,iQ,240
+2013,Scion,tC,292
+2013,Scion,xB,298
+2013,Scion,xD,282
+2013,Subaru,BRZ,298
+2013,Subaru,Forester,293
+2013,Subaru,Impreza,281
+2013,Subaru,Legacy,292
+2013,Subaru,Outback,299
+2013,Subaru,Tribeca,334
+2013,Subaru,XV Crosstrek,292
+2013,Toyota,4Runner,329
+2013,Toyota,Avalon,278
+2013,Toyota,Camry,269
+2013,Toyota,Corolla,259
+2013,Toyota,FJ Cruiser,341
+2013,Toyota,Highlander,316
+2013,Toyota,Land Cruiser,361
+2013,Toyota,Prius,178
+2013,Toyota,Prius c,166
+2013,Toyota,Prius v,213
+2013,Toyota,Rav4,286
+2013,Toyota,Sequoia,386
+2013,Toyota,Sienna,330
+2013,Toyota,Tacoma,321
+2013,Toyota,Tundra,383
+2013,Toyota,Venza,302
+2013,Toyota,Yaris,238
+2013,Volkswagen,Beetle,269
+2013,Volkswagen,CC,272
+2013,Volkswagen,Eos,274
+2013,Volkswagen,Golf,276
+2013,Volkswagen,Jetta,278
+2013,Volkswagen,Passat,285
+2013,Volkswagen,Tiguan,277
+2013,Volvo,S60,282
+2013,Volvo,S80,286
+2013,Volvo,XC60,284
+2013,Volvo,XC70,301
+2013,Volvo,XC90,302
+2012,Acura,ILX,278
+2012,Acura,MDX,340
+2012,Acura,RDX,283
+2012,Acura,RL,304
+2012,Acura,TL,293
+2012,Acura,TSX,282
+2012,Acura,ZDX,310
+2012,Audi,A3,256
+2012,Audi,A4,256
+2012,Audi,A5,278
+2012,Audi,A6,295
+2012,Audi,A7,308
+2012,Audi,A8,320
+2012,Audi,Q5,271
+2012,Audi,Q7,295
+2012,BMW,1 Series,249
+2012,BMW,3 Series,247
+2012,BMW,5 Series,279
+2012,BMW,6 Series,312
+2012,BMW,7 Series,320
+2012,BMW,M3,326
+2012,BMW,M5,350
+2012,BMW,M6,374
+2012,BMW,X3,256
+2012,BMW,X5,303
+2012,BMW,X6,304
+2012,Buick,Enclave,310
+2012,Buick,LaCrosse,308
+2012,Buick,Regal,281
+2012,Buick,Verano,268
+2012,Cadillac,CTS,315
+2012,Cadillac,Escalade,350
+2012,Cadillac,SRX,305
+2012,Cadillac,STS,322
+2012,Cadillac,XLR,373
+2012,Cadillac,XTS,295
+2012,Chevrolet,Avalanche,432
+2012,Chevrolet,Camaro,322
+2012,Chevrolet,Captiva Sport,303
+2012,Chevrolet,Colorado,306
+2012,Chevrolet,Corvette,406
+2012,Chevrolet,Cruze,261
+2012,Chevrolet,Equinox,266
+2012,Chevrolet,Express 1500,487
+2012,Chevrolet,Express 2500,514
+2012,Chevrolet,Express 3500,537
+2012,Chevrolet,Impala,289
+2012,Chevrolet,Malibu,287
+2012,Chevrolet,Silverado 1500,368
+2012,Chevrolet,Silverado 2500HD,438
+2012,Chevrolet,Silverado 3500HD,490
+2012,Chevrolet,Sonic,265
+2012,Chevrolet,Suburban,358
+2012,Chevrolet,Tahoe,355
+2012,Chevrolet,Traverse,303
+2012,Chevrolet,Volt,182
+2012,Chrysler,200,289
+2012,Chrysler,300,323
+2012,Chrysler,Town and Country,328
+2012,Dodge,Avenger,287
+2012,Dodge,Caliber,290
+2012,Dodge,Caravan,293
+2012,Dodge,Challenger,322
+2012,Dodge,Charger,317
+2012,Dodge,Dakota,379
+2012,Dodge,Durango,332
+2012,Dodge,Journey,301
+2012,Dodge,Nitro,323
+2012,Dodge,Ram 1500,396
+2012,Dodge,Ram 2500,439
+2012,Dodge,Ram 3500,496
+2012,Dodge,Viper,488
+2012,Fiat,500,269
+2012,Fiat,500 Abarth,278
+2012,Fiat,500c,269
+2012,Fiat,500e,0
+2012,Fiat,500L,276
+2012,Fiat,500X,277
+2012,Ford,E-150,571
+2012,Ford,E-250,596
+2012,Ford,E-350 Super Duty,637
+2012,Ford,Edge,291
+2012,Ford,Escape,267
+2012,Ford,Expedition,355
+2012,Ford,Explorer,303
+2012,Ford,F-150,332
+2012,Ford,F-250 Super Duty,453
+2012,Ford,F-350 Super Duty,501
+2012,Ford,Fiesta,263
+2012,Ford,Focus,262
+2012,Ford,Fusion,284
+2012,Ford,Mustang,329
+2012,Ford,Ranger,310
+2012,Ford,Taurus,310
+2012,Ford,Transit Connect,250
+2012,GMC,Acadia,303
+2012,GMC,Canyon,311
+2012,GMC,Savana 1500,487
+2012,GMC,Sierra 1500,364
+2012,GMC,Sierra 2500HD,438
+2012,GMC,Sierra 3500HD,490
+2012,GMC,Terrain,278
+2012,GMC,Yukon,361
+2012,GMC,Yukon XL,358
+2012,Honda,Accord,261
+2012,Honda,Civic,245
+2012,Honda,CR-V,250
+2012,Honda,Crosstour,307
+2012,Honda,Fit,269
+2012,Honda,Insight,231
+2012,Honda,Odyssey,292
+2012,Honda,Pilot,288
+2012,Honda,Ridgeline,293
+2012,Hyundai,Accent,247
+2012,Hyundai,Azera,278
+2012,Hyundai,Elantra,241
+2012,Hyundai,Equus,297
+2012,Hyundai,Genesis,290
+2012,Hyundai,Santa Fe,266
+2012,Hyundai,Sonata,256
+2012,Hyundai,Tucson,262
+2012,Hyundai,Veracruz,298
+2012,Infiniti,EX,282
+2012,Infiniti,FX,298
+2012,Infiniti,G,282
+2012,Infiniti,JX,282
+2012,Infiniti,M,294
+2012,Infiniti,QX,337
+2012,Jeep,Compass,265
+2012,Jeep,Grand Cherokee,327
+2012,Jeep,Liberty,335
+2012,Jeep,Patriot,260
+2012,Jeep,Wrangler,324
+2012,Kia,Forte,237
+2012,Kia,Forte Koup,241
+2012,Kia,Optima,252
+2012,Kia,Rio,228
+2012,Kia,Sedona,288
+2012,Kia,Sorento,277
+2012,Kia,Soul,250
+2012,Kia,Sportage,260
+2012,Land Rover,LR2,322
+2012,Land Rover,LR4,330
+2012,Land Rover,Range Rover,393
+2012,Land Rover,Range Rover Evoque,292
+2012,Land Rover,Range Rover Sport,357
+2012,Lexus,CT,234
+2012,Lexus,ES,279
+2012,Lexus,GS,288
+2012,Lexus,GX,337
+2012,Lexus,HS,240
+2012,Lexus,IS,258
+2012,Lexus,LS,331
+2012,Lexus,LX,376
+2012,Lexus,RX,272
+2012,Lincoln,MKX,299
+2012,Lincoln,MKZ,278
+2012,Lincoln,MKT,315
+2012,Lincoln,Navigator,358
+2012,Mazda,2,234
+2012,Mazda,3,234
+2012,Mazda,5,260
+2012,Mazda,6,259
+2012,Mazda,CX-7,276
+2012,Mazda,CX-9,299
+2012,Mercedes-Benz,C-Class,267
+2012,Mercedes-Benz,CL-Class,389
+2012,Mercedes-Benz,CLA-Class,263
+2012,Mercedes-Benz,CLK-Class,317
+2012,Mercedes-Benz,CLS-Class,290
+2012,Mercedes-Benz,E-Class,279
+2012,Mercedes-Benz,G-Class,441
+2012,Mercedes-Benz,GL-Class,318
+2012,Mercedes-Benz,GLK-Class,292
+2012,Mercedes-Benz,ML-Class,318
+2012,Mercedes-Benz,R-Class,354
+2012,Mercedes-Benz,S-Class,330
+2012,Mercedes-Benz,SL-Class,352
+2012,Mercedes-Benz,SLK-Class,281
+2012,Mercedes-Benz,SLS-Class,486
+2012,Mini,Cooper,223
+2012,Mini,Cooper Clubman,243
+2012,Mini,Cooper Countryman,236
+2012,Mini,Cooper Coupe,223
+2012,Mini,Cooper Roadster,231
+2012,Mitsubishi,Eclipse,320
+2012,Mitsubishi,Endeavor,359
+2012,Mitsubishi,Galant,282
+2012,Mitsubishi,i-MiEV,0
+2012,Mitsubishi,Lancer,275
+2012,Mitsubishi,Outlander,313
+2012,Mitsubishi,Outlander Sport,294
+2012,Nissan,370Z,313
+2012,Nissan,Altima,278
+2012,Nissan,Armada,430
+2012,Nissan,Cube,290
+2012,Nissan,Frontier,339
+2012,Nissan,Juke,288
+2012,Nissan,Leaf,0
+2012,Nissan,Maxima,278
+2012,Nissan,Murano,293
+2012,Nissan,NV1500,571
+2012,Nissan,NV2500 HD,596
+2012,Nissan,NV3500 HD,637
+2012,Nissan,Pathfinder,321
+2012,Nissan,Quest,282
+2012,Nissan,Rogue,299
+2012,Nissan,Sentra,266
+2012,Nissan,Titan,484
+2012,Nissan,Versa,262
+2012,Nissan,Xterra,346
+2012,Porsche,911,326
+2012,Porsche,Boxster,289
+2012,Porsche,Cayenne,331
+2012,Porsche,Panamera,318
+2012,Ram,1500,396
+2012,Ram,2500,439
+2012,Ram,3500,496
+2012,Scion,FR-S,294
+2012,Scion,iQ,240
+2012,Scion,tC,292
+2012,Scion,xB,298
+2012,Scion,xD,282
+2012,Subaru,Forester,293
+2012,Subaru,Impreza,281
+2012,Subaru,Legacy,292
+2012,Subaru,Outback,299
+2012,Subaru,Tribeca,334
+2012,Subaru,XV Crosstrek,292
+2012,Toyota,4Runner,329
+2012,Toyota,Avalon,278
+2012,Toyota,Camry,269
+2012,Toyota,Corolla,259
+2012,Toyota,FJ Cruiser,341
+2012,Toyota,Highlander,316
+2012,Toyota,Land Cruiser,361
+2012,Toyota,Prius,178
+2012,Toyota,Prius c,166
+2012,Toyota,Prius v,213
+2012,Toyota,Rav4,286
+2012,Toyota,Sequoia,386
+2012,Toyota,Sienna,330
+2012,Toyota,Tacoma,321
+2012,Toyota,Tundra,383
+2012,Toyota,Venza,302
+2012,Toyota,Yaris,238
+2012,Volkswagen,Beetle,269
+2012,Volkswagen,CC,272
+2012,Volkswagen,Eos,274
+2012,Volkswagen,Golf,276
+2012,Volkswagen,Jetta,278
+2012,Volkswagen,Passat,285
+2012,Volkswagen,Tiguan,277
+2012,Volvo,C30,296
+2012,Volvo,C70,299
+2012,Volvo,S60,282
+2012,Volvo,S80,286
+2012,Volvo,XC60,284
+2012,Volvo,XC70,301
+2012,Volvo,XC90,302
+2011,Acura,MDX,347
+2011,Acura,RDX,316
+2011,Acura,RL,325
+2011,Acura,TL,317
+2011,Acura,TSX,297
+2011,Acura,ZDX,337
+2011,Audi,A3,279
+2011,Audi,A4,279
+2011,Audi,A5,304
+2011,Audi,A6,316
+2011,Audi,A8,336
+2011,Audi,Q5,298
+2011,Audi,Q7,324
+2011,BMW,1 Series,273
+2011,BMW,3 Series,272
+2011,BMW,5 Series,300
+2011,BMW,6 Series,327
+2011,BMW,7 Series,344
+2011,BMW,M3,351
+2011,BMW,M5,383
+2011,BMW,M6,405
+2011,BMW,X3,301
+2011,BMW,X5,339
+2011,BMW,X6,347
+2011,Buick,Enclave,347
+2011,Buick,LaCrosse,328
+2011,Buick,Regal,308
+2011,Buick,Verano,292
+2011,Cadillac,CTS,341
+2011,Cadillac,DTS,337
+2011,Cadillac,Escalade,395
+2011,Cadillac,SRX,330
+2011,Cadillac,STS,349
+2011,Cadillac,XLR,405
+2011,Cadillac,XTS,328
+2011,Chevrolet,Avalanche,452
+2011,Chevrolet,Aveo,289
+2011,Chevrolet,Camaro,331
+2011,Chevrolet,Colorado,326
+2011,Chevrolet,Corvette,421
+2011,Chevrolet,Cruze,276
+2011,Chevrolet,Equinox,293
+2011,Chevrolet,Express 1500,529
+2011,Chevrolet,Express 2500,559
+2011,Chevrolet,Express 3500,594
+2011,Chevrolet,HHR,295
+2011,Chevrolet,Impala,310
+2011,Chevrolet,Malibu,303
+2011,Chevrolet,Silverado 1500,396
+2011,Chevrolet,Silverado 2500HD,452
+2011,Chevrolet,Silverado 3500HD,505
+2011,Chevrolet,Sonic,266
+2011,Chevrolet,Suburban,419
+2011,Chevrolet,Tahoe,412
+2011,Chevrolet,Traverse,342
+2011,Chevrolet,Volt,186
+2011,Chrysler,200,299
+2011,Chrysler,300,335
+2011,Chrysler,Town and Country,345
+2011,Dodge,Avenger,307
+2011,Dodge,Caliber,298
+2011,Dodge,Caravan,310
+2011,Dodge,Challenger,331
+2011,Dodge,Charger,339
+2011,Dodge,Dakota,390
+2011,Dodge,Durango,360
+2011,Dodge,Journey,317
+2011,Dodge,Nitro,338
+2011,Dodge,Ram 1500,418
+2011,Dodge,Ram 2500,452
+2011,Dodge,Ram 3500,513
+2011,Dodge,Viper,523
+2011,Fiat,500,270
+2011,Fiat,500 Abarth,279
+2011,Fiat,500c,271
+2011,Fiat,500e,0
+2011,Fiat,500L,280
+2011,Fiat,500X,277
+2011,Ford,E-150,586
+2011,Ford,E-250,614
+2011,Ford,E-350 Super Duty,655
+2011,Ford,Edge,307
+2011,Ford,Escape,282
+2011,Ford,Expedition,412
+2011,Ford,Explorer,344
+2011,Ford,F-150,374
+2011,Ford,F-250 Super Duty,481
+2011,Ford,F-350 Super Duty,531
+2011,Ford,Fiesta,283
+2011,Ford,Focus,276
+2011,Ford,Fusion,292
+2011,Ford,Mustang,349
+2011,Ford,Ranger,332
+2011,Ford,Taurus,344
+2011,Ford,Transit Connect,262
+2011,GMC,Acadia,337
+2011,GMC,Canyon,346
+2011,GMC,Savana 1500,529
+2011,GMC,Sierra 1500,403
+2011,GMC,Sierra 2500HD,452
+2011,GMC,Sierra 3500HD,505
+2011,GMC,Terrain,298
+2011,GMC,Yukon,419
+2011,GMC,Yukon XL,419
+2011,Honda,Accord,280
+2011,Honda,Civic,267
+2011,Honda,CR-V,266
+2011,Honda,Crosstour,320
+2011,Honda,Fit,277
+2011,Honda,Insight,241
+2011,Honda,Odyssey,316
+2011,Honda,Pilot,318
+2011,Honda,Ridgeline,332
+2011,Hyundai,Accent,256
+2011,Hyundai,Azera,298
+2011,Hyundai,Elantra,259
+2011,Hyundai,Equus,316
+2011,Hyundai,Genesis,307
+2011,Hyundai,Santa Fe,291
+2011,Hyundai,Sonata,275
+2011,Hyundai,Tucson,284
+2011,Hyundai,Veracruz,317
+2011,Infiniti,EX,297
+2011,Infiniti,FX,317
+2011,Infiniti,G,297
+2011,Infiniti,JX,297
+2011,Infiniti,M,316
+2011,Infiniti,QX,363
+2011,Jeep,Compass,289
+2011,Jeep,Grand Cherokee,355
+2011,Jeep,Liberty,353
+2011,Jeep,Patriot,276
+2011,Jeep,Wrangler,351
+2011,Kia,Forte,258
+2011,Kia,Forte Koup,263
+2011,Kia,Optima,273
+2011,Kia,Rio,248
+2011,Kia,Sedona,322
+2011,Kia,Sorento,303
+2011,Kia,Soul,277
+2011,Kia,Sportage,284
+2011,Land Rover,LR2,351
+2011,Land Rover,LR4,363
+2011,Land Rover,Range Rover,430
+2011,Land Rover,Range Rover Sport,415
+2011,Lexus,CT,251
+2011,Lexus,ES,297
+2011,Lexus,GS,308
+2011,Lexus,GX,363
+2011,Lexus,HS,259
+2011,Lexus,IS,275
+2011,Lexus,LS,351
+2011,Lexus,LX,398
+2011,Lexus,RX,287
+2011,Lincoln,MKX,316
+2011,Lincoln,MKZ,297
+2011,Lincoln,MKT,341
+2011,Lincoln,Navigator,398
+2011,Mazda,2,248
+2011,Mazda,3,255
+2011,Mazda,5,279
+2011,Mazda,6,287
+2011,Mazda,CX-7,304
+2011,Mazda,CX-9,337
+2011,Mercedes-Benz,C-Class,281
+2011,Mercedes-Benz,CL-Class,413
+2011,Mercedes-Benz,CLK-Class,363
+2011,Mercedes-Benz,CLS-Class,320
+2011,Mercedes-Benz,E-Class,308
+2011,Mercedes-Benz,G-Class,459
+2011,Mercedes-Benz,GL-Class,336
+2011,Mercedes-Benz,GLK-Class,307
+2011,Mercedes-Benz,M-Class,336
+2011,Mercedes-Benz,R-Class,374
+2011,Mercedes-Benz,S-Class,363
+2011,Mercedes-Benz,SL-Class,376
+2011,Mercedes-Benz,SLK-Class,288
+2011,Mercedes-Benz,SLS-Class,518
+2011,Mini,Cooper,245
+2011,Mini,Cooper Clubman,268
+2011,Mini,Cooper Countryman,255
+2011,Mini,Cooper Coupe,245
+2011,Mini,Cooper Roadster,251
+2011,Mitsubishi,Eclipse,335
+2011,Mitsubishi,Endeavor,374
+2011,Mitsubishi,Galant,296
+2011,Mitsubishi,i-MiEV,0
+2011,Mitsubishi,Lancer,287
+2011,Mitsubishi,Outlander,330
+2011,Mitsubishi,Outlander Sport,305
+2011,Nissan,370Z,324
+2011,Nissan,Altima,296
+2011,Nissan,Armada,420
+2011,Nissan,Cube,292
+2011,Nissan,Frontier,353
+2011,Nissan,Juke,291
+2011,Nissan,Leaf,0
+2011,Nissan,Maxima,296
+2011,Nissan,Murano,309
+2011,Nissan,NV1500,560
+2011,Nissan,NV2500 HD,605
+2011,Nissan,NV3500 HD,640
+2011,Nissan,Pathfinder,327
+2011,Nissan,Quest,292
+2011,Nissan,Rogue,309
+2011,Nissan,Sentra,282
+2011,Nissan,Titan,432
+2011,Nissan,Versa,280
+2011,Nissan,Xterra,348
+2011,Porsche,911,326
+2011,Porsche,Boxster,299
+2011,Porsche,Cayenne,331
+2011,Porsche,Panamera,322
+2011,Ram,1500,405
+2011,Ram,2500,452
+2011,Ram,3500,513
+2011,Scion,FR-S,292
+2011,Scion,iQ,240
+2011,Scion,tC,292
+2011,Scion,xB,306
+2011,Scion,xD,289
+2011,Subaru,Forester,307
+2011,Subaru,Impreza,297
+2011,Subaru,Legacy,301
+2011,Subaru,Outback,318
+2011,Subaru,Tribeca,354
+2011,Subaru,XV Crosstrek,301
+2011,Toyota,4Runner,349
+2011,Toyota,Avalon,317
+2011,Toyota,Camry,307
+2011,Toyota,Corolla,285
+2011,Toyota,FJ Cruiser,355
+2011,Toyota,Highlander,322
+2011,Toyota,Land Cruiser,406
+2011,Toyota,Prius,194
+2011,Toyota,Prius c,166
+2011,Toyota,Prius v,219
+2011,Toyota,Rav4,300
+2011,Toyota,Sequoia,425
+2011,Toyota,Sienna,349
+2011,Toyota,Tacoma,340
+2011,Toyota,Tundra,406
+2011,Toyota,Venza,314
+2011,Toyota,Yaris,246
+2011,Volkswagen,CC,295
+2011,Volkswagen,Eos,304
+2011,Volkswagen,Golf,276
+2011,Volkswagen,Jetta,291
+2011,Volkswagen,Passat,293
+2011,Volkswagen,Routan,340
+2011,Volkswagen,Tiguan,281
+2011,Volvo,C30,296
+2011,Volvo,C70,303
+2011,Volvo,S40,286
+2011,Volvo,S60,289
+2011,Volvo,S80,292
+2011,Volvo,V50,297
+2011,Volvo,XC60,303
+2011,Volvo,XC70,318
+2011,Volvo,XC90,335
+2010,Acura,MDX,353
+2010,Acura,RDX,331
+2010,Acura,RL,335
+2010,Acura,TL,327
+2010,Acura,TSX,303
+2010,Acura,ZDX,344
+2010,Audi,A3,293
+2010,Audi,A4,293
+2010,Audi,A5,318
+2010,Audi,A6,331
+2010,Audi,A8,363
+2010,Audi,Q5,318
+2010,Audi,Q7,353
+2010,BMW,1 Series,282
+2010,BMW,3 Series,282
+2010,BMW,5 Series,310
+2010,BMW,6 Series,337
+2010,BMW,7 Series,363
+2010,BMW,M3,370
+2010,BMW,M5,405
+2010,BMW,M6,427
+2010,BMW,X3,318
+2010,BMW,X5,360
+2010,BMW,X6,367
+2010,Buick,Enclave,367
+2010,Buick,LaCrosse,349
+2010,Buick,Lucerne,340
+2010,Buick,Regal,318
+2010,Buick,LaCrosse,349
+2010,Buick,Lucerne,340
+2010,Buick,Regal,318
+2010,Cadillac,CTS,353
+2010,Cadillac,DTS,349
+2010,Cadillac,Escalade,405
+2010,Cadillac,SRX,344
+2010,Cadillac,STS,359
+2010,Cadillac,XLR,427
+2010,Cadillac,CTS,353
+2010,Cadillac,DTS,349
+2010,Cadillac,Escalade,405
+2010,Cadillac,SRX,344
+2010,Cadillac,STS,359
+2010,Cadillac,XLR,427
+2010,Chevrolet,Avalanche,469
+2010,Chevrolet,Aveo,307
+2010,Chevrolet,Camaro,353
+2010,Chevrolet,Colorado,340
+2010,Chevrolet,Corvette,439
+2010,Chevrolet,Cruze,288
+2010,Chevrolet,Equinox,305
+2010,Chevrolet,Express 1500,544
+2010,Chevrolet,Express 2500,575
+2010,Chevrolet,Express 3500,609
+2010,Chevrolet,HHR,305
+2010,Chevrolet,Impala,327
+2010,Chevrolet,Malibu,318
+2010,Chevrolet,Silverado 1500,421
+2010,Chevrolet,Silverado 2500HD,469
+2010,Chevrolet,Silverado 3500HD,524
+2010,Chevrolet,Suburban,427
+2010,Chevrolet,Tahoe,421
+2010,Chevrolet,Traverse,367
+2010,Chevrolet,Cobalt,299
+2010,Chrysler,300,349
+2010,Chrysler,Aspen,405
+2010,Chrysler,PT Cruiser,318
+2010,Chrysler,Sebring,318
+2010,Chrysler,Town and Country,363
+2010,Dodge,Avenger,318
+2010,Dodge,Caliber,310
+2010,Dodge,Caravan,335
+2010,Dodge,Challenger,349
+2010,Dodge,Charger,353
+2010,Dodge,Dakota,396
+2010,Dodge,Durango,374
+2010,Dodge,Journey,327
+2010,Dodge,Nitro,349
+2010,Dodge,Ram 1500,439
+2010,Dodge,Ram 2500,469
+2010,Dodge,Ram 3500,534
+2010,Dodge,Viper,548
+2010,Ford,E-150,609
+2010,Ford,E-250,640
+2010,Ford,E-350 Super Duty,682
+2010,Ford,Edge,327
+2010,Ford,Escape,299
+2010,Ford,Expedition,439
+2010,Ford,Explorer,367
+2010,Ford,F-150,405
+2010,Ford,F-250 Super Duty,524
+2010,Ford,F-350 Super Duty,579
+2010,Ford,Fiesta,305
+2010,Ford,Focus,293
+2010,Ford,Fusion,310
+2010,Ford,Mustang,367
+2010,Ford,Ranger,353
+2010,Ford,Taurus,367
+2010,Ford,Transit Connect,279
+2010,GMC,Acadia,353
+2010,GMC,Canyon,367
+2010,GMC,Savana 1500,544
+2010,GMC,Sierra 1500,421
+2010,GMC,Sierra 2500HD,469
+2010,GMC,Sierra 3500HD,524
+2010,GMC,Terrain,318
+2010,GMC,Yukon,439
+2010,GMC,Yukon XL,439
+2010,Honda,Accord,310
+2010,Honda,Civic,293
+2010,Honda,CR-V,288
+2010,Honda,Crosstour,349
+2010,Honda,Fit,305
+2010,Honda,Insight,260
+2010,Honda,Odyssey,335
+2010,Honda,Pilot,353
+2010,Honda,Ridgeline,367
+2010,Hyundai,Accent,275
+2010,Hyundai,Elantra,264
+2010,Hyundai,Entourage,353
+2010,Hyundai,Genesis,335
+2010,Hyundai,Santa Fe,318
+2010,Hyundai,Sonata,299
+2010,Hyundai,Tucson,305
+2010,Hyundai,Veracruz,353
+2010,Infiniti,EX,318
+2010,Infiniti,FX,335
+2010,Infiniti,G,318
+2010,Infiniti,M,335
+2010,Infiniti,QX,374
+2010,Jeep,Commander,427
+2010,Jeep,Compass,299
+2010,Jeep,Grand Cherokee,363
+2010,Jeep,Liberty,367
+2010,Jeep,Patriot,288
+2010,Jeep,Wrangler,363
+2010,Kia,Forte,270
+2010,Kia,Forte Koup,275
+2010,Kia,Optima,288
+2010,Kia,Rio,263
+2010,Kia,Rondo,299
+2010,Kia,Sedona,353
+2010,Kia,Sorento,318
+2010,Kia,Soul,299
+2010,Kia,Sportage,305
+2010,Land Rover,LR2,367
+2010,Land Rover,LR4,396
+2010,Land Rover,Range Rover,468
+2010,Land Rover,Range Rover Sport,452
+2010,Lexus,ES,318
+2010,Lexus,GS,329
+2010,Lexus,GX,383
+2010,Lexus,HS,275
+2010,Lexus,IS,299
+2010,Lexus,LS,374
+2010,Lexus,LX,421
+2010,Lexus,RX,293
+2010,Lincoln,MKX,335
+2010,Lincoln,MKS,349
+2010,Lincoln,MKT,383
+2010,Lincoln,MKZ,318
+2010,Lincoln,Navigator,421
+2010,Lincoln,Navigator L,421
+2010,Mazda,3,270
+2010,Mazda,5,299
+2010,Mazda,6,299
+2010,Mazda,CX-7,331
+2010,Mazda,CX-9,363
+2010,Mercedes-Benz,C-Class,299
+2010,Mercedes-Benz,CL-Class,439
+2010,Mercedes-Benz,CLK-Class,383
+2010,Mercedes-Benz,CLS-Class,335
+2010,Mercedes-Benz,E-Class,318
+2010,Mercedes-Benz,G-Class,468
+2010,Mercedes-Benz,GL-Class,353
+2010,Mercedes-Benz,GLK-Class,318
+2010,Mercedes-Benz,M-Class,353
+2010,Mercedes-Benz,R-Class,396
+2010,Mercedes-Benz,S-Class,383
+2010,Mercedes-Benz,SL-Class,396
+2010,Mercedes-Benz,SLK-Class,318
+2010,Mercedes-Benz,SLS-Class,556
+2010,Mini,Cooper,260
+2010,Mini,Cooper Clubman,284
+2010,Mini,Cooper Convertible,266
+2010,Mini,Cooper Countryman,270
+2010,Mini,Cooper S,270
+2010,Mitsubishi,Endeavor,379
+2010,Mitsubishi,Eclipse,360
+2010,Mitsubishi,Galant,310
+2010,Mitsubishi,Lancer,318
+2010,Mitsubishi,Outlander,318
+2010,Nissan,350Z,338
+2010,Nissan,370Z,348
+2010,Nissan,Altima,310
+2010,Nissan,Armada,479
+2010,Nissan,Cube,292
+2010,Nissan,Frontier,349
+2010,Nissan,Juke,292
+2010,Nissan,Maxima,327
+2010,Nissan,Murano,332
+2010,Nissan,Pathfinder,379
+2010,Nissan,Rogue,318
+2010,Nissan,Sentra,305
+2010,Nissan,Titan,439
+2010,Nissan,Versa,292
+2010,Porsche,911,339
+2010,Porsche,Boxster,322
+2010,Porsche,Cayenne,383
+2010,Porsche,Panamera,353
+2010,Ram,1500,449
+2010,Ram,2500,524
+2010,Ram,3500,594
+2010,Scion, tC,300
+2009,Acura,MDX,367
+2009,Acura,RDX,335
+2009,Acura,RL,340
+2009,Acura,TL,335
+2009,Acura,TSX,318
+2009,Acura,ZDX,353
+2009,Audi,A3,300
+2009,Audi,A4,305
+2009,Audi,A5,331
+2009,Audi,A6,335
+2009,Audi,A8,367
+2009,Audi,Q5,331
+2009,Audi,Q7,379
+2009,BMW,1 Series,297
+2009,BMW,3 Series,297
+2009,BMW,5 Series,327
+2009,BMW,6 Series,367
+2009,BMW,7 Series,383
+2009,BMW,M3,388
+2009,BMW,M5,439
+2009,BMW,M6,452
+2009,BMW,X3,331
+2009,BMW,X5,379
+2009,BMW,X6,390
+2009,Buick,Enclave,390
+2009,Buick,LaCrosse,367
+2009,Buick,Lucerne,359
+2009,Buick,Regal,335
+2009,Cadillac,CTS,367
+2009,Cadillac,DTS,367
+2009,Cadillac,Escalade,421
+2009,Cadillac,SRX,360
+2009,Cadillac,STS,379
+2009,Cadillac,XLR,452
+2009,Chevrolet,Avalanche,495
+2009,Chevrolet,Aveo,318
+2009,Chevrolet,Camaro,367
+2009,Chevrolet,Colorado,360
+2009,Chevrolet,Corvette,452
+2009,Chevrolet,Equinox,318
+2009,Chevrolet,Express 1500,574
+2009,Chevrolet,Express 2500,609
+2009,Chevrolet,Express 3500,640
+2009,Chevrolet,HHR,318
+2009,Chevrolet,Impala,335
+2009,Chevrolet,Malibu,327
+2009,Chevrolet,Silverado 1500,439
+2009,Chevrolet,Silverado 2500HD,495
+2009,Chevrolet,Silverado 3500HD,556
+2009,Chevrolet,Suburban,479
+2009,Chevrolet,Tahoe,468
+2009,Chevrolet,Traverse,390
+2009,Chevrolet,Cobalt,305
+2009,Chrysler,300,367
+2009,Chrysler,Aspen,421
+2009,Chrysler,PT Cruiser,327
+2009,Chrysler,Sebring,327
+2009,Chrysler,Town and Country,383
+2009,Dodge,Avenger,327
+2009,Dodge,Caliber,318
+2009,Dodge,Caravan,335
+2009,Dodge,Challenger,367
+2009,Dodge,Charger,367
+2009,Dodge,Dakota,410
+2009,Dodge,Durango,396
+2009,Dodge,Journey,335
+2009,Dodge,Nitro,367
+2009,Dodge,Ram 1500,468
+2009,Dodge,Ram 2500,524
+2009,Dodge,Ram 3500,594
+2009,Dodge,Viper,588
+2009,Ford,E-150,640
+2009,Ford,E-250,675
+2009,Ford,E-350 Super Duty,716
+2009,Ford,Edge,335
+2009,Ford,Escape,318
+2009,Ford,Expedition,468
+2009,Ford,Explorer,390
+2009,Ford,F-150,421
+2009,Ford,F-250 Super Duty,556
+2009,Ford,F-350 Super Duty,609
+2009,Ford,Fiesta,318
+2009,Ford,Focus,305
+2009,Ford,Fusion,327
+2009,Ford,Mustang,390
+2009,Ford,Ranger,374
+2009,Ford,Taurus,379
+2009,Ford,Transit Connect,293
+2009,GMC,Acadia,367
+2009,GMC,Canyon,374
+2009,GMC,Savana 1500,574
+2009,GMC,Sierra 1500,439
+2009,GMC,Sierra 2500HD,495
+2009,GMC,Sierra 3500HD,556
+2009,GMC,Terrain,327
+2009,GMC,Yukon,468
+2009,GMC,Yukon XL,468
+2009,Honda,Accord,327
+2009,Honda,Civic,305
+2009,Honda,CR-V,305
+2009,Honda,Crosstour,367
+2009,Honda,Fit,318
+2009,Honda,Insight,275
+2009,Honda,Odyssey,335
+2009,Honda,Pilot,367
+2009,Honda,Ridgeline,390
+2009,Hyundai,Accent,281
+2009,Hyundai,Elantra,279
+2009,Hyundai,Entourage,374
+2009,Hyundai,Genesis,353
+2009,Hyundai,Santa Fe,327
+2009,Hyundai,Sonata,318
+2009,Hyundai,Tucson,318
+2009,Hyundai,Veracruz,367
+2009,Infiniti,EX,318
+2009,Infiniti,FX,335
+2009,Infiniti,G,327
+2009,Infiniti,M,335
+2009,Infiniti,QX,396
+2009,Jeep,Commander,468
+2009,Jeep,Compass,305
+2009,Jeep,Grand Cherokee,383
+2009,Jeep,Liberty,390
+2009,Jeep,Patriot,305
+2009,Jeep,Wrangler,383
+2009,Kia,Forte,281
+2009,Kia,Forte Koup,281
+2009,Kia,Optima,305
+2009,Kia,Rio,263
+2009,Kia,Rondo,318
+2009,Kia,Sedona,374
+2009,Kia,Sorento,327
+2009,Kia,Soul,305
+2009,Kia,Sportage,318
+2009,Land Rover,LR2,379
+2009,Land Rover,LR3,421
+2009,Land Rover,Range Rover,468
+2009,Land Rover,Range Rover Sport,452
+2009,Lexus,ES,327
+2009,Lexus,GS,335
+2009,Lexus,GX,396
+2009,Lexus,IS,318
+2009,Lexus,LS,396
+2009,Lexus,LX,439
+2009,Lexus,RX,318
+2009,Lincoln,MKX,335
+2009,Lincoln,MKS,367
+2009,Lincoln,MKT,396
+2009,Lincoln,MKZ,318
+2009,Lincoln,Navigator,439
+2009,Lincoln,Navigator L,439
+2009,Mazda,3,292
+2009,Mazda,5,327
+2009,Mazda,6,318
+2009,Mazda,CX-7,353
+2009,Mazda,CX-9,383
+2009,Mercedes-Benz,C-Class,318
+2009,Mercedes-Benz,CL-Class,439
+2009,Mercedes-Benz,CLK-Class,383
+2009,Mercedes-Benz,CLS-Class,353
+2009,Mercedes-Benz,E-Class,335
+2009,Mercedes-Benz,G-Class,468
+2009,Mercedes-Benz,GL-Class,390
+2009,Mercedes-Benz,GLK-Class,335
+2009,Mercedes-Benz,M-Class,383
+2009,Mercedes-Benz,R-Class,410
+2009,Mercedes-Benz,S-Class,396
+2009,Mercedes-Benz,SL-Class,421
+2009,Mercedes-Benz,SLK-Class,335
+2009,Mercedes-Benz,SLS-Class,575
+2009,Mini,Cooper,281
+2009,Mini,Cooper Clubman,300
+2009,Mini,Cooper Convertible,281
+2009,Mini,Cooper S,285
+2009,Mitsubishi,Endeavor,390
+2009,Mitsubishi,Eclipse,360
+2009,Mitsubishi,Galant,327
+2009,Mitsubishi,Lancer,318
+2009,Mitsubishi,Outlander,327
+2009,Nissan,350Z,356
+2009,Nissan,370Z,367
+2009,Nissan,Altima,327
+2009,Nissan,Armada,505
+2009,Nissan,Cube,300
+2009,Nissan,Frontier,367
+2009,Nissan,Murano,343
+2009,Nissan,Pathfinder,396
+2009,Nissan,Rogue,318
+2009,Nissan,Sentra,305
+2009,Nissan,Titan,556
+2009,Nissan,Versa,292
+2009,Pontiac,G5,327
+2009,Pontiac,G6,335
+2009,Pontiac,G8,367
+2009,Pontiac,Solstice,347
+2009,Pontiac,Vibe,318
+2009,Porsche,911,343
+2009,Porsche,Boxster,343
+2009,Porsche,Cayenne,396
+2009,Porsche,Panamera,390
+2009,Saab,3-Sep,318
+2009,Saab,5-Sep,335
+2009,Saturn,Astra,318
+2009,Saturn,Aura,318
+2009,Saturn,Outlook,390
+2009,Saturn,Sky,347
+2009,Saturn,VUE,335
+2009,Scion,tC,318
+2009,Scion,xB,300
+2009,Scion,xD,300
+2009,Subaru,Forester,318
+2009,Subaru,Impreza,305
+2009,Subaru,Legacy,327
+2009,Subaru,Outback,327
+2009,Subaru,Tribeca,383
+2009,Suzuki,Equator,374
+2009,Suzuki,Grand Vitara,348
+2009,Suzuki,Kizashi,318
+2009,Suzuki,SX4,305
+2009,Suzuki,XL7,390
+2009,Toyota,4Runner,390
+2009,Toyota,Avalon,353
+2009,Toyota,Camry,318
+2009,Toyota,Corolla,305
+2009,Toyota,FJ Cruiser,392
+2009,Toyota,Highlander,348
+2009,Toyota,Land Cruiser,540
+2009,Toyota,Matrix,305
+2009,Toyota,RAV4,318
+2009,Toyota,Sequoia,517
+2009,Toyota,Sienna,396
+2009,Toyota,Tacoma,374
+2009,Toyota,Tundra,556
+2009,Toyota,Venza,348
+2009,Toyota,Yaris,292
+2009,Volkswagen,CC,318
+2009,Volkswagen,Eos,327
+2009,Volkswagen,Golf,318
+2009,Volkswagen,Jetta,318
+2009,Volkswagen,Passat,318
+2009,Volkswagen,Rabbit,318
+2009,Volkswagen,Routan,383
+2009,Volkswagen,Tiguan,318
+2009,Volvo,C30,318
+2009,Volvo,C70,335
+2009,Volvo,S40,305
+2009,Volvo,S60,327
+2009,Volvo,S80,359
+2009,Volvo,V50,318
+2009,Volvo,V70,335
+2009,Volvo,XC60,343
+2009,Volvo,XC70,343
+2009,Volvo,XC90,396
+2008,Acura,MDX,373
+2008,Acura,RDX,343
+2008,Acura,RL,350
+2008,Acura,TL,343
+2008,Acura,TSX,326
+2008,Acura,ZDX,363
+2008,Audi,A3,309
+2008,Audi,A4,315
+2008,Audi,A5,343
+2008,Audi,A6,348
+2008,Audi,A8,373
+2008,Audi,Q7,404
+2008,BMW,1 Series,303
+2008,BMW,3 Series,303
+2008,BMW,5 Series,335
+2008,BMW,6 Series,373
+2008,BMW,7 Series,389
+2008,BMW,M3,394
+2008,BMW,M5,445
+2008,BMW,M6,458
+2008,BMW,X3,343
+2008,BMW,X5,404
+2008,BMW,X6,415
+2008,Buick,Enclave,415
+2008,Buick,LaCrosse,373
+2008,Buick,Lucerne,367
+2008,Buick,Regal,343
+2008,Cadillac,CTS,373
+2008,Cadillac,DTS,373
+2008,Cadillac,Escalade,428
+2008,Cadillac,SRX,367
+2008,Cadillac,STS,404
+2008,Cadillac,XLR,458
+2008,Chevrolet,Avalanche,504
+2008,Chevrolet,Aveo,326
+2008,Chevrolet,Cobalt,315
+2008,Chevrolet,Colorado,367
+2008,Chevrolet,Corvette,458
+2008,Chevrolet,Equinox,326
+2008,Chevrolet,Express 1500,590
+2008,Chevrolet,Express 2500,626
+2008,Chevrolet,Express 3500,656
+2008,Chevrolet,HHR,326
+2008,Chevrolet,Impala,343
+2008,Chevrolet,Malibu,335
+2008,Chevrolet,Silverado 1500,445
+2008,Chevrolet,Silverado 2500HD,504
+2008,Chevrolet,Silverado 3500HD,567
+2008,Chevrolet,Suburban,490
+2008,Chevrolet,Tahoe,479
+2008,Chevrolet,TrailBlazer,404
+2008,Chevrolet,Uplander,373
+2008,Chevrolet,Captiva Sport,335
+2008,Chrysler,300,373
+2008,Chrysler,Aspen,428
+2008,Chrysler,PT Cruiser,335
+2008,Chrysler,Sebring,335
+2008,Chrysler,Town and Country,389
+2008,Dodge,Avenger,335
+2008,Dodge,Caliber,326
+2008,Dodge,Caravan,343
+2008,Dodge,Challenger,373
+2008,Dodge,Charger,373
+2008,Dodge,Dakota,421
+2008,Dodge,Durango,415
+2008,Dodge,Grand Caravan,373
+2008,Dodge,Journey,343
+2008,Dodge,Magnum,373
+2008,Dodge,Nitro,373
+2008,Dodge,Ram 1500,479
+2008,Dodge,Ram 2500,535
+2008,Dodge,Ram 3500,604
+2008,Dodge,Sprinter 2500,656
+2008,Dodge,Sprinter 3500,656
+2008,Ford,E-150,656
+2008,Ford,E-250,696
+2008,Ford,E-350 Super Duty,738
+2008,Ford,Edge,343
+2008,Ford,Escape,326
+2008,Ford,Expedition,479
+2008,Ford,Explorer,415
+2008,Ford,F-150,428
+2008,Ford,F-250 Super Duty,567
+2008,Ford,F-350 Super Duty,626
+2008,Ford,F-450 Super Duty,656
+2008,Ford,F-550 Super Duty,656
+2008,Ford,Fiesta,326
+2008,Ford,Focus,315
+2008,Ford,Fusion,335
+2008,Ford,Mustang,415
+2008,Ford,Ranger,400
+2008,Ford,Taurus,404
+2008,Ford,Transit Connect,303
+2008,GMC,Acadia,373
+2008,GMC,Canyon,400
+2008,GMC,Savana 1500,590
+2008,GMC,Sierra 1500,445
+2008,GMC,Sierra 2500HD,504
+2008,GMC,Sierra 3500HD,567
+2008,GMC,Terrain,343
+2008,GMC,Yukon,479
+2008,GMC,Yukon XL,479
+2008,Honda,Accord,335
+2008,Honda,Civic,315
+2008,Honda,CR-V,315
+2008,Honda,Element,343
+2008,Honda,Fit,326
+2008,Honda,Odyssey,343
+2008,Honda,Pilot,373
+2008,Honda,Ridgeline,415
+2008,Hyundai,Accent,287
+2008,Hyundai,Elantra,285
+2008,Hyundai,Entourage,400
+2008,Hyundai,Genesis,367
+2008,Hyundai,Santa Fe,343
+2008,Hyundai,Sonata,326
+2008,Hyundai,Tiburon,326
+2008,Hyundai,Tucson,326
+2008,Hyundai,Veracruz,373
+2008,Infiniti,EX,326
+2008,Infiniti,FX,343
+2008,Infiniti,G,335
+2008,Infiniti,M,343
+2008,Infiniti,QX,415
+2008,Isuzu,Ascender,421
+2008,Jeep,Commander,479
+2008,Jeep,Compass,315
+2008,Jeep,Grand Cherokee,404
+2008,Jeep,Liberty,415
+2008,Jeep,Patriot,315
+2008,Jeep,Wrangler,404
+2008,Kia,Amanti,358
+2008,Kia,Borrego,415
+2008,Kia,Optima,315
+2008,Kia,Rio,271
+2008,Kia,Rondo,343
+2008,Kia,Sedona,400
+2008,Kia,Sorento,343
+2008,Kia,Spectra,315
+2008,Kia,Sportage,326
+2008,Land Rover,LR2,404
+2008,Land Rover,LR3,428
+2008,Land Rover,Range Rover,479
+2008,Land Rover,Range Rover Sport,458
+2008,Lexus,ES,335
+2008,Lexus,GS,343
+2008,Lexus,GX,415
+2008,Lexus,IS,326
+2008,Lexus,LS,415
+2008,Lexus,LX,458
+2008,Lexus,RX,326
+2008,Lincoln,MKX,343
+2008,Lincoln,MKS,373
+2008,Lincoln,MKT,415
+2008,Lincoln,MKZ,326
+2008,Lincoln,Navigator,458
+2008,Lincoln,Navigator L,458
+2008,Mazda,3,298
+2008,Mazda,5,343
+2008,Mazda,6,326
+2008,Mazda,B-Series,421
+2008,Mazda,CX-7,373
+2008,Mazda,CX-9,404
+2008,Mercedes-Benz,C-Class,326
+2008,Mercedes-Benz,CL-Class,458
+2008,Mercedes-Benz,CLK-Class,404
+2008,Mercedes-Benz,CLS-Class,373
+2008,Mercedes-Benz,E-Class,348
+2008,Mercedes-Benz,G-Class,479
+2008,Mercedes-Benz,GL-Class,400
+2008,Mercedes-Benz,GLK-Class,348
+2008,Mercedes-Benz,M-Class,404
+2008,Mercedes-Benz,R-Class,431
+2008,Mercedes-Benz,S-Class,415
+2008,Mercedes-Benz,SL-Class,439
+2008,Mercedes-Benz,SLK-Class,348
+2008,Mercedes-Benz,SLS-Class,589
+2008,Mercury,Mariner,343
+2008,Mercury,Mariner Hybrid,343
+2008,Mercury,Milan,326
+2008,Mercury,Mountaineer,415
+2008,Mini,Cooper,287
+2008,Mini,Cooper Clubman,309
+2008,Mini,Cooper Convertible,287
+2008,Mini,Cooper S,292
+2008,Mitsubishi,Eclipse,415
+2008,Mitsubishi,Endeavor,404
+2008,Mitsubishi,Galant,343
+2008,Mitsubishi,Lancer,315
+2008,Mitsubishi,Outlander,343
+2008,Mitsubishi,Raider,504
+2008,Nissan,350Z,392
+2008,Nissan,Altima,326
+2008,Nissan,Armada,490
+2008,Nissan,Frontier,421
+2008,Nissan,Maxima,343
+2008,Nissan,Murano,343
+2008,Nissan,Pathfinder,415
+2008,Nissan,Quest,415
+2008,Nissan,Rogue,326
+2008,Nissan,Sentra,315
+2008,Nissan,Titan,556
+2008,Nissan,Versa,292
+2008,Pontiac,G5,327
+2008,Pontiac,G6,335
+2008,Pontiac,G8,367
+2008,Pontiac,Solstice,347
+2008,Pontiac,Vibe,318
+2008,Porsche,911,343
+2008,Porsche,Boxster,343
+2008,Porsche,Cayenne,396
+2008,Porsche,Cayman,343
+2008,Porsche,Panamera,390
+2008,Saab,3-Sep,318
+2008,Saab,5-Sep,335
+2008,Saturn,Astra,318
+2008,Saturn,Aura,318
+2008,Saturn,Outlook,390
+2008,Saturn,Sky,347
+2008,Saturn,VUE,335
+2008,Scion,tC,318
+2008,Scion,xB,300
+2008,Scion,xD,300
+2008,Subaru,Forester,318
+2008,Subaru,Impreza,305
+2008,Subaru,Legacy,327
+2008,Subaru,Outback,327
+2008,Subaru,Tribeca,383
+2008,Suzuki,Equator,374
+2008,Suzuki,Forenza,335
+2008,Suzuki,Grand Vitara,348
+2008,Suzuki,Reno,315
+2008,Suzuki,SX4,305
+2008,Suzuki,XL7,390
+2008,Toyota,4Runner,390
+2008,Toyota,Avalon,353
+2008,Toyota,Camry,318
+2008,Toyota,Corolla,305
+2008,Toyota,FJ Cruiser,392
+2008,Toyota,Highlander,348
+2008,Toyota,Land Cruiser,540
+2008,Toyota,Matrix,305
+2008,Toyota,RAV4,318
+2008,Toyota,Sequoia,517
+2008,Toyota,Sienna,396
+2008,Toyota,Tacoma,374
+2008,Toyota,Tundra,556
+2008,Toyota,Yaris,292
+2008,Volkswagen,Beetle,335
+2008,Volkswagen,Eos,327
+2008,Volkswagen,Golf,318
+2008,Volkswagen,Jetta,318
+2008,Volkswagen,Passat,318
+2008,Volkswagen,Rabbit,318
+2008,Volkswagen,Routan,383
+2008,Volkswagen,Tiguan,318
+2008,Volvo,C30,318
+2008,Volvo,C70,335
+2008,Volvo,S40,305
+2008,Volvo,S60,327
+2008,Volvo,S80,359
+2008,Volvo,V50,318
+2008,Volvo,V70,335
+2008,Volvo,XC70,343
+2008,Volvo,XC90,396
+2007,Acura,MDX,385
+2007,Acura,RDX,354
+2007,Acura,RL,361
+2007,Acura,TL,354
+2007,Acura,TSX,337
+2007,Acura,ZDX,375
+2007,Audi,A3,321
+2007,Audi,A4,328
+2007,Audi,A6,361
+2007,Audi,A8,385
+2007,Audi,Q7,416
+2007,BMW,3 Series,328
+2007,BMW,5 Series,359
+2007,BMW,6 Series,385
+2007,BMW,7 Series,402
+2007,BMW,M5,470
+2007,BMW,X3,354
+2007,BMW,X5,416
+2007,BMW,X5 M,456
+2007,Buick,Lacrosse,361
+2007,Buick,Lucerne,375
+2007,Buick,Rainier,416
+2007,Buick,Rendezvous,375
+2007,Buick,Terraza,375
+2007,Cadillac,CTS,375
+2007,Cadillac,DTS,375
+2007,Cadillac,Escalade,430
+2007,Cadillac,SRX,375
+2007,Cadillac,STS,402
+2007,Cadillac,XLR,456
+2007,Chevrolet,Avalanche,518
+2007,Chevrolet,Aveo,337
+2007,Chevrolet,Cobalt,328
+2007,Chevrolet,Colorado,375
+2007,Chevrolet,Corvette,456
+2007,Chevrolet,Equinox,337
+2007,Chevrolet,Express 1500,607
+2007,Chevrolet,Express 2500,643
+2007,Chevrolet,Express 3500,675
+2007,Chevrolet,HHR,337
+2007,Chevrolet,Impala,354
+2007,Chevrolet,Malibu,359
+2007,Chevrolet,Silverado 1500,470
+2007,Chevrolet,Silverado 2500HD,518
+2007,Chevrolet,Silverado 3500HD,581
+2007,Chevrolet,Suburban,504
+2007,Chevrolet,Tahoe,493
+2007,Chevrolet,TrailBlazer,402
+2007,Chevrolet,Uplander,375
+2007,Chrysler,300,375
+2007,Chrysler,Aspen,430
+2007,Chrysler,Pacifica,375
+2007,Chrysler,PT Cruiser,359
+2007,Chrysler,Sebring,359
+2007,Chrysler,Town and Country,402
+2007,Dodge,Caliber,337
+2007,Dodge,Caravan,354
+2007,Dodge,Charger,375
+2007,Dodge,Dakota,425
+2007,Dodge,Durango,416
+2007,Dodge,Grand Caravan,375
+2007,Dodge,Magnum,375
+2007,Dodge,Nitro,375
+2007,Dodge,Ram 1500,493
+2007,Dodge,Ram 2500,550
+2007,Dodge,Ram 3500,618
+2007,Dodge,Sprinter 2500,675
+2007,Dodge,Sprinter 3500,675
+2007,Ford,E-150,675
+2007,Ford,E-250,718
+2007,Ford,E-350 Super Duty,759
+2007,Ford,Edge,354
+2007,Ford,Escape,337
+2007,Ford,Expedition,493
+2007,Ford,Explorer,425
+2007,Ford,F-150,430
+2007,Ford,F-250 Super Duty,581
+2007,Ford,F-350 Super Duty,643
+2007,Ford,F-450 Super Duty,675
+2007,Ford,F-550 Super Duty,675
+2007,Ford,Freestar,402
+2007,Ford,Freestyle,359
+2007,Ford,Fusion,359
+2007,Ford,Mustang,425
+2007,Ford,Ranger,407
+2007,Ford,Taurus,402
+2007,Ford,Transit Connect,321
+2007,GMC,Acadia,375
+2007,GMC,Canyon,407
+2007,GMC,Envoy,402
+2007,GMC,Savana 1500,607
+2007,GMC,Savana 2500,643
+2007,GMC,Savana 3500,675
+2007,GMC,Sierra 1500,470
+2007,GMC,Sierra 2500HD,518
+2007,GMC,Sierra 3500HD,581
+2007,GMC,Yukon,504
+2007,GMC,Yukon XL,504
+2007,Honda,Accord,359
+2007,Honda,Civic,328
+2007,Honda,CR-V,328
+2007,Honda,Element,354
+2007,Honda,Fit,337
+2007,Honda,Odyssey,354
+2007,Honda,Pilot,375
+2007,Honda,Ridgeline,416
+2007,Hummer,H2,612
+2007,Hummer,H3,446
+2007,Hyundai,Accent,303
+2007,Hyundai,Elantra,303
+2007,Hyundai,Entourage,407
+2007,Hyundai,Santa Fe,375
+2007,Hyundai,Sonata,359
+2007,Hyundai,Tiburon,337
+2007,Hyundai,Tucson,337
+2007,Hyundai,Veracruz,402
+2007,Infiniti,EX35,337
+2007,Infiniti,FX35,354
+2007,Infiniti,FX45,385
+2007,Infiniti,G35,359
+2007,Infiniti,M35,375
+2007,Infiniti,Q45,456
+2007,Isuzu,Ascender,425
+2007,Isuzu,I-290,359
+2007,Isuzu,I-370,446
+2007,Jeep,Commander,504
+2007,Jeep,Compass,328
+2007,Jeep,Grand Cherokee,402
+2007,Jeep,Liberty,416
+2007,Jeep,Patriot,328
+2007,Jeep,Wrangler,402
+2007,Kia,Amanti,367
+2007,Kia,Rio,312
+2007,Kia,Rondo,354
+2007,Kia,Sedona,407
+2007,Kia,Sorento,375
+2007,Kia,Spectra,328
+2007,Kia,Sportage,337
+2007,Land Rover,LR3,402
+2007,Land Rover,Range Rover,504
+2007,Land Rover,Range Rover Sport,474
+2007,Lexus,ES 350,359
+2007,Lexus,GS 350,375
+2007,Lexus,GX 470,446
+2007,Lexus,IS 250,337
+2007,Lexus,LS 460,446
+2007,Lexus,LX 470,456
+2007,Lexus,RX 350,337
+2007,Lincoln,Mark LT,493
+2007,Lincoln,MKX,354
+2007,Lincoln,MKZ,337
+2007,Lincoln,Navigator,456
+2007,Lincoln,Navigator L,456
+2007,Mazda,3,312
+2007,Mazda,5,354
+2007,Mazda,6,337
+2007,Mazda,B-Series,425
+2007,Mazda,CX-7,375
+2007,Mazda,CX-9,402
+2007,Mercedes-Benz,C-Class,337
+2007,Mercedes-Benz,CL-Class,474
+2007,Mercedes-Benz,CLK-Class,402
+2007,Mercedes-Benz,CLS-Class,375
+2007,Mercedes-Benz,E-Class,361
+2007,Mercedes-Benz,G-Class,504
+2007,Mercedes-Benz,GL-Class,407
+2007,Mercedes-Benz,M-Class,402
+2007,Mercedes-Benz,R-Class,431
+2007,Mercedes-Benz,S-Class,416
+2007,Mercury,Grand Marquis,416
+2007,Mercury,Mariner,354
+2007,Mercury,Mariner Hybrid,354
+2007,Mercury,Milan,337
+2007,Mercury,Mountaineer,416
+2007,Mini,Cooper,303
+2007,Mini,Cooper Convertible,316
+2007,Mini,Cooper S,316
+2007,Mitsubishi,Eclipse,416
+2007,Mitsubishi,Endeavor,402
+2007,Mitsubishi,Galant,359
+2007,Mitsubishi,Lancer,328
+2007,Mitsubishi,Outlander,359
+2007,Nissan,350Z,416
+2007,Nissan,Altima,337
+2007,Nissan,Armada,504
+2007,Nissan,Frontier,425
+2007,Nissan,Maxima,354
+2007,Nissan,Murano,375
+2007,Nissan,Pathfinder,425
+2007,Nissan,Quest,402
+2007,Nissan,Sentra,328
+2007,Nissan,Titan,618
+2007,Nissan,Versa,303
+2007,Pontiac,G5,328
+2007,Pontiac,G6,337
+2007,Pontiac,GTO,446
+2007,Pontiac,Solstice,337
+2007,Pontiac,Vibe,328
+2007,Porsche,911,402
+2007,Porsche,Boxster,354
+2007,Porsche,Cayman,354
+2007,Saab,3-Sep,328
+2007,Saab,5-Sep,359
+2007,Saturn,Aura,337
+2007,Saturn,Outlook,407
+2007,Saturn,Relay,407
+2007,Saturn,Sky,354
+2007,Saturn,VUE,359
+2007,Scion,tC,328
+2007,Scion,xA,337
+2007,Scion,xB,328
+2007,Subaru,Forester,354
+2007,Subaru,Impreza,337
+2007,Subaru,Legacy,337
+2007,Subaru,Outback,337
+2007,Subaru,Tribeca,407
+2007,Suzuki,Aerio,328
+2007,Suzuki,Forenza,359
+2007,Suzuki,Grand Vitara,446
+2007,Suzuki,Reno,328
+2007,Suzuki,Swift,312
+2007,Suzuki,Verona,359
+2007,Suzuki,XL7,402
+2007,Toyota,4Runner,416
+2007,Toyota,Avalon,375
+2007,Toyota,Camry,337
+2007,Toyota,Corolla,328
+2007,Toyota,FJ Cruiser,446
+2007,Toyota,Highlander,359
+2007,Toyota,Land Cruiser,550
+2007,Toyota,Matrix,328
+2007,Toyota,RAV4,337
+2007,Toyota,Sequoia,618
+2007,Toyota,Sienna,407
+2007,Toyota,Tacoma,446
+2007,Toyota,Tundra,618
+2007,Toyota,Yaris,312
+2007,Volkswagen,Beetle,337
+2007,Volkswagen,Eos,337
+2007,Volkswagen,Golf,328
+2007,Volkswagen,Jetta,328
+2007,Volkswagen,Passat,337
+2007,Volkswagen,Rabbit,328
+2007,Volkswagen,Touareg,407
+2007,Volvo,C70,337
+2007,Volvo,S40,312
+2007,Volvo,S60,337
+2007,Volvo,S80,375
+2007,Volvo,V50,328
+2007,Volvo,V70,337
+2007,Volvo,XC70,359
+2007,Volvo,XC90,416
+2006,Acura,MDX,389
+2006,Acura,RSX,332
+2006,Acura,TL,357
+2006,Acura,TSX,340
+2006,Acura,RL,357
+2006,Audi,A3,324
+2006,Audi,A4,324
+2006,Audi,A6,366
+2006,Audi,A8,389
+2006,Audi,Allroad,389
+2006,Audi,S4,385
+2006,Audi,S6,389
+2006,Audi,TT,340
+2006,BMW,3 Series,324
+2006,BMW,5 Series,366
+2006,BMW,6 Series,389
+2006,BMW,7 Series,402
+2006,BMW,M3,470
+2006,BMW,X3,366
+2006,BMW,X5,428
+2006,BMW,Z4,385
+2006,Buick,Lacrosse,366
+2006,Buick,Rainier,428
+2006,Buick,Rendezvous,392
+2006,Buick,Terraza,392
+2006,Cadillac,CTS,375
+2006,Cadillac,Deville,375
+2006,Cadillac,Escalade,435
+2006,Cadillac,SRX,392
+2006,Cadillac,STS,402
+2006,Cadillac,XLR,464
+2006,Chevrolet,Avalanche,528
+2006,Chevrolet,Aveo,335
+2006,Chevrolet,Cobalt,328
+2006,Chevrolet,Colorado,389
+2006,Chevrolet,Corvette,464
+2006,Chevrolet,Equinox,335
+2006,Chevrolet,Express 1500,617
+2006,Chevrolet,Express 2500,654
+2006,Chevrolet,Express 3500,686
+2006,Chevrolet,HHR,335
+2006,Chevrolet,Impala,357
+2006,Chevrolet,Malibu,366
+2006,Chevrolet,Monte Carlo,366
+2006,Chevrolet,Silverado 1500,485
+2006,Chevrolet,Silverado 2500HD,528
+2006,Chevrolet,Silverado 3500HD,595
+2006,Chevrolet,SSR,495
+2006,Chevrolet,Suburban,511
+2006,Chevrolet,Tahoe,511
+2006,Chevrolet,TrailBlazer,402
+2006,Chevrolet,Uplander,392
+2006,Chrysler,300,375
+2006,Chrysler,Aspen,435
+2006,Chrysler,Pacifica,392
+2006,Chrysler,PT Cruiser,366
+2006,Chrysler,Sebring,366
+2006,Chrysler,Town and Country,402
+2006,Dodge,Caliber,335
+2006,Dodge,Caravan,357
+2006,Dodge,Charger,375
+2006,Dodge,Dakota,421
+2006,Dodge,Durango,411
+2006,Dodge,Grand Caravan,392
+2006,Dodge,Magnum,375
+2006,Dodge,Ram 1500,495
+2006,Dodge,Ram 2500,552
+2006,Dodge,Ram 3500,620
+2006,Dodge,Sprinter 2500,686
+2006,Dodge,Sprinter 3500,686
+2006,Ford,Escape,335
+2006,Ford,E-150,686
+2006,Ford,E-250,729
+2006,Ford,E-350 Super Duty,770
+2006,Ford,Edge,357
+2006,Ford,Expedition,495
+2006,Ford,Explorer,421
+2006,Ford,F-150,435
+2006,Ford,F-250 Super Duty,595
+2006,Ford,F-350 Super Duty,654
+2006,Ford,F-450 Super Duty,686
+2006,Ford,F-550 Super Duty,686
+2006,Ford,Freestar,402
+2006,Ford,Freestyle,366
+2006,Ford,Fusion,366
+2006,Ford,Mustang,421
+2006,Ford,Ranger,411
+2006,Ford,Taurus,402
+2006,Ford,Transit Connect,324
+2006,GMC,Acadia,392
+2006,GMC,Canyon,411
+2006,GMC,Envoy,402
+2006,GMC,Savana 1500,617
+2006,GMC,Savana 2500,654
+2006,GMC,Savana 3500,686
+2006,GMC,Sierra 1500,485
+2006,GMC,Sierra 2500HD,528
+2006,GMC,Sierra 3500HD,595
+2006,GMC,Yukon,511
+2006,GMC,Yukon XL,528
+2006,Honda,Accord,366
+2006,Honda,Civic,335
+2006,Honda,CR-V,335
+2006,Honda,Element,357
+2006,Honda,Fit,328
+2006,Honda,Odyssey,357
+2006,Honda,Pilot,392
+2006,Honda,Ridgeline,421
+2006,Hummer,H2,615
+2006,Hummer,H3,450
+2006,Hyundai,Accent,308
+2006,Hyundai,Elantra,308
+2006,Hyundai,Sonata,366
+2006,Hyundai,Tiburon,335
+2006,Hyundai,Tucson,335
+2006,Hyundai,Santa Fe,392
+2006,Hyundai,Entourage,411
+2006,Infiniti,FX35,357
+2006,Infiniti,FX45,389
+2006,Infiniti,G35,366
+2006,Infiniti,M35,392
+2006,Infiniti,Q45,464
+2006,Isuzu,Ascender,421
+2006,Isuzu,I-280,335
+2006,Isuzu,I-350,450
+2006,Jeep,Commander,511
+2006,Jeep,Compass,335
+2006,Jeep,Grand Cherokee,402
+2006,Jeep,Liberty,411
+2006,Jeep,Wrangler,402
+2006,Kia,Amanti,370
+2006,Kia,Rio,316
+2006,Kia,Sedona,411
+2006,Kia,Sorento,392
+2006,Kia,Spectra,335
+2006,Kia,Sportage,335
+2006,Land Rover,LR3,402
+2006,Land Rover,Range Rover,511
+2006,Land Rover,Range Rover Sport,480
+2006,Lexus,ES 330,366
+2006,Lexus,GS 300,375
+2006,Lexus,GX 470,450
+2006,Lexus,IS 250,335
+2006,Lexus,LS 430,450
+2006,Lexus,LX 470,464
+2006,Lexus,RX 330,335
+2006,Lincoln,Mark LT,495
+2006,Lincoln,MKX,357
+2006,Lincoln,MKZ,335
+2006,Lincoln,Navigator,464
+2006,Lincoln,Navigator L,464
+2006,Mazda,3,316
+2006,Mazda,5,357
+2006,Mazda,6,335
+2006,Mazda,B-Series,421
+2006,Mazda,MX-5 Miata,354
+2006,Mazda,RX-8,385
+2006,Mercedes-Benz,C-Class,335
+2006,Mercedes-Benz,CL-Class,480
+2006,Mercedes-Benz,CLK-Class,402
+2006,Mercedes-Benz,CLS-Class,375
+2006,Mercedes-Benz,E-Class,366
+2006,Mercedes-Benz,G-Class,511
+2006,Mercedes-Benz,GL-Class,411
+2006,Mercedes-Benz,M-Class,402
+2006,Mercedes-Benz,R-Class,435
+2006,Mercedes-Benz,S-Class,421
+2006,Mercury,Grand Marquis,421
+2006,Mercury,Mariner,357
+2006,Mercury,Mariner Hybrid,357
+2006,Mercury,Mountaineer,421
+2006,Mercury,Milan,335
+2006,Mini,Cooper,308
+2006,Mini,Cooper Convertible,324
+2006,Mini,Cooper S,324
+2006,Mitsubishi,Eclipse,421
+2006,Mitsubishi,Endeavor,402
+2006,Mitsubishi,Galant,366
+2006,Mitsubishi,Lancer,335
+2006,Mitsubishi,Montero,495
+2006,Mitsubishi,Outlander,366
+2006,Nissan,350Z,421
+2006,Nissan,Altima,335
+2006,Nissan,Armada,511
+2006,Nissan,Frontier,421
+2006,Nissan,Maxima,375
+2006,Nissan,Murano,392
+2006,Nissan,Pathfinder,435
+2006,Nissan,Quest,392
+2006,Nissan,Sentra,335
+2006,Nissan,Titan,595
+2006,Nissan,Versa,308
+2006,Pontiac,G6,335
+2006,Pontiac,GTO,480
+2006,Pontiac,Solstice,354
+2006,Pontiac,Torrent,366
+2006,Porsche,911,402
+2006,Porsche,Boxster,370
+2006,Porsche,Cayenne,480
+2006,Porsche,Cayman,370
+2006,Saab,9-2X,354
+2006,Saab,3-Sep,335
+2006,Saab,5-Sep,366
+2006,Saturn,ION,316
+2006,Saturn,Relay,411
+2006,Saturn,VUE,366
+2006,Scion,tC,335
+2006,Scion,xA,335
+2006,Scion,xB,335
+2006,Subaru,B9 Tribeca,392
+2006,Subaru,Forester,357
+2006,Subaru,Impreza,335
+2006,Subaru,Legacy,335
+2006,Subaru,Outback,335
+2006,Subaru,Tribeca,392
+2006,Suzuki,Aerio,335
+2006,Suzuki,Forenza,328
+2006,Suzuki,Grand Vitara,450
+2006,Suzuki,Reno,328
+2006,Suzuki,Swift,312
+2006,Suzuki,Verona,375
+2006,Suzuki,XL7,411
+2006,Toyota,4Runner,421
+2006,Toyota,Avalon,366
+2006,Toyota,Camry,335
+2006,Toyota,Corolla,328
+2006,Toyota,FJ Cruiser,495
+2006,Toyota,Highlander,392
+2006,Toyota,Land Cruiser,580
+2006,Toyota,Matrix,328
+2006,Toyota,Prius,219
+2006,Toyota,RAV4,335
+2006,Toyota,Sequoia,595
+2006,Toyota,Sienna,411
+2006,Toyota,Solara,375
+2006,Toyota,Tacoma,450
+2006,Toyota,Tundra,620
+2006,Toyota,Yaris,316
+2006,Volkswagen,Beetle,316
+2006,Volkswagen,Golf,335
+2006,Volkswagen,Jetta,335
+2006,Volkswagen,New Beetle,316
+2006,Volkswagen,Passat,335
+2006,Volkswagen,Phaeton,460
+2006,Volkswagen,Touareg,480
+2006,Volvo,S40,328
+2006,Volvo,S60,335
+2006,Volvo,S80,375
+2006,Volvo,V50,328
+2006,Volvo,V70,335
+2006,Volvo,XC70,366
+2006,Volvo,XC90,428
+2005,Acura,MDX,394
+2005,Acura,NSX,387
+2005,Acura,RL,376
+2005,Acura,RSX,342
+2005,Acura,TL,376
+2005,Audi,A4,342
+2005,Audi,A6,387
+2005,Audi,A8,394
+2005,Audi,Allroad,394
+2005,Audi,S4,383
+2005,Audi,S6,394
+2005,Audi,TT,342
+2005,BMW,3 Series,342
+2005,BMW,5 Series,387
+2005,BMW,6 Series,394
+2005,BMW,7 Series,407
+2005,BMW,M3,476
+2005,BMW,X3,387
+2005,BMW,X5,448
+2005,BMW,Z4,383
+2005,Buick,Century,383
+2005,Buick,Lacrosse,387
+2005,Buick,LeSabre,402
+2005,Buick,Park Avenue,402
+2005,Buick,Rainier,448
+2005,Buick,Rendezvous,407
+2005,Buick,Terraza,407
+2005,Cadillac,CTS,389
+2005,Cadillac,Deville,389
+2005,Cadillac,Escalade,448
+2005,Cadillac,SRX,407
+2005,Cadillac,STS,407
+2005,Cadillac,XLR,476
+2005,Chevrolet,Astro,620
+2005,Chevrolet,Avalanche 1500,531
+2005,Chevrolet,Avalanche 2500,582
+2005,Chevrolet,Aveo,341
+2005,Chevrolet,Blazer,407
+2005,Chevrolet,Cavalier,341
+2005,Chevrolet,Classic,341
+2005,Chevrolet,Colorado,394
+2005,Chevrolet,Corvette,476
+2005,Chevrolet,Equinox,341
+2005,Chevrolet,Express 1500,620
+2005,Chevrolet,Express 2500,654
+2005,Chevrolet,Express 3500,686
+2005,Chevrolet,Impala,376
+2005,Chevrolet,Malibu,387
+2005,Chevrolet,Monte Carlo,387
+2005,Chevrolet,Silverado 1500,496
+2005,Chevrolet,Silverado 2500HD,531
+2005,Chevrolet,Silverado 3500,596
+2005,Chevrolet,SSR,496
+2005,Chevrolet,Suburban 1500,511
+2005,Chevrolet,Suburban 2500,582
+2005,Chevrolet,Tahoe,511
+2005,Chevrolet,TrailBlazer,407
+2005,Chevrolet,Uplander,407
+2005,Chrysler,300,389
+2005,Chrysler,Concorde,407
+2005,Chrysler,Crossfire,383
+2005,Chrysler,Pacifica,407
+2005,Chrysler,PT Cruiser,387
+2005,Chrysler,Sebring,387
+2005,Chrysler,Town and Country,413
+2005,Dodge,Caravan,376
+2005,Dodge,Dakota,427
+2005,Dodge,Durango,418
+2005,Dodge,Grand Caravan,407
+2005,Dodge,Magnum,389
+2005,Dodge,Neon,342
+2005,Dodge,Ram 1500,496
+2005,Dodge,Ram 2500,553
+2005,Dodge,Ram 3500,620
+2005,Dodge,Sprinter 2500,686
+2005,Dodge,Sprinter 3500,686
+2005,Dodge,Stratus,387
+2005,Dodge,Viper,650
+2005,Ford,Escape,341
+2005,Ford,E-150,686
+2005,Ford,E-250,729
+2005,Ford,E-350 Super Duty,770
+2005,Ford,Edge,376
+2005,Ford,Escape Hybrid,341
+2005,Ford,Expedition,496
+2005,Ford,Explorer,427
+2005,Ford,F-150,448
+2005,Ford,F-250 Super Duty,596
+2005,Ford,F-350 Super Duty,654
+2005,Ford,F-450 Super Duty,686
+2005,Ford,F-550 Super Duty,686
+2005,Ford,Freestar,413
+2005,Ford,Freestyle,387
+2005,Ford,Fusion,387
+2005,Ford,Focus,341
+2005,Ford,Mustang,427
+2005,Ford,Ranger,418
+2005,Ford,Taurus,413
+2005,Ford,Thunderbird,407
+2005,Ford,Transit Connect,342
+2005,GMC,Envoy,407
+2005,GMC,Safari,620
+2005,GMC,Savana 1500,620
+2005,GMC,Savana 2500,654
+2005,GMC,Savana 3500,686
+2005,GMC,Seirra 1500,496
+2005,GMC,Sierra 2500HD,531
+2005,GMC,Sierra 3500,596
+2005,GMC,Yukon,511
+2005,GMC,Yukon XL 1500,531
+2005,GMC,Yukon XL 2500,582
+2005,Honda,Accord,387
+2005,Honda,Civic,341
+2005,Honda,CR-V,341
+2005,Honda,Element,376
+2005,Honda,Insight,219
+2005,Honda,Odyssey,407
+2005,Honda,Pilot,418
+2005,Honda,S2000,383
+2005,Hummer,H2,620
+2005,Hummer,H2 SUT,620
+2005,Hummer,H3,455
+2005,Hyundai,Accent,319
+2005,Hyundai,Elantra,319
+2005,Hyundai,Santa Fe,418
+2005,Hyundai,Sonata,387
+2005,Hyundai,Tiburon,342
+2005,Hyundai,Tucson,341
+2005,Hyundai,XG350,418
+2005,Infiniti,FX35,376
+2005,Infiniti,FX45,394
+2005,Infiniti,G35,387
+2005,Infiniti,Q45,476
+2005,Isuzu,Ascender,418
+2005,Isuzu,Axiom,448
+2005,Isuzu,Rodeo,407
+2005,Isuzu,Ascender,418
+2005,Isuzu,i-280,341
+2005,Isuzu,i-350,455
+2005,Jaguar,S-Type,402
+2005,Jaguar,Vanden Plas,434
+2005,Jaguar,XJ Series,434
+2005,Jaguar,XK Series,464
+2005,Jeep,Grand Cherokee,407
+2005,Jeep,Liberty,418
+2005,Jeep,Wrangler,407
+2005,Kia,Amanti,383
+2005,Kia,Magentis,418
+2005,Kia,Rio,319
+2005,Kia,Sedona,413
+2005,Kia,Sorento,418
+2005,Kia,Spectra,341
+2005,Kia,Sportage,341
+2005,Land Rover,Discovery,418
+2005,Land Rover,LR3,407
+2005,Land Rover,Range Rover,511
+2005,Lexus,ES 330,387
+2005,Lexus,GS 300,389
+2005,Lexus,GX 470,455
+2005,Lexus,IS 300,341
+2005,Lexus,LS 430,455
+2005,Lexus,LX 470,476
+2005,Lexus,RX 330,341
+2005,Lincoln,Aviator,418
+2005,Lincoln,LS,383
+2005,Lincoln,Navigator,476
+2005,Lincoln,Town Car,402
+2005,Lincoln,Zephyr,342
+2005,Mazda,3,324
+2005,Mazda,6,341
+2005,Mazda,B-Series,418
+2005,Mazda,MX-5 Miata,359
+2005,Mazda,Mazda3,324
+2005,Mazda,Mazda6,341
+2005,Mazda,MazdaSpeed MX-5,359
+2005,Mazda,MazdaSpeed Protege,359
+2005,Mazda,MazdaSpeed6,341
+2005,Mazda,MPV,407
+2005,Mazda,RX-8,383
+2005,Mercedes-Benz,C-Class,341
+2005,Mercedes-Benz,CL-Class,511
+2005,Mercedes-Benz,CLK-Class,402
+2005,Mercedes-Benz,CLS-Class,394
+2005,Mercedes-Benz,E-Class,394
+2005,Mercedes-Benz,G-Class,595
+2005,Mercedes-Benz,M-Class,448
+2005,Mercedes-Benz,R-Class,448
+2005,Mercedes-Benz,S-Class,511
+2005,Mercedes-Benz,SL-Class,476
+2005,Mercedes-Benz,SLK-Class,376
+2005,Mercedes-Benz,SLR McLaren,595
+2005,Mercedes-Benz,Sprinter 2500,686
+2005,Mercedes-Benz,Sprinter 3500,686
+2005,Mercury,Grand Marquis,402
+2005,Mercury,Mariner,341
+2005,Mercury,Mariner Hybrid,341
+2005,Mercury,Monterey,407
+2005,Mercury,Mountaineer,418
+2005,Mercury,Sable,383
+2005,Mini,Cooper,335
+2005,Mitsubishi,Diamante,383
+2005,Mitsubishi,Eclipse,342
+2005,Mitsubishi,Endeavor,407
+2005,Mitsubishi,Galant,341
+2005,Mitsubishi,Lancer,342
+2005,Mitsubishi,Mighty Max,580
+2005,Mitsubishi,Montero,476
+2005,Mitsubishi,Outlander,341
+2005,Nissan,350Z,383
+2005,Nissan,Altima,342
+2005,Nissan,Armada,511
+2005,Nissan,Frontier,427
+2005,Nissan,Maxima,383
+2005,Nissan,Murano,376
+2005,Nissan,Pathfinder,418
+2005,Nissan,Quest,407
+2005,Nissan,Sentra,342
+2005,Nissan,Titan,596
+2005,Nissan,Xterra,418
+2005,Oldsmobile,Alero,376
+2005,Oldsmobile,Bravada,448
+2005,Oldsmobile,Silhouette,413
+2005,Pontiac,Aztek,407
+2005,Pontiac,Bonneville,387
+2005,Pontiac,G6,376
+2005,Pontiac,Grand Am,387
+2005,Pontiac,Grand Prix,407
+2005,Pontiac,Montana,407
+2005,Pontiac,Sunfire,342
+2005,Pontiac,Vibe,341
+2005,Porsche,911,476
+2005,Porsche,Boxster,394
+2005,Porsche,Cayenne,511
+2005,Porsche,Cayman,383
+2005,Saab,9-2X,341
+2005,Saab,3-Sep,342
+2005,Saab,5-Sep,394
+2005,Saturn,ION,341
+2005,Saturn,L-Series,418
+2005,Saturn,Relay,407
+2005,Saturn,VUE,341
+2005,Scion,tC,342
+2005,Scion,xA,342
+2005,Scion,xB,342
+2005,Subaru,Baja,376
+2005,Subaru,Forester,342
+2005,Subaru,Impreza,342
+2005,Subaru,Legacy,342
+2005,Subaru,Outback,342
+2005,Suzuki,Aerio,342
+2005,Suzuki,Forenza,341
+2005,Suzuki,Grand Vitara,448
+2005,Suzuki,Reno,341
+2005,Suzuki,Verona,394
+2005,Suzuki,Vitara,448
+2005,Suzuki,XL7,418
+2005,Toyota,4Runner,418
+2005,Toyota,Avalon,387
+2005,Toyota,Camry,342
+2005,Toyota,Corolla,341
+2005,Toyota,Echo,319
+2005,Toyota,Highlander,376
+2005,Toyota,Land Cruiser,620
+2005,Toyota,Matrix,341
+2005,Toyota,MR2 Spyder,383
+2005,Toyota,RAV4,342
+2005,Toyota,Sequoia,596
+2005,Toyota,Sienna,407
+2005,Toyota,Solara,387
+2005,Toyota,Tacoma,448
+2005,Toyota,Tundra,620
+2005,Toyota,Yaris,319
+2005,Volkswagen,Beetle,341
+2005,Volkswagen,Golf,342
+2005,Volkswagen,Jetta,342
+2005,Volkswagen,New Beetle,341
+2005,Volkswagen,Passat,342
+2005,Volkswagen,Phaeton,511
+2005,Volkswagen,Touareg,511
+2005,Volvo,S40,342
+2005,Volvo,S60,342
+2005,Volvo,S80,376
+2005,Volvo,V50,342
+2005,Volvo,V70,342
+2005,Volvo,XC70,376
+2005,Volvo,XC90,418
