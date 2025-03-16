@@ -12,6 +12,8 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     var carMake: String = ""
     var carModel: String = ""
     var emissionsPerMile = 0.0
+    private var hourlyDrivingMinutes: Int = 0
+    private var lastHourReset: Date = Date()
     
     var userCar = [String]()
     var carData = [[String]]()
@@ -43,6 +45,20 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
         startLocationUpdates()
         startMonitoringSignificantLocationChanges()
         initializeDailyTracking()
+    }
+    
+    func getLastHourDrivingMinutes() -> Int {
+        let minutes = hourlyDrivingMinutes
+        hourlyDrivingMinutes = 0  // Reset for next hour
+        lastHourReset = Date()
+        return min(60, minutes)
+    }
+    
+    func updateDrivingMinutes() {
+        checkAndResetHourlyCounter()
+        if isDriving {
+            hourlyDrivingMinutes = min(60, hourlyDrivingMinutes + 1)
+        }
     }
     
     func startMonitoringSignificantLocationChanges() {
@@ -124,27 +140,29 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
             self.lastLocation = location
             return
         }
-        
+
         let distance = location.distance(from: lastLocation)
         totalDistance += distance
-        
+
         if let startDrivingDate = startDrivingDate {
             let duration = Date().timeIntervalSince(startDrivingDate)
             totalDuration += duration
         }
-        
+
         self.lastLocation = location
         let currentSpeed = location.speed
-        
+
         if currentSpeed >= 0 {
             let speedInMph = currentSpeed * 2.23694 // Convert from m/s to mph
             print("Current speed: \(String(format: "%.2f", speedInMph)) mph")
-            if currentSpeed > 4.47 { // 4.47 m/s is 10MPH
+            if currentSpeed > 0.02 { // 4.47 m/s is 10MPH
                 if !isDriving {
                     isDriving = true
                     print("User started moving.")
                     startTrackingDriving()
                 }
+                // Add this line to update hourly driving minutes when driving
+                updateDrivingMinutes()
             } else {
                 if isDriving {
                     isDriving = false
@@ -152,6 +170,14 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
                     stopTrackingDriving()
                 }
             }
+        }
+    }
+    
+    private func checkAndResetHourlyCounter() {
+        let calendar = Calendar.current
+        if !calendar.isDate(lastHourReset, equalTo: Date(), toGranularity: .hour) {
+            hourlyDrivingMinutes = 0
+            lastHourReset = Date()
         }
     }
     

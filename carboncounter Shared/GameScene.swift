@@ -6,12 +6,14 @@ import UserNotifications
 import Foundation
 import PassKit
 import AuthenticationServices
-
+import Stripe
+import BackgroundTasks
 
 
 class GameScene: SKScene, UITextFieldDelegate, CLLocationManagerDelegate {
 
-    
+    private var cachedLeaderboardPosition: Int?
+    private var lastLeaderboardFetch: Date?
     var timer: Timer?
     fileprivate var label: SKLabelNode?
     fileprivate var spinnyNode: SKShapeNode?
@@ -37,8 +39,31 @@ class GameScene: SKScene, UITextFieldDelegate, CLLocationManagerDelegate {
     var userFullName: String = "Default User"
     let nameTextField = UITextField()
     private var doneButton: UIButton?
-
-    var dayByDay = [0, 0, 0, 0, 0, 0, 0]
+    
+    var lastNightWeeklyScore: Double {
+        get {
+            return UserDefaults.standard.double(forKey: "lastNightWeeklyScore")
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: "lastNightWeeklyScore")
+            UserDefaults.standard.synchronize()
+        }
+    }
+    
+    var userScore = 0
+    var dayByDay: [DailyEmissions] = Array(repeating: DailyEmissions(carEmissions: 0, food: 0, energy: 0, goods: 0), count: 7)
+    
+    // Add property to track current day's emissions
+    var currentDayEmissions: DailyEmissions {
+        get {
+            return DailyEmissions(
+                carEmissions: dailyCarEmissions,
+                food: FOOD,
+                energy: ENERGY,
+                goods: GOODS
+            )
+        }
+    }
     var dailyCarEmissions = 0
     var weekByWeek = [0, 0, 0, 0, 0]
     var stackView: UIStackView!
@@ -52,6 +77,8 @@ class GameScene: SKScene, UITextFieldDelegate, CLLocationManagerDelegate {
     var profileHostingController: UIHostingController<ProfileView>?
     var ecotrack = SKLabelNode()
     var viewLeaderboardButton = UIButton(type: .system)
+    var weeklyScore: Int = 0
+    var offsetGrams: Int = UserDefaults.standard.integer(forKey: "offsetGrams")
 
     
     var myProgressButton = UIButton(type: .system)
@@ -127,19 +154,7 @@ class GameScene: SKScene, UITextFieldDelegate, CLLocationManagerDelegate {
     @objc func resetDailyData() {
         dailyCarEmissions = 0
         totalKg = 0
-        // Reset today's emissions
-        ENERGY = 0
-        FOOD = 0
-        GOODS = 0
-        dayByDay[6] = ENERGY + FOOD + GOODS + dailyCarEmissions
         saveArrays()
-        
-        // Update the UI to reflect the changes
-
-        
-        // You might want to add other UI updates here
-        
-        print("Daily data reset")
     }
     
     
@@ -199,8 +214,8 @@ class GameScene: SKScene, UITextFieldDelegate, CLLocationManagerDelegate {
     }
     
     func start() {
-        // Schedule the timer to check every minute
-        timer = Timer.scheduledTimer(timeInterval: 60, target: self, selector: #selector(checkTime), userInfo: nil, repeats: true)
+        // Schedule the timer to check every 2 minutes
+        timer = Timer.scheduledTimer(timeInterval: 120, target: self, selector: #selector(checkTime), userInfo: nil, repeats: true)
     }
 
     @objc func checkTime() {
@@ -208,20 +223,40 @@ class GameScene: SKScene, UITextFieldDelegate, CLLocationManagerDelegate {
         dateFormatter.dateFormat = "HH:mm"
         let currentTime = dateFormatter.string(from: Date())
         
+        // Update FOOD, GOODS, and ENERGY every 2 minutes
+        updateEmissionsData()
+        
         if currentTime == "21:30" {
             updateEnergyAfterDriving()
         }
         if currentTime == "00:00" {
+            // Check if it's Monday
+            let calendar = Calendar.current
+            if calendar.component(.weekday, from: Date()) == 2 {
+                // It's Monday, reset everything to 0
+                lastNightWeeklyScore = 0
+            } else {
+                // Not Monday, store current weekly score
+                lastNightWeeklyScore = Double(weekByWeek[4])
+            }
             performMidnightTasks()
+        }
+    }
+    
+    func updateEmissionsData() {
+        // Fetch updated data from backend
+        if let username = UserDefaults.standard.string(forKey: "userFullName") {
+            fetchUserEmissions(username: username)
         }
     }
     
     override func didMove(to view: SKView) {
 
         loadArrays()
+        setupBackgroundTasks()
         setupMidnightTimer()
         start()
-        startHourlyIncrement()
+        setupNotificationHandler()
         updateWeeklyHistogram()
         hideAppleSignInButton()
         super.didMove(to: view)
@@ -234,6 +269,8 @@ class GameScene: SKScene, UITextFieldDelegate, CLLocationManagerDelegate {
         welcome.fontColor = SKColor.white
         welcome.fontName = "AvenirNext-Bold"
         addChild(welcome)
+        
+        StripeAPI.defaultPublishableKey = "pk_live_51Q9qgvIkPhKQ4Pu3bt6Dj2uXUEVHCX39Y4r9WmracCglvD1J52Ued55IbJR4i4WTRkqHRTViUAksYhV0cYUbdriX00LtKC7lPS"
         
         fullNameTextField = UITextField(frame: CGRect(x: (size.width - 280) / 2, y: size.height / 2 - 20, width: 280, height: 40))
         guard let fullNameTextField = fullNameTextField else { return }
@@ -269,6 +306,9 @@ class GameScene: SKScene, UITextFieldDelegate, CLLocationManagerDelegate {
         doneButton.addTarget(self, action: #selector(doneButtonPressed), for: .touchUpInside)
         doneButton.isHidden = true
         view.addSubview(doneButton)
+        
+        
+
         
         
         drivingStatusLabel = SKLabelNode(fontNamed: "AvenirNext-Bold")
@@ -339,15 +379,7 @@ class GameScene: SKScene, UITextFieldDelegate, CLLocationManagerDelegate {
         
         NotificationCenter.default.addObserver(self, selector: #selector(handleDrivingStatusChanged), name: .drivingStatusChanged, object: nil)
 
-        let username = UserDefaults.standard.string(forKey: "username") ?? "User\(Int.random(in: 1000...9999))"
-            createUser(username: username) { success in
-                if success {
-                    print("User created or already exists")
-                    UserDefaults.standard.set(username, forKey: "username")
-                } else {
-                    print("Failed to create user")
-                }
-            }
+
         
         // Setup logo image
 //        logoImage = UIImageView(image: UIImage(named: "EcoTracker"))
@@ -513,73 +545,164 @@ class GameScene: SKScene, UITextFieldDelegate, CLLocationManagerDelegate {
         }
         RunLoop.main.add(timer, forMode: .common)
     }
+    
 
-    func startHourlyIncrement() {
-        Timer.scheduledTimer(withTimeInterval: 3600, repeats: true) { [weak self] _ in
-            self?.FOOD += 400
-            self?.GOODS += 460
-            UserDefaults.standard.set(self?.FOOD, forKey: "FOOD")
-            UserDefaults.standard.set(self?.GOODS, forKey: "GOODS")
-            UserDefaults.standard.set(self?.ENERGY, forKey: "ENERGY")
-            // ENERGY is not incremented hourly
-        }
-    }
+
+
 
     // Add this function to update ENERGY when driving ends
     func updateEnergyAfterDriving() {
-        let drivingHours = Int(customLocationManager.drivingTimeInHours)
-        let nonDrivingHours = 24 - drivingHours
-        self.ENERGY = nonDrivingHours * 600
-        self.dayByDay[6] += self.ENERGY
 
-        print("Energy updated at 9:30 PM: \(self.ENERGY)")
     }
     
-//    func setupDailyEnergyUpdate() {
-//        let calendar = Calendar.current
-//        var dateComponents = DateComponents()
-//        dateComponents.hour = 21 // 9 PM
-//        dateComponents.minute = 30 // 30 minutes past the hour
-//
-//        // Get the next 9:30 PM
-//        guard let nextUpdateTime = calendar.nextDate(after: Date(), matching: dateComponents, matchingPolicy: .nextTime) else {
-//            print("Could not calculate next update time")
-//            return
-//        }
-//
-//        // Calculate the time interval until the next 9:30 PM
-//        let timeInterval = nextUpdateTime.timeIntervalSinceNow
-//
-//        // Create and schedule the timer
-//        Timer.scheduledTimer(withTimeInterval: timeInterval, repeats: false) { [weak self] _ in
-//            self?.updateEnergyAfterDriving()
-//            self?.setupDailyEnergyUpdate() // Schedule the next day's update
-//        }
-//    }
-
-    func performMidnightTasks() {
-        allTimeEmissions += dayByDay[6]
-        dailyCarEmissions = 0
-        dayByDay.remove(at: 0)
-        dayByDay.append(0)
+    func fetchUserEmissions(username: String) {
+        guard let url = URL(string: "https://functionappbackend.azurewebsites.net/api/GetUserEmissions?") else { return }
         
-        // Reset daily variables
-        ENERGY = 0
-        FOOD = 0
-        GOODS = 0
-        totalKg = 0
+        let queryItems = [
+            URLQueryItem(name: "username", value: username),
+            URLQueryItem(name: "days", value: "7")
+        ]
         
-        // Check if it's Monday (weekday == 2 in Calendar)
-        let calendar = Calendar.current
-        if calendar.component(.weekday, from: Date()) == 2 {
-            weekByWeek.remove(at: 0)
-            weekByWeek.append(0)
+        var urlComps = URLComponents(url: url, resolvingAgainstBaseURL: true)!
+        urlComps.queryItems = queryItems
+        
+        guard let finalURL = urlComps.url else { return }
+        
+        URLSession.shared.dataTask(with: finalURL) { [weak self] data, response, error in
+            guard let self = self else { return }
+            
+            if let error = error {
+                print("Error fetching emissions: \(error)")
+                return
+            }
+            
+            guard let data = data else { return }
+            
+            do {
+                let emissionsData = try JSONDecoder().decode(EmissionsResponse.self, from: data)
+                
+                DispatchQueue.main.async {
+                    // Update UI with latest emissions data
+                    self.FOOD = emissionsData.emissions[emissionsData.latestDate]?.food ?? 0
+                    self.GOODS = emissionsData.emissions[emissionsData.latestDate]?.goods ?? 0
+                    self.dailyCarEmissions = Int(emissionsData.emissions[emissionsData.latestDate]?.carEmissions ?? 0)
+                    
+                    self.saveArrays()
+                }
+            } catch {
+                print("Error decoding emissions data: \(error)")
+            }
+        }.resume()
+    }
+    
+    func fetchUserHistory(completion: @escaping ([DailyEmissions]?) -> Void) {
+        let userName = UserDefaults.standard.string(forKey: "userFullName") ?? "Not found"
+        guard let url = URL(string: "https://your-function-app-url/api/userhistory/\(userName)") else {
+            completion(nil)
+            return
         }
         
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            guard let data = data,
+                  let userData = try? JSONDecoder().decode(UserScoreData.self, from: data) else {
+                completion(nil)
+                return
+            }
+            
+            DispatchQueue.main.async {
+                self.dayByDay = userData.dailyHistory
+                self.saveArrays()
+                completion(userData.dailyHistory)
+            }
+        }.resume()
+    }
+    
+    func setupDailyEnergyUpdate() {
+        let calendar = Calendar.current
+        var dateComponents = DateComponents()
+        dateComponents.hour = 21 // 9 PM
+        dateComponents.minute = 30 // 30 minutes past the hour
+
+        // Get the next 9:30 PM
+        guard let nextUpdateTime = calendar.nextDate(after: Date(), matching: dateComponents, matchingPolicy: .nextTime) else {
+            print("Could not calculate next update time")
+            return
+        }
+
+        // Calculate the time interval until the next 9:30 PM
+        let timeInterval = nextUpdateTime.timeIntervalSinceNow
+
+        // Create and schedule the timer
+        Timer.scheduledTimer(withTimeInterval: timeInterval, repeats: false) { [weak self] _ in
+            self?.updateEnergyAfterDriving()
+            self?.setupDailyEnergyUpdate() // Schedule the next day's update
+        }
+    }
+    
+    func sendDailyUpdate() {
+        let userName = UserDefaults.standard.string(forKey: "userFullName") ?? "Not found"
+        let userScore = weekByWeek[4] + FOOD + ENERGY + GOODS + offsetGrams
+        
+        let parameters: [String: Any] = [
+            "userId": userName,
+            "weeklyScore": userScore,
+            "dailyHistory": dayByDay.map { [
+                "carEmissions": $0.carEmissions,
+                "food": $0.food,
+                "energy": $0.energy,
+                "goods": $0.goods
+            ]},
+            "currentDayEmissions": [
+                "carEmissions": dailyCarEmissions,
+                "food": FOOD,
+                "energy": ENERGY,
+                "goods": GOODS
+            ]
+        ]
+        
+        guard let url = URL(string: "https://functionappbackend.azurewebsites.net/api/updateweeklyscore?code=lblCgRPcIKqtmdyf8Py_cL93EEYeSNlsr_5OeYTrfNgeAzFuourfNQ%3D%3D") else {
+            print("Invalid URL")
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        do {
+            request.httpBody = try JSONSerialization.data(withJSONObject: parameters)
+        } catch {
+            print("Error serializing JSON: \(error)")
+            return
+        }
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                print("Error sending daily update: \(error)")
+                return
+            }
+            
+            if let httpResponse = response as? HTTPURLResponse {
+                print("Daily update response status code: \(httpResponse.statusCode)")
+            }
+        }.resume()
+    }
+
+    func performMidnightTasks() {
+        EmissionsCache.shared.clearCache()
+        // Only reset car emissions if it's a new day
+        let calendar = Calendar.current
+        let lastUpdate = UserDefaults.standard.object(forKey: "lastEmissionsUpdate") as? Date ?? Date()
+        if !calendar.isDate(lastUpdate, inSameDayAs: Date()) {
+            dailyCarEmissions = 0
+            UserDefaults.standard.set(Date(), forKey: "lastEmissionsUpdate")
+        } // Only reset car emissions locally
         saveArrays()
         
-        // Reset driving time for the next day
-        customLocationManager.setDrivingTimeToZero()
+        // Fetch updated data from backend
+        if let username = UserDefaults.standard.string(forKey: "userFullName") {
+            fetchUserEmissions(username: username)
+        }
     }
     
     func saveArrays() {
@@ -587,54 +710,132 @@ class GameScene: SKScene, UITextFieldDelegate, CLLocationManagerDelegate {
         UserDefaults.standard.set(FOOD, forKey: "FOOD")
         UserDefaults.standard.set(GOODS, forKey: "GOODS")
         UserDefaults.standard.set(totalKg, forKey: "totalKg")
-        UserDefaults.standard.set(dayByDay, forKey: "dayByDay")
-        UserDefaults.standard.set(weekByWeek, forKey: "weekByWeek")
         UserDefaults.standard.set(dailyCarEmissions, forKey: "dailyCarEmissions")
         UserDefaults.standard.set(carbonOffsetsPurchased, forKey: "carbonOffsetsPurchased")
-    }
-
-    func loadArrays() {
+        UserDefaults.standard.set(offsetGrams, forKey: "offsetGrams")
         
-
+        // Save daily history
+        if let encoded = try? JSONEncoder().encode(dayByDay) {
+            UserDefaults.standard.set(encoded, forKey: "dayByDay")
+        }
+        
+        UserDefaults.standard.set(weekByWeek, forKey: "weekByWeek")
+        UserDefaults.standard.synchronize()
+        
+        // Clear caches to force refresh on next fetch
+        EmissionsCache.shared.clearCache()
+        LeaderboardCache.shared.clearCache()
+    }
+    func loadArrays() {
         totalKg = UserDefaults.standard.integer(forKey: "totalKg")
         carbonOffsetsPurchased = UserDefaults.standard.integer(forKey: "carbonOffsetsPurchased")
         FOOD = UserDefaults.standard.integer(forKey: "FOOD")
         GOODS = UserDefaults.standard.integer(forKey: "GOODS")
         ENERGY = UserDefaults.standard.integer(forKey: "ENERGY")
         dailyCarEmissions = UserDefaults.standard.integer(forKey: "dailyCarEmissions")
-        dayByDay[6] = FOOD + GOODS + ENERGY + dailyCarEmissions
+        offsetGrams = UserDefaults.standard.integer(forKey: "offsetGrams")
+        
+        // Load dayByDay with proper error handling
+        if let savedDayByDay = UserDefaults.standard.data(forKey: "dayByDay"),
+           let decodedDayByDay = try? JSONDecoder().decode([DailyEmissions].self, from: savedDayByDay) {
+            dayByDay = decodedDayByDay
+        } else {
+            // Initialize with default values if loading fails
+            dayByDay = Array(repeating: DailyEmissions(carEmissions: 1, food: 1, energy: 1, goods: 1), count: 7)
+        }
+        
+        // Load weekByWeek with proper initialization
+        if let savedWeekByWeek = UserDefaults.standard.array(forKey: "weekByWeek") as? [Int] {
+            weekByWeek = savedWeekByWeek
+        } else {
+            // Initialize with default values if loading fails
+            weekByWeek = Array(repeating: 0, count: 5)
+        }
+        
+        // Debug print
+        print("Loaded dayByDay: \(dayByDay.map { $0.total })")
+        print("Loaded weekByWeek: \(weekByWeek)")
     }
     
     func endDrivingSession() {
-        customLocationManager.isDriving = true
-        if customLocationManager.isDriving {
-            let emissions = customLocationManager.calculateEmissions(distance: customLocationManager.totalDistance, duration: customLocationManager.totalDuration, carYear: carYear, carMake: carMake, carModel: carModel, carData: carData)
-            CalculateduserEmissions = Int(emissions)
+        let emissions = customLocationManager.calculateEmissions(
+            distance: customLocationManager.totalDistance,
+            duration: customLocationManager.totalDuration,
+            carYear: carYear,
+            carMake: carMake,
+            carModel: carModel,
+            carData: carData
+        )
+        
+        // Update local state first
+        self.dailyCarEmissions = Int(emissions)
+        self.saveArrays()
+        
+        // Clear caches to force refresh
+        EmissionsCache.shared.clearCache()
+        
+        // First get the weekly totals from EmissionsCache
+        guard let username = UserDefaults.standard.string(forKey: "userFullName") else { return }
+        
+        EmissionsCache.shared.getEmissionsData(username: username) { [weak self] result in
+            guard let self = self else { return }
             
-            // Update dayByDay array (today's emissions)
-            dayByDay[6] = CalculateduserEmissions
-            
-            // Update weekByWeek array (this week's emissions)
-            weekByWeek[4] += CalculateduserEmissions
-            
-            // Save the updated arrays
-            saveArrays()
-            
-            print("Total emissions: \(emissions) grams")
-            
-            // Update emissions on the server
-            let username = UserDefaults.standard.string(forKey: "username") ?? "DefaultUser"
-            updateEmissions(username: username, emissions: Float(CalculateduserEmissions)) { success in
-                if success {
-                    print("Emissions updated on server successfully")
-                } else {
-                    print("Failed to update emissions on server")
+            switch result {
+            case .success(let stats):
+                let weeklyTotals = stats.weeklyHistory
+                
+                // Now update backend with correct weekly score
+                let parameters: [String: Any] = [
+                    "username": username,
+                    "food": self.FOOD,
+                    "energy": self.ENERGY,
+                    "goods": self.GOODS,
+                    "car": self.dailyCarEmissions,
+                    "weeklyScore": weeklyTotals[0]  // Use weeklyTotals[0] which has the correct calculation
+                ]
+                
+                guard let url = URL(string: "https://functionappbackend.azurewebsites.net/api/UpdateEmissions") else { return }
+                var request = URLRequest(url: url)
+                request.httpMethod = "POST"
+                request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+                
+                do {
+                    request.httpBody = try JSONSerialization.data(withJSONObject: parameters)
+                    
+                    URLSession.shared.dataTask(with: request) { [weak self] data, response, error in
+                        if (200...299).contains((response as? HTTPURLResponse)?.statusCode ?? 0) {
+                            // Refresh data after successful update
+                            DispatchQueue.main.async {
+                                self?.refreshAllViews()
+                            }
+                        } else {
+                            print("Failed to update emissions: \(error?.localizedDescription ?? "Unknown error")")
+                        }
+                    }.resume()
+                } catch {
+                    print("Error serializing parameters: \(error)")
                 }
+                
+            case .failure(let error):
+                print("Failed to get emissions data: \(error)")
             }
-            
-            customLocationManager.isDriving = false
-            customLocationManager.totalDistance = 0
-            customLocationManager.totalDuration = 0
+        }
+    }
+
+    func refreshAllViews() {
+        // Refresh histogram
+        if let histogramView = histogramHostingController?.rootView as? HistogramView {
+            displayHistogram()
+        }
+        
+        // Refresh pie chart
+        if let pieChartView = pieChartHostingController?.rootView as? PieChartView {
+            showPieChart()
+        }
+        
+        // Refresh leaderboard
+        if let leaderboardView = hostingController?.rootView as? LeaderboardView {
+            displayLeaderboard()
         }
     }
     
@@ -660,68 +861,67 @@ class GameScene: SKScene, UITextFieldDelegate, CLLocationManagerDelegate {
 
     // Add this method to handle location updates
 
+
+    
     func sendScore(name: String, score: Int, completion: @escaping (Bool) -> Void) {
-        guard let url = URL(string: "https://a827-174-165-215-17.ngrok-free.app/leaderboard") else {
+        // Replace with your Azure Function endpoint
+        guard let url = URL(string: "https://functionappbackend.azurewebsites.net/api/UpdateEmissions?") else {
             print("Invalid URL")
             completion(false)
             return
         }
         
+        let parameters: [String: Any] = [
+            "username": name,
+            "food": FOOD,
+            "energy": ENERGY,
+            "goods": GOODS,
+            "car": dailyCarEmissions
+        ]
+        
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
-        let scoreData: [String: Any] = [
-            "name": name,
-            "score": score
-        ]
-        
         do {
-            request.httpBody = try JSONSerialization.data(withJSONObject: scoreData, options: [])
+            request.httpBody = try JSONSerialization.data(withJSONObject: parameters)
         } catch {
             print("Error serializing JSON: \(error)")
             completion(false)
             return
         }
         
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+        URLSession.shared.dataTask(with: request) { data, response, error in
             if let error = error {
                 print("Error sending score: \(error)")
                 completion(false)
                 return
             }
             
-            guard let httpResponse = response as? HTTPURLResponse else {
-                print("Invalid response")
-                completion(false)
-                return
-            }
-            
-            print("Response status code: \(httpResponse.statusCode)")
-            
-            if let data = data, let responseString = String(data: data, encoding: .utf8) {
-                print("Response body: \(responseString)")
-            }
-            
-            if httpResponse.statusCode == 200 {
-                print("Score sent successfully!")
-                completion(true)
+            if let httpResponse = response as? HTTPURLResponse {
+                print("Response status code: \(httpResponse.statusCode)")
+                completion(httpResponse.statusCode == 200)
             } else {
-                print("Failed to send score. Status code: \(httpResponse.statusCode)")
                 completion(false)
             }
-        }
-        task.resume()
+        }.resume()
     }
+
     
-    func fetchAndDisplayLeaderboard() {
-        guard let url = URL(string: "https://a827-174-165-215-17.ngrok-free.app/leaderboard") else {
+    
+    
+
+    
+    private func fetchAndDisplayLeaderboard() {
+        guard let url = URL(string: "https://functionappbackend.azurewebsites.net/api/GetLeaderboard?") else {
             print("Invalid URL")
             return
         }
         
-        URLSession.shared.dataTask(with: url) { data, response, error in
+        URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
             DispatchQueue.main.async {
+                guard let self = self else { return }
+                
                 if let error = error {
                     print("Error fetching leaderboard data: \(error.localizedDescription)")
                     return
@@ -733,103 +933,19 @@ class GameScene: SKScene, UITextFieldDelegate, CLLocationManagerDelegate {
                 }
                 
                 do {
-                    let leaderboardData = try JSONDecoder().decode([LeaderboardEntry].self, from: data)
+                    let leaderboardData = try JSONDecoder().decode(LeaderboardResponse.self, from: data)
+                    // Note: The backend will handle the sorting in ascending order
+                    let leaderboardView = LeaderboardView(leaderboardData: leaderboardData.leaderboard)
+                    self.hostingController?.rootView = leaderboardView
                     
-                    // Sort the leaderboard data by score (ascending order)
-                    let sortedLeaderboard = leaderboardData.sorted { $0.score < $1.score }
-                    
-                    self.carLabel.text = "Leaderboard"
-                    // Create the leaderboard view with fetched data
-                    let leaderboardView = LeaderboardView(leaderboardData: sortedLeaderboard)
-                    self.hostingController = UIHostingController(rootView: leaderboardView)
-                    self.hostingController?.view.backgroundColor = .white
-                    
-                    if let view = self.view {
-                        // Remove any existing leaderboard view
-                        self.hostingController?.view.removeFromSuperview()
-                        
-                        // Set the frame to cover a smaller portion of the screen
-                        let width: CGFloat = view.bounds.width * 0.8 // 80% of screen width
-                        let height: CGFloat = view.bounds.height * 0.5 // 50% of screen height
-                        let x = (view.bounds.width - width) / 2
-                        let y = (view.bounds.height - height) / 2
-                        
-                        self.hostingController?.view.frame = CGRect(
-                            x: x,
-                            y: y,
-                            width: width,
-                            height: height
-                        )
-                        
-                        // Add corner radius for a nicer look
-                        self.hostingController?.view.layer.cornerRadius = 10
-                        self.hostingController?.view.clipsToBounds = true
-                        
-                        view.addSubview(self.hostingController!.view)
-                        
-                        // Optionally animate the presentation
-                        self.hostingController?.view.alpha = 0
-                        UIView.animate(withDuration: 0.3) {
-                            self.hostingController?.view.alpha = 1
-                        }
-                    }
                 } catch {
-                    print("Error decoding leaderboard data: \(error.localizedDescription)")
+                    print("Error decoding leaderboard data: \(error)")
                 }
             }
         }.resume()
     }
     
-    func fetchWeeklyEmissions(completion: @escaping ([(String, Double)]?) -> Void) {
-        guard let url = URL(string: "http://127.0.0.1:5000/api/weekly_emissions") else {
-            print("Invalid URL")
-            completion(nil)
-            return
-        }
-        
-        var request = URLRequest(url: url)
-        request.httpMethod = "GET"
-        
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            if let error = error {
-                print("Error fetching weekly emissions: \(error)")
-                completion(nil)
-                return
-            }
-            
-            guard let data = data else {
-                print("No data returned")
-                completion(nil)
-                return
-            }
-            
-            do {
-                if let jsonResult = try JSONSerialization.jsonObject(with: data, options: []) as? [[String: Any]] {
-                    let userEmissionsList = jsonResult.compactMap { dict -> (String, Double)? in
-                        guard let username = dict["username"] as? String,
-                              let emissions = dict["weekly_emissions"] as? Double else {
-                            return nil
-                        }
-                        return (username, emissions)
-                    }
-                    completion(userEmissionsList)
-                } else {
-                    print("Could not parse JSON")
-                    completion(nil)
-                }
-            } catch {
-                print("Error decoding data: \(error)")
-                completion(nil)
-            }
-        }
-        
-        task.resume()
-    }
-    
-    struct UserEmissions: Codable {
-        let username: String
-        let weekly_emissions: Int
-    }
+
     
 
 
@@ -843,41 +959,79 @@ class GameScene: SKScene, UITextFieldDelegate, CLLocationManagerDelegate {
         }
     }
     
+
     func scheduleDailyNotification() {
         let center = UNUserNotificationCenter.current()
-        center.removeAllPendingNotificationRequests()  // Remove previous notifications if any
+        center.removeAllPendingNotificationRequests()
         
-        // Create content for the notification
-        let content = UNMutableNotificationContent()
-        content.title = "Daily Carbon Emission Report"
-        content.body = generateDailyReport()
-        content.sound = .default
+        // Schedule notification for midnight update
+        let midnightContent = UNMutableNotificationContent()
+        midnightContent.sound = nil // Silent notification
+        midnightContent.title = "" // Empty title
+        midnightContent.userInfo = ["type": "midnight_update"]
         
-        // Create a trigger to fire the notification daily at a specific time
         var dateComponents = DateComponents()
-        dateComponents.hour = 22  // 10 PM
+        dateComponents.hour = 0
+        dateComponents.minute = 0
+        
         let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
+        let midnightRequest = UNNotificationRequest(
+            identifier: "midnight_update",
+            content: midnightContent,
+            trigger: trigger
+        )
         
-        // Create the request
-        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+        // Schedule the regular daily report notification
+        let reportContent = UNMutableNotificationContent()
+        reportContent.title = "Daily Carbon Emission Report"
+        //reportContent.body = generateDailyReport()
+        reportContent.sound = .default
         
-        // Schedule the request with the system
-        center.add(request) { error in
+        dateComponents.hour = 22 // 10 PM
+        let reportTrigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
+        let reportRequest = UNNotificationRequest(
+            identifier: UUID().uuidString,
+            content: reportContent,
+            trigger: reportTrigger
+        )
+        
+        // Schedule both notifications
+        center.add(midnightRequest) { error in
             if let error = error {
-                print("Failed to schedule notification: \(error.localizedDescription)")
+                print("Failed to schedule midnight notification: \(error)")
+            }
+        }
+        
+        center.add(reportRequest) { error in
+            if let error = error {
+                print("Failed to schedule report notification: \(error)")
             }
         }
     }
     
-    func generateDailyReport() -> String {
-        let totalEmissions = dayByDay[6]
-        let yesterdayEmissions = dayByDay[5]
+    func setupNotificationHandler() {
+        UNUserNotificationCenter.current().delegate = self
         
-        if dayByDay[5] > dayByDay[6] {
-            return "Today, your carbon footprint was \(totalEmissions) grams, which is \(totalEmissions - yesterdayEmissions) grams less than yesterday."
+        // Request notification permission if not already granted
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
+            if granted {
+                print("Notification permission granted")
+            } else if let error = error {
+                print("Notification permission error: \(error)")
+            }
         }
-        return "Today, your carbon footprint was \(totalEmissions) grams, which is \(totalEmissions - yesterdayEmissions) grams more than yesterday."
     }
+    
+    //func generateDailyReport() -> String {
+
+        //let yesterday = Int(dayByDay[5].carEmissions)+dayByDay[5].energy+dayByDay[5].food+dayByDay[5].goods
+        //let today = Int(dayByDay[6].carEmissions)+dayByDay[6].energy+dayByDay[6].food+dayByDay[6].goods
+        
+        //if yesterday>today {
+            //return "Today, your carbon footprint was \(today) grams, which is \(yesterday-today) grams less than yesterday."
+        //}
+        //return "Today, your carbon footprint was \(today) grams, which is \(today-yesterday) grams more than yesterday."
+    //}
     
     func updateDrivingStatusLabel() {
         // Safely update the label text based on driving status
@@ -901,9 +1055,9 @@ class GameScene: SKScene, UITextFieldDelegate, CLLocationManagerDelegate {
 
     func updateLocalEmissions(emissions: Double) {
         // Update the last day and week values
-        dayByDay[dayByDay.count - 1] += Int(emissions)
-        weekByWeek[weekByWeek.count - 1] += Int(emissions)
-        allTimeEmissions += Int(emissions)
+        //dayByDay[dayByDay.count - 1] += Int(emissions)
+        //weekByWeek[weekByWeek.count - 1] += Int(emissions)
+        //allTimeEmissions += Int(emissions)
         
         // Update the histograms, pie chart, and leaderboard
     }
@@ -1023,28 +1177,14 @@ class GameScene: SKScene, UITextFieldDelegate, CLLocationManagerDelegate {
         startSimulatedTrip()
         
         // Update car info on the server
-        let username = UserDefaults.standard.string(forKey: "username") ?? "DefaultUser"
-        updateCarInfo(username: username) { success in
-            DispatchQueue.main.async {
-                if success {
-                    print("Car info updated on server successfully")
-                } else {
-                    print("Failed to update car info on server")
-                }
-                
-                // Hide the pickers and confirm button
-                self.yearPickerView.isHidden = true
-                self.makePickerView.isHidden = true
-                self.modelPickerView.isHidden = true
-                self.confirmButton.isHidden = true
-                self.fullNameTextField!.isHidden = false
-                self.fullNameTextField!.becomeFirstResponder()
-                self.doneButton!.isHidden = false
-                
-                // Show the home page
-                
-            }
-        }
+        let username = UserDefaults.standard.string(forKey: "userFullName") ?? "DefaultUser"
+        self.yearPickerView.isHidden = true
+        self.makePickerView.isHidden = true
+        self.modelPickerView.isHidden = true
+        self.confirmButton.isHidden = true
+        self.fullNameTextField!.isHidden = false
+        self.fullNameTextField!.becomeFirstResponder()
+        self.doneButton!.isHidden = false
     }
     
     @objc func donateCarbonCredits() {
@@ -1080,33 +1220,19 @@ class GameScene: SKScene, UITextFieldDelegate, CLLocationManagerDelegate {
             }
         }
     }
-    
+
     func purchaseCarbonOffsets(quantity: Int, kgPerUnit: Int) {
-        let purchasedKg = quantity * kgPerUnit
-        totalKg += purchasedKg  // Add to the existing totalKg instead of replacing it
-        let amount = kgPerUnit == 400 ? 7.99 : 0.99
         hideAppleSignInButton()
-        let totalAmount = amount * Double(quantity)
-        self.carbonOffsetsPurchased += quantity  // Increment the number of offsets purchased
-        dayByDay[6] -= purchasedKg
-        self.allTimeEmissions -= purchasedKg // Decrease allTimeEmissions
-        self.updateProfile()
-        self.dismissCarbonOffsetPurchaseScreen()
-        self.profileButtonTapped()  // Return to profile screen
+        let offsetGrams = quantity * kgPerUnit * 1000
+        let parameters: [String: Any] = [
+            "userId": UserDefaults.standard.string(forKey: "userFullName") ?? "",
+            "offsetGrams": offsetGrams
+        ]
         
-        // Update the server with the new emissions value
-        let username = UserDefaults.standard.string(forKey: "username") ?? "DefaultUser"
-        updateEmissions(username: username, emissions: Float(self.allTimeEmissions)) { success in
-            if success {
-                print("Emissions updated on server successfully")
-            } else {
-                print("Failed to update emissions on server")
-            }
-        }
-        
-        // Save the updated values
-        saveArrays()
+
     }
+    
+
 
     
     func dismissCarbonOffsetPurchaseScreen() {
@@ -1142,13 +1268,7 @@ class GameScene: SKScene, UITextFieldDelegate, CLLocationManagerDelegate {
     }
 
     @objc func profileButtonTapped() {
-        
-        if self.profileHostingController != nil {
-            // Profile view is already open, so just return
-            return
-        }
-         // This will load totalKg from UserDefaults
-        let userName = UserDefaults.standard.string(forKey: "userFullName") ?? "Not found in User Defaults"
+        if self.profileHostingController != nil { return }
         
         // Hide all previews and other views
         homeButtonTapped()
@@ -1158,78 +1278,92 @@ class GameScene: SKScene, UITextFieldDelegate, CLLocationManagerDelegate {
         myProgressButton.isHidden = true
         myBadgesButton.isHidden = true
         
-        // Calculate all-time emissions and daily average
-        let daysTracked = max(1, weekByWeek.filter { $0 > 0 }.count * 7)
-        let dailyAverage = Double(allTimeEmissions) / Double(daysTracked)
-        
-        // Get car details
+        // Show profile immediately with loading state
+        let userName = UserDefaults.standard.string(forKey: "userFullName") ?? "Not found"
         let carDetails = "\(carYear) \(carMake) \(carModel)"
         
-        getLeaderboardPosition { leaderboardPosition in
-            DispatchQueue.main.async {
-                // Create the profile view
-
-                let profileView = ProfileView(
-                    username: userName,
-                    allTimeEmissions: self.allTimeEmissions,
-                    dailyEmissionsAverage: dailyAverage,
-                    carDetails: carDetails,
-                    leaderboardPosition: leaderboardPosition,
-                    carbonCreditsPurchased: self.carbonOffsetsPurchased,
-                    totalKg: self.totalKg  // Changed to totalKg
-                )
+        // Create initial profile view with loading state
+        let profileView = ProfileView(
+            username: userName,
+            allTimeEmissions: self.allTimeEmissions,
+            dailyEmissionsAverage: 0, // Will update
+            carDetails: carDetails,
+            leaderboardPosition: 0, // Will update
+            carbonCreditsPurchased: self.carbonOffsetsPurchased,
+            totalKg: self.totalKg
+        )
+        
+        // Show the view immediately
+        self.profileHostingController = UIHostingController(rootView: profileView)
+        
+        if let view = self.view {
+            setupProfileUI(in: view)
+            
+            // Update data asynchronously
+            DispatchQueue.global(qos: .userInitiated).async {
+                let daysTracked = max(1, self.weekByWeek.filter { $0 > 0 }.count * 7)
+                let dailyAverage = Double(self.allTimeEmissions) / Double(daysTracked)
                 
-                // Create and configure the hosting controller
-                let hostingController = UIHostingController(rootView: profileView)
-                hostingController.view.backgroundColor = .clear
-
-                if let view = self.view {
-                    // Set the frame of the hosting controller's view
-                    hostingController.view.frame = CGRect(
-                        x: 20,
-                        y: 100,
-                        width: view.bounds.width - 40,
-                        height: view.bounds.height - 250  // Reduced height to make room for the button
-                    )
-
-                    // Add the hosting controller's view as a subview
-                    view.addSubview(hostingController.view)
-
-                    // Create "Donate Carbon Credits" button
-                    let donateButton = UIButton(type: .system)
-                    donateButton.setTitle("Buy Carbon Offsets", for: .normal)
-                    donateButton.titleLabel?.font = UIFont(name: "AvenirNext-Bold", size: 18)
-                    donateButton.setTitleColor(.white, for: .normal)
-                    donateButton.backgroundColor = .green
-                    donateButton.layer.cornerRadius = 10
-                    //donateButton.addTarget(self, action: #selector(self.donateCarbonCredits), for: .touchUpInside)
-
-                    // Position the button closer to the profile view
-                    donateButton.frame = CGRect(
-                        x: 20,
-                        y: hostingController.view.frame.maxY - 40,  // Reduced gap
-                        width: view.bounds.width - 40,
-                        height: 50
-                    )
-
-
-                    // Animate the presentation
-                    hostingController.view.alpha = 0
-                    donateButton.alpha = 0
-                    UIView.animate(withDuration: 0.3) {
-                        hostingController.view.alpha = 1
-                        donateButton.alpha = 1
-                        view.backgroundColor = .black
+                self.getLeaderboardPosition { position in
+                    DispatchQueue.main.async {
+                        // Update the profile view with actual data
+                        let updatedProfileView = ProfileView(
+                            username: userName,
+                            allTimeEmissions: self.allTimeEmissions,
+                            dailyEmissionsAverage: dailyAverage,
+                            carDetails: carDetails,
+                            leaderboardPosition: position,
+                            carbonCreditsPurchased: self.carbonOffsetsPurchased,
+                            totalKg: self.totalKg
+                        )
+                        self.profileHostingController?.rootView = updatedProfileView
                     }
                 }
-
-                // Update the carLabel
-                self.carLabel.text = "My Profile"
-
-                // Store the hosting controller for later removal
-                self.profileHostingController = hostingController
             }
         }
+    }
+
+    private func setupProfileUI(in view: UIView) {
+        guard let hostingController = self.profileHostingController else { return }
+        
+        hostingController.view.backgroundColor = .clear
+        hostingController.view.frame = CGRect(
+            x: 20,
+            y: 100,
+            width: view.bounds.width - 40,
+            height: view.bounds.height - 250
+        )
+        
+        view.addSubview(hostingController.view)
+        
+        // Create "Buy Carbon Offsets" button
+        let donateButton = UIButton(type: .system)
+        donateButton.setTitle("Buy Carbon Offsets", for: .normal)
+        donateButton.titleLabel?.font = UIFont(name: "AvenirNext-Bold", size: 18)
+        donateButton.setTitleColor(.white, for: .normal)
+        donateButton.backgroundColor = .green
+        donateButton.layer.cornerRadius = 10
+        donateButton.addTarget(self, action: #selector(self.donateCarbonCredits), for: .touchUpInside)
+        
+        donateButton.frame = CGRect(
+            x: 20,
+            y: hostingController.view.frame.maxY - 40,
+            width: view.bounds.width - 40,
+            height: 50
+        )
+        
+        // Animate the presentation
+        hostingController.view.alpha = 0
+        donateButton.alpha = 0
+        UIView.animate(withDuration: 0.3) {
+            hostingController.view.alpha = 1
+            donateButton.alpha = 1
+            view.backgroundColor = .black
+        }
+        view.addSubview(donateButton)
+        
+        // Update the carLabel
+        self.carLabel.text = "My Profile"
     }
 
 
@@ -1250,19 +1384,40 @@ class GameScene: SKScene, UITextFieldDelegate, CLLocationManagerDelegate {
     }
     
     func getLeaderboardPosition(completion: @escaping (Int) -> Void) {
-        fetchWeeklyEmissions { userEmissionsList in
-            if let userEmissionsList = userEmissionsList {
-                let sortedList = userEmissionsList.sorted { $0.1 < $1.1 }
-                if let index = sortedList.firstIndex(where: { $0.0 == UserDefaults.standard.string(forKey: "username") }) {
-                    completion(index + 1)
-                } else {
-                    completion(0) // User not found in the list
-                }
-            } else {
-                completion(0) // Failed to fetch emissions data
-            }
+        // Return cached value if less than 1 minute old
+        if let position = cachedLeaderboardPosition,
+           let lastFetch = lastLeaderboardFetch,
+           Date().timeIntervalSince(lastFetch) < 60 {
+            completion(position)
+            return
         }
+        
+        guard let url = URL(string: "https://functionappbackend.azurewebsites.net/api/GetLeaderboard?") else {
+            completion(0)
+            return
+        }
+        
+        URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
+            guard let self = self else { return }
+            
+            if let data = data,
+               let leaderboardData = try? JSONDecoder().decode([LeaderboardEntry].self, from: data) {
+                // Change sorting order to ascending (lowest first)
+                let sortedLeaderboard = leaderboardData.sorted { $0.weeklyScore < $1.weeklyScore }
+                let position = sortedLeaderboard.firstIndex(where: {
+                    $0.userId == UserDefaults.standard.string(forKey: "userFullName")
+                }).map { $0 + 1 } ?? 0
+                
+                self.cachedLeaderboardPosition = position
+                self.lastLeaderboardFetch = Date()
+                completion(position)
+            } else {
+                completion(0)
+            }
+        }.resume()
     }
+    
+    
     
     func setupHomePage() {
         hideAppleSignInButton()
@@ -1418,9 +1573,38 @@ class GameScene: SKScene, UITextFieldDelegate, CLLocationManagerDelegate {
         // For now, we'll return dummy data
         return [("User1", 100.0), ("User2", 150.0), ("User3", 200.0)]
     }
+    
+    func fetchWeeklyEmissions(completion: @escaping (WeeklyEmissions?) -> Void) {
+        guard let userID = UserDefaults.standard.string(forKey: "userFullName"),
+              let url = URL(string: "https://your-function-app/api/weekly/\(userID)") else {
+            completion(nil)
+            return
+        }
+        
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            guard let data = data,
+                  let weeklyData = try? JSONDecoder().decode(WeeklyEmissions.self, from: data) else {
+                completion(nil)
+                return
+            }
+            
+            DispatchQueue.main.async {
+                completion(weeklyData)
+            }
+        }.resume()
+    }
 
-
-
+    struct WeeklyEmissions: Codable {
+        let carEmissions: Int
+        let food: Int
+        let energy: Int
+        let goods: Int
+        let offsetGrams: Int
+        
+        var total: Int {
+            return carEmissions + food + energy + goods - offsetGrams
+        }
+    }
 
     @objc func homeButtonTapped() {
         dismissProfile()
@@ -1541,124 +1725,197 @@ class GameScene: SKScene, UITextFieldDelegate, CLLocationManagerDelegate {
     }
     
     func handleDrivingStopped() {
-        customLocationManager.findEmissionsPerMiles(carYear: carYear, carMake: carMake, carModel: carModel, carData: carData)
-        let emissions = customLocationManager.calculateAndSendEmissions()
-        
-        // Add emissions to the last element in the dayByDay and weekByWeek arrays
-
-        dayByDay[6] += Int(emissions)
-
-
+        let emissions = locationTracker.calculateAndPrintEmissions()
         dailyCarEmissions += Int(emissions)
-
-
-
-        weekByWeek[4] += Int(emissions)
-
-        saveArrays()
-        // Update all-time emissions
-        allTimeEmissions += Int(emissions)
-        updateProfile()
-
-
-
+        UserDefaults.standard.set(dailyCarEmissions, forKey: "dailyCarEmissions")
+        UserDefaults.standard.synchronize()
+        endDrivingSession()
     }
-
 
     func updateWeeklyHistogram() {
         //let weeklyEmissions = calculateWeeklyEmissions()  // Calculate the sum of the week // Store the weekly emissions in the last index
         print("weekByWeek updated: \(weekByWeek)")
     }
     
-    func calculateWeeklyEmissions() -> Int {
-        let dayLabels = getDayLabels()  // Get the correct labels
-        var sum = 0
 
-        // Start from today's emissions (right-most bar) and move left
-        for (index, day) in dayLabels.enumerated().reversed() {
-            sum += dayByDay[index]  // Add the emissions for this day
-            if day == "Mon" {  // Stop once we hit the bar labeled "Mon"
-                break
-            }
-        }
-        print("Weekly emissions calculated: \(sum)")
-        return sum
-    }
 
 
     
     func displayHistogram() {
-        loadArrays()
-        print(dayByDay)
-        print("Weeky by Week Emissions = \(weekByWeek)")
-        print(weekByWeek)
-        if customLocationManager.isDriving {
-            handleDrivingStopped()
+        let loadingView = LoadingDotsView(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
+        loadingView.center = view?.center ?? CGPoint(x: 0, y: 0)
+        loadingView.backgroundColor = .clear
+        view?.addSubview(loadingView)
+        
+        guard let username = UserDefaults.standard.string(forKey: "userFullName") else {
+            loadingView.removeFromSuperview()
+            print("No username found")
+            return
         }
-        // Create the histogram view
-        //weekByWeek[4] = dayByDay[0] + dayByDay[1] + dayByDay[2] + dayByDay[3] + dayByDay[4] + dayByDay[5] + dayByDay[6]
-        print("Daily: ")
-        print(dayByDay)
-        print("Weekly: ")
-        print(weekByWeek)
-        dayByDay[6] = dailyCarEmissions + FOOD + GOODS + ENERGY
-        //saveArrays()
-        weekByWeek[4] = calculateWeeklyEmissions()
-        let histogramView = HistogramView(dayByDay: dayByDay, weekByWeek: weekByWeek)
-        histogramHostingController = UIHostingController(rootView: histogramView)
-
-        if let view = self.view {
-            // Remove any existing histogram view
-            histogramHostingController?.view.removeFromSuperview()
-            
-            // Set the frame to cover a portion of the screen
-            let width: CGFloat = view.bounds.width * 0.9
-            let height: CGFloat = view.bounds.height * 0.6
-            let x = (view.bounds.width - width) / 2
-            let y = (view.bounds.height - height) / 2
-            
-            histogramHostingController?.view.frame = CGRect(x: x, y: y, width: width, height: height)
-            
-            // Add corner radius for a nicer look
-            histogramHostingController?.view.layer.cornerRadius = 10
-            histogramHostingController?.view.clipsToBounds = true
-            
-            view.addSubview(histogramHostingController!.view)
-            
-            // Optionally animate the presentation
-            histogramHostingController?.view.alpha = 0
-            UIView.animate(withDuration: 0.3) {
-                self.histogramHostingController?.view.alpha = 1
-            }
-        }
-        dayByDay[6] -= (FOOD + GOODS + ENERGY)
-    }
-    
-    func displayLeaderboard() {
-        // Get the user's Apple ID
-        let userIdentifier = KeychainItem.currentUserIdentifier
-        if !userIdentifier.isEmpty {
-            ASAuthorizationAppleIDProvider().getCredentialState(forUserID: userIdentifier) { (credentialState, error) in
-                DispatchQueue.main.async {
-                    if credentialState == .authorized {
-                        // User is authenticated, proceed to send score and fetch leaderboard
-                        let userName = KeychainItem.currentUserDisplayName ?? "Yousef Haddad"
-                        self.sendScoreAndFetchLeaderboard(userName: userName)
-                    } else {
-                        // User not authenticated, use default name
-                        self.sendScoreAndFetchLeaderboard(userName: "Yousef Haddad")
+        
+        EmissionsCache.shared.getEmissionsData(username: username) { [weak self] result in
+            DispatchQueue.main.async {
+                guard let self = self else { return }
+                loadingView.stopAnimation()
+                loadingView.removeFromSuperview()
+                
+                switch result {
+                case .success(let stats):
+                    let weeklyTotals = stats.weeklyHistory
+                    self.weekByWeek = Array(weeklyTotals.reversed())
+                    
+                    // Initialize the histogramHostingController before adding its view
+                    let histogramView = HistogramView(dayByDay: self.dayByDay, weekByWeek: self.weekByWeek)
+                    self.histogramHostingController = UIHostingController(rootView: histogramView)
+                    
+                    if let hostingController = self.histogramHostingController, let view = self.view {
+                        let width: CGFloat = view.bounds.width * 0.9
+                        let height: CGFloat = view.bounds.height * 0.7
+                        let x = (view.bounds.width - width) / 2
+                        let y = (view.bounds.height - height) / 2
+                        
+                        hostingController.view.frame = CGRect(x: x, y: y, width: width, height: height)
+                        hostingController.view.tag = 101
+                        view.addSubview(hostingController.view)
+                    }
+                    
+                case .failure(let error):
+                    print("Failed to load histogram data: \(error)")
+                    // Show error in game scene
+                    if let viewController = self.view?.window?.rootViewController {
+                        let alert = UIAlertController(title: "Error",
+                                                    message: "Failed to load data. Please try again.",
+                                                    preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "OK", style: .default))
+                        viewController.present(alert, animated: true)
                     }
                 }
             }
-        } else {
-            // No user identifier found, use default name
-            sendScoreAndFetchLeaderboard(userName: "Yousef Haddad")
+        }
+    }
+    
+
+    func displayLeaderboard() {
+        let loadingView = LoadingDotsView(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
+        loadingView.center = view?.center ?? CGPoint(x: 0, y: 0)
+        loadingView.backgroundColor = .clear
+        view?.addSubview(loadingView)
+        
+        LeaderboardCache.shared.getLeaderboardData { [weak self] result in
+            DispatchQueue.main.async {
+                loadingView.stopAnimation()
+                loadingView.removeFromSuperview()
+                
+                switch result {
+                case .success(let leaderboardData):
+                    let leaderboardView = LeaderboardView(leaderboardData: leaderboardData)
+                    self?.hostingController = UIHostingController(rootView: leaderboardView)
+                    
+                    if let view = self?.view {
+                        let width: CGFloat = view.bounds.width * 0.9
+                        let height: CGFloat = view.bounds.height * 0.7
+                        let x = (view.bounds.width - width) / 2
+                        let y = (view.bounds.height - height) / 2
+                        
+                        self?.hostingController?.view.frame = CGRect(x: x, y: y, width: width, height: height)
+                        self?.hostingController?.view.layer.cornerRadius = 10
+                        self?.hostingController?.view.clipsToBounds = true
+                        view.addSubview(self?.hostingController!.view ?? UIView())
+                    }
+                    
+                case .failure(let error):
+                    print("Error loading leaderboard: \(error)")
+                    if let viewController = self?.view?.window?.rootViewController {
+                        let alert = UIAlertController(title: "Error",
+                                                    message: "Failed to load leaderboard. Please try again.",
+                                                    preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "OK", style: .default))
+                        viewController.present(alert, animated: true)
+                    }
+                }
+            }
+        }
+    }
+    
+    func setupBackgroundTasks() {
+        // Register for hourly background task
+        BGTaskScheduler.shared.register(forTaskWithIdentifier: "com.ecotrack.hourlyupdate", using: nil) { task in
+            let drivingMinutes = self.locationTracker.getLastHourDrivingMinutes()
+            //let hourlyEnergy = 600 - (10 * drivingMinutes)
+            
+            // Update ENERGY
+            //self.ENERGY += max(0, hourlyEnergy)
+            
+            // Update backend
+            self.updateBackendWithNewEnergy()
+            
+            // Schedule next task
+            self.scheduleNextHourlyUpdate()
+            
+            task.setTaskCompleted(success: true)
+        }
+        
+        // Start the schedule
+        scheduleNextHourlyUpdate()
+    }
+
+    func scheduleNextHourlyUpdate() {
+        let request = BGAppRefreshTaskRequest(identifier: "com.ecotrack.hourlyupdate")
+        
+        // Calculate time until next hour
+        let calendar = Calendar.current
+        let now = Date()
+        if let nextHour = calendar.nextDate(after: now, matching: DateComponents(minute: 0), matchingPolicy: .nextTime) {
+            request.earliestBeginDate = nextHour
+            
+            do {
+                try BGTaskScheduler.shared.submit(request)
+            } catch {
+                print("Could not schedule hourly update: \(error)")
+            }
         }
     }
 
-    private func sendScoreAndFetchLeaderboard(userName: String) {
-        let userScore = self.weekByWeek[4] + self.FOOD + self.ENERGY + self.GOODS
-        self.sendScore(name: UserDefaults.standard.string(forKey: "userFullName") ?? "Not found", score: userScore) { success in
+    func handleHourlyUpdate(completion: @escaping (Bool) -> Void) {
+
+    }
+    
+    func updateBackendWithNewEnergy() {
+        let parameters: [String: Any] = [
+            "username": UserDefaults.standard.string(forKey: "userFullName") ?? "",
+            "food": self.FOOD,
+            "energy": self.ENERGY,
+            "goods": self.GOODS,
+            "car": self.dailyCarEmissions
+        ]
+        
+        guard let url = URL(string: "https://functionappbackend.azurewebsites.net/api/UpdateEmissions") else { return }
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        do {
+            request.httpBody = try JSONSerialization.data(withJSONObject: parameters)
+            
+            URLSession.shared.dataTask(with: request) { [weak self] _, response, error in
+                if let error = error {
+                    print("Error updating emissions: \(error)")
+                    return
+                }
+                
+                if (200...299).contains((response as? HTTPURLResponse)?.statusCode ?? 0) {
+                    // Success - update local cache
+                    EmissionsCache.shared.clearCache()
+                }
+            }.resume()
+        } catch {
+            print("Error serializing parameters: \(error)")
+        }
+    }
+    
+    func sendScoreAndFetchLeaderboard(userName: String) {
+        // Remove local score calculation since backend will handle it
+        self.sendScore(name: userName, score: 0) { success in
             if success {
                 self.fetchAndDisplayLeaderboard()
             } else {
@@ -1671,12 +1928,22 @@ class GameScene: SKScene, UITextFieldDelegate, CLLocationManagerDelegate {
 
     // Define a struct to match the backend's data structure
     struct LeaderboardEntry: Codable {
-        let name: String
-        let score: Double
+        let username: String
+        let total_emissions: Double
+
+        // If you still need to use userId and weeklyScore in your views,
+        // you can add computed properties
+        var userId: String { username }
+        var weeklyScore: Double { total_emissions }
     }
     
+    struct LeaderboardResponse: Codable {
+        let leaderboard: [LeaderboardEntry]
+    }
+
     struct LeaderboardView: View {
         let leaderboardData: [LeaderboardEntry]
+        
         var body: some View {
             VStack {
                 Text("Leaderboard")
@@ -1688,54 +1955,77 @@ class GameScene: SKScene, UITextFieldDelegate, CLLocationManagerDelegate {
                             .font(.headline)
                             .frame(width: 30, alignment: .leading)
                         
-                        Text(leaderboardData[index].name)
+                        Text(leaderboardData[index].userId)
                             .font(.body)
                         
                         Spacer()
                         
-                        Text("\(leaderboardData[index].score)")
+                        Text("\(Int(leaderboardData[index].weeklyScore))")
                             .font(.body)
                     }
+                    .listRowBackground(
+                        isCurrentUser(leaderboardData[index].userId) ?
+                            Color.green.opacity(0.2) :
+                            Color.clear
+                    )
                 }
             }
+        }
+        
+        private func isCurrentUser(_ userId: String) -> Bool {
+            let currentUser = UserDefaults.standard.string(forKey: "userFullName") ?? "Not found"
+            return userId == currentUser
         }
     }
 
     struct HistogramView: View {
-        let dayByDay: [Int]
+        let dayByDay: [DailyEmissions]
         let weekByWeek: [Int]
-        
-        init(dayByDay: [Int], weekByWeek: [Int]) {
-            self.dayByDay = dayByDay
-            self.weekByWeek = weekByWeek
-        }
+        @State private var currentPage = 0
         
         var body: some View {
-            TabView {
-                DailyHistogram(data: dayByDay)
-                    .tabItem {
-                        Text("Daily")
-                    }
+            VStack {
+                TabView(selection: $currentPage) {
+                    DailyHistogram(emissions: dayByDay)
+                        .tag(0)
+                    
+                    WeeklyHistogram(data: weekByWeek)
+                        .tag(1)
+                }
+                .tabViewStyle(.page(indexDisplayMode: .never))
                 
-                WeeklyHistogram(data: weekByWeek)
-                    .tabItem {
-                        Text("Weekly")
+                // Custom page indicator
+                HStack(spacing: 8) {
+                    ForEach(0..<2) { index in
+                        Circle()
+                            .fill(currentPage == index ? Color.green : Color.gray)
+                            .frame(width: 8, height: 8)
                     }
+                }
+                .padding(.bottom, 16)
             }
-            .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
-            .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
         }
     }
 
     struct DailyHistogram: View {
-        let data: [Int]
-        let maxEmission: Int
-        let dayLabels: [String] // Store the day labels
+        let emissions: [DailyEmissions]
         
-        init(data: [Int]) {
-            self.data = data
-            self.maxEmission = data.max() ?? 1 // Avoid division by zero
-            self.dayLabels = DailyHistogram.updateDayLabels() // Call once to get the correct day labels
+        // Ensure we always have 7 days of data
+        private var normalizedEmissions: [DailyEmissions] {
+            let emptyEmission = DailyEmissions(carEmissions: 0, food: 0, energy: 0, goods: 0)
+            var result = Array(repeating: emptyEmission, count: 7)
+            
+            // Fill with actual data from the end
+            let startIndex = max(0, result.count - emissions.count)
+            for (index, emission) in emissions.suffix(7).enumerated() {
+                result[startIndex + index] = emission
+            }
+            
+            return result
+        }
+        
+        var maxEmission: Int {
+            normalizedEmissions.map { $0.total }.max() ?? 1
         }
         
         var body: some View {
@@ -1744,21 +2034,21 @@ class GameScene: SKScene, UITextFieldDelegate, CLLocationManagerDelegate {
                     .font(.title)
                     .padding()
                 
-                HStack(alignment: .bottom, spacing: 8) { // Reduced spacing to accommodate wider bars
+                HStack(alignment: .bottom, spacing: 8) {
                     ForEach(0..<7) { index in
                         VStack {
                             ZStack(alignment: .bottom) {
                                 Rectangle()
                                     .fill(Color.green.opacity(0.3))
-                                    .frame(width: 40, height: 200) // Increased width to 40
+                                    .frame(width: 40, height: 200)
                                 
                                 Rectangle()
                                     .fill(Color.green)
-                                    .frame(width: 40, height: CGFloat(self.data[index]) / CGFloat(self.maxEmission) * 200) // Increased width to 40
+                                    .frame(width: 40, height: CGFloat(normalizedEmissions[index].total) / CGFloat(maxEmission) * 200)
                             }
-                            Text(self.dayLabels[index]) // Use precomputed day labels here
+                            Text(DailyHistogram.getDayLabel(for: index))
                                 .font(.caption)
-                            Text("\(self.data[index])")
+                            Text("\(normalizedEmissions[index].total)")
                                 .font(.system(size: 8))
                         }
                     }
@@ -1770,39 +2060,27 @@ class GameScene: SKScene, UITextFieldDelegate, CLLocationManagerDelegate {
                     .padding()
             }
         }
-
-        static func updateDayLabels() -> [String] {
+        
+        static func getDayLabel(for index: Int) -> String {
             let daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
-            
-            // Get today's day index (0 for Sunday, 6 for Saturday)
             let todayIndex = Calendar.current.component(.weekday, from: Date()) - 1
-            
-            var dayLabels = [String](repeating: "", count: 7)
-            
-            // Fill the labels starting from today as the last one
-            for i in 0..<7 {
-                let labelIndex = (todayIndex - i + 7) % 7
-                dayLabels[6 - i] = daysOfWeek[labelIndex]
-            }
-            
-            return dayLabels
+            return daysOfWeek[(todayIndex - (6 - index) + 7) % 7]
         }
     }
+    
+
 
     struct WeeklyHistogram: View {
-        let data: [Int]
-        let maxEmission: Int
+        let data: [Int]  // This should now contain properly processed weekly data
         
-        init(data: [Int]) {
-            self.data = data
-            self.maxEmission = data.max() ?? 1 // Avoid division by zero
+        private var maxEmission: Int {
+            return data.max() ?? 1
         }
         
         var body: some View {
             VStack {
-                // Reduced font size for title
                 Text("Past 5 Weeks")
-                    .font(.system(size: 30))  // Smaller font size
+                    .font(.system(size: 30))
                     .padding()
                 
                 HStack(alignment: .bottom, spacing: 20) {
@@ -1815,24 +2093,19 @@ class GameScene: SKScene, UITextFieldDelegate, CLLocationManagerDelegate {
                                 
                                 Rectangle()
                                     .fill(Color.green)
-                                    .frame(width: 50, height: CGFloat(self.data[index]) / CGFloat(self.maxEmission) * 200)
+                                    .frame(width: 50, height: data[index] > 0 ? CGFloat(data[index]) / CGFloat(maxEmission) * 200 : 0)
                             }
-                            
-                            // Reduced font size for week label
                             Text("Week \(5 - index)")
-                                .font(.system(size: 10))  // Smaller caption size
-                            
-                            // Reduced font size for emission label
-                            Text("\(self.data[index])")
-                                .font(.system(size: 8))  // Smaller caption size
+                                .font(.system(size: 10))
+                            Text("\(data[index])")
+                                .font(.system(size: 8))
                         }
                     }
                 }
                 .padding()
                 
-                // Reduced font size for footer text
                 Text("Weekly Emissions in grams CO2")
-                    .font(.system(size: 12))  // Smaller caption size
+                    .font(.system(size: 12))
                     .padding()
             }
         }
@@ -1938,38 +2211,7 @@ extension GameScene: UIPickerViewDataSource, UIPickerViewDelegate {
 }
 extension GameScene {
     
-    func createUser(username: String, completion: @escaping (Bool) -> Void) {
-        guard let url = URL(string: "http://127.0.0.1:5000/api/user") else {
-            print("Invalid URL")
-            completion(false)
-            return
-        }
-        
-        let parameters = ["username": username]
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = try? JSONSerialization.data(withJSONObject: parameters)
-        
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            if let error = error {
-                print("Error: \(error.localizedDescription)")
-                completion(false)
-                return
-            }
-            
-            guard let httpResponse = response as? HTTPURLResponse,
-                  (200...299).contains(httpResponse.statusCode) else {
-                print("Invalid response")
-                completion(false)
-                return
-            }
-            
-            completion(true)
-        }
-        
-        task.resume()
-    }
+
     
     func showPickerViews() {
         // Remove any existing picker views
@@ -1989,122 +2231,359 @@ extension GameScene {
         presentLocationPermissionAlert()
     }
     
-    func updateCarInfo(username: String, completion: @escaping (Bool) -> Void) {
-        guard let url = URL(string: "http://127.0.0.1:5000/api/user/\(username)/car") else {
-            print("Invalid URL")
-            completion(false)
-            return
-        }
+
+    
+    func updateEmissions(username: String, emissions: EmissionData) {
+        guard let url = URL(string: "https://functionappbackend.azurewebsites.net/api/UpdateEmissions?") else { return }
         
         let parameters: [String: Any] = [
-            "username": username,
-            "car_year": carYear,
-            "car_make": carMake,
-            "car_model": carModel
+            "username": userFullName,
+            "food": emissions.food,
+            "energy": emissions.energy,
+            "goods": emissions.goods,
+            "car": emissions.car
         ]
         
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = try? JSONSerialization.data(withJSONObject: parameters)
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            if let error = error {
-                print("Error: \(error.localizedDescription)")
-                completion(false)
-                return
-            }
-            
-            guard let httpResponse = response as? HTTPURLResponse,
-                  (200...299).contains(httpResponse.statusCode) else {
-                print("Invalid response")
-                completion(false)
-                return
-            }
-            
-            completion(true)
+        do {
+            request.httpBody = try JSONSerialization.data(withJSONObject: parameters)
+        } catch {
+            print("Error serializing JSON: \(error)")
+            return
         }
         
-        task.resume()
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                print("Error updating emissions: \(error)")
+                return
+            }
+            
+            if let httpResponse = response as? HTTPURLResponse {
+                print("Update emissions response: \(httpResponse.statusCode)")
+            }
+        }.resume()
     }
     
-    func updateEmissions(username: String, emissions: Float, completion: @escaping (Bool) -> Void) {
-        guard let url = URL(string: "http://127.0.0.1:5000/api/user/\(username)/emissions") else {
-            print("Invalid URL")
-            completion(false)
+    struct DailyEmissions: Codable {
+        var carEmissions: Int
+        var food: Int
+        var energy: Int
+        var goods: Int
+        
+        var total: Int {
+            return carEmissions + food + energy + goods
+        }
+        
+        enum CodingKeys: String, CodingKey {
+            case carEmissions = "car"
+            case food
+            case energy
+            case goods
+        }
+    }
+
+    struct UserScoreData: Codable {
+        let userId: String
+        let weeklyScore: Int
+        let dailyHistory: [DailyEmissions]
+        let currentDayEmissions: DailyEmissions
+    }
+    
+    struct UserStats: Codable {
+        var username: String
+        var emissions: [String: DailyEmissions]
+        var weeklyHistory: [Int] = [0, 0, 0, 0, 0]  // Add this property
+        
+        // Computed properties to provide the data in the format your views expect
+        var weeklyScore: Double = 0  // Change this to a variable
+        
+        var dailyHistory: [DailyEmissions] {
+            // Sort dates and get last 7 days of emissions
+            let sortedDates = emissions.keys.sorted()
+            let last7Days = sortedDates.suffix(7)
+            return last7Days.map { emissions[$0] ?? DailyEmissions(carEmissions: 0, food: 0, energy: 0, goods: 0) }
+        }
+        
+        var currentDayEmissions: DailyEmissions {
+            let today = ISO8601DateFormatter().string(from: Date()).prefix(10)
+            return emissions[String(today)] ?? DailyEmissions(carEmissions: 0, food: 0, energy: 0, goods: 0)
+        }
+    }
+    
+    struct EmissionsResponse: Codable {
+        let username: String
+        let emissions: [String: DailyEmissions]
+        
+        var latestDate: String {
+            return emissions.keys.sorted().last ?? ""
+        }
+    }
+
+    struct EmissionData: Codable {
+        let food: Int
+        let energy: Int
+        let goods: Int
+        let car: Int
+    }
+    
+    class LeaderboardCache {
+        static let shared = LeaderboardCache()
+        
+        private let cacheExpirationInterval: TimeInterval = 300 // 5 minutes
+        private var lastFetchTime: Date?
+        private var cachedLeaderboardData: [LeaderboardEntry]?
+        private var isLoading: Bool = false
+        
+        func getLeaderboardData(forceRefresh: Bool = false, completion: @escaping (Result<[LeaderboardEntry], Error>) -> Void) {
+            // Return cached data if valid
+            if !forceRefresh,
+               let lastFetch = lastFetchTime,
+               let cachedData = cachedLeaderboardData,
+               Date().timeIntervalSince(lastFetch) < cacheExpirationInterval {
+                completion(.success(cachedData))
+                return
+            }
+            
+            guard !isLoading else {
+                DispatchQueue.global().asyncAfter(deadline: .now() + 0.5) { [weak self] in
+                    self?.getLeaderboardData(forceRefresh: forceRefresh, completion: completion)
+                }
+                return
+            }
+            
+            isLoading = true
+            
+            guard let url = URL(string: "https://functionappbackend.azurewebsites.net/api/GetLeaderboard") else {
+                isLoading = false
+                completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Invalid URL"])))
+                return
+            }
+            
+            URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
+                defer { self?.isLoading = false }
+                
+                if let error = error {
+                    completion(.failure(error))
+                    return
+                }
+                
+                guard let data = data else {
+                    completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "No data received"])))
+                    return
+                }
+                
+                do {
+                    let response = try JSONDecoder().decode(LeaderboardResponse.self, from: data)
+                    let leaderboardData = response.leaderboard
+                        .filter { $0.userId != "Not found" }
+                        .sorted { $0.weeklyScore < $1.weeklyScore }
+                    
+                    self?.cachedLeaderboardData = leaderboardData
+                    self?.lastFetchTime = Date()
+                    completion(.success(leaderboardData))
+                } catch {
+                    completion(.failure(error))
+                }
+            }.resume()
+        }
+        
+        func clearCache() {
+            cachedLeaderboardData = nil
+            lastFetchTime = nil
+        }
+    }
+    
+    class EmissionsCache {
+        static let shared = EmissionsCache()
+        
+        private let cacheExpirationInterval: TimeInterval = 300 // 5 minutes
+        private var lastFetchTime: Date?
+        private var cachedEmissionsData: UserStats?
+        private var isLoading: Bool = false
+        
+        // In EmissionsCache class
+        private func processWeeklyData(emissions: [String: DailyEmissions]) -> [Int] {
+            let calendar = Calendar.current
+            let today = Date()
+            var weeklyTotals = [0, 0, 0, 0, 0]
+
+            // Get start of current week (Monday)
+            let weekStart = calendar.date(from: calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: today))!
+            
+            // Sort dates in descending order (newest first)
+            let sortedDates = emissions.keys.sorted(by: >)
+            
+            for dateStr in sortedDates {
+                guard let date = ISO8601DateFormatter().date(from: dateStr + "T00:00:00Z") else { continue }
+                let emission = emissions[dateStr]!
+                
+                // Calculate weeks difference
+                let weekDiff = calendar.dateComponents([.weekOfYear], from: date, to: weekStart).weekOfYear ?? 0
+                
+                // If date is in the past 5 weeks
+                if weekDiff >= 0 && weekDiff < 5 {
+                    let total = emission.carEmissions + emission.food + emission.energy + emission.goods
+                    weeklyTotals[weekDiff] += total
+                }
+            }
+            
+            print("Weekly totals calculated: \(weeklyTotals)")
+            return weeklyTotals
+        }
+        
+        func getEmissionsData(username: String, forceRefresh: Bool = false, completion: @escaping (Result<UserStats, Error>) -> Void) {
+            guard let url = URL(string: "https://functionappbackend.azurewebsites.net/api/GetUserEmissions") else {
+                completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Invalid URL"])))
+                return
+            }
+            
+            var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: true)
+            urlComponents?.queryItems = [
+                URLQueryItem(name: "username", value: username)
+            ]
+            
+            guard let finalUrl = urlComponents?.url else { return }
+            
+            URLSession.shared.dataTask(with: finalUrl) { data, response, error in
+                if let error = error {
+                    completion(.failure(error))
+                    return
+                }
+                
+                guard let data = data else {
+                    completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "No data received"])))
+                    return
+                }
+                
+                do {
+                    var stats = try JSONDecoder().decode(UserStats.self, from: data)
+                    
+                    let calendar = Calendar.current
+                    let today = Date()
+                    var weeklyTotals = [0, 0, 0, 0, 0]
+                    
+                    // Sort dates from newest to oldest
+                    let sortedDates = stats.emissions.keys.sorted(by: >)
+                    
+                    // Start from today and work backwards
+                    var currentDate = today
+                    var currentWeek = 0
+                    
+                    while currentWeek < 5 {
+                        // Find Monday of current week
+                        let currentWeekday = calendar.component(.weekday, from: currentDate)
+                        let daysToMonday = (currentWeekday + 6) % 7  // Changed from +5 to +6
+                        let monday = calendar.date(byAdding: .day, value: -daysToMonday, to: currentDate)!
+                        
+                        // Get next Monday (end of week)
+                        let nextMonday = calendar.date(byAdding: .day, value: 7, to: monday)!
+                        
+                        // Sum up emissions for this week
+                        for dateStr in sortedDates {
+                            guard let date = ISO8601DateFormatter().date(from: dateStr + "T00:00:00Z") else { continue }
+                            
+                            // If date is between Monday and next Monday, add to this week's total
+                            if date >= monday && date < nextMonday {
+                                let emission = stats.emissions[dateStr]!
+                                let dailyTotal = emission.carEmissions + emission.food + emission.energy + emission.goods
+                                weeklyTotals[currentWeek] += dailyTotal
+                                print("Date: \(dateStr), Week: \(currentWeek + 1), Monday: \(monday), Daily Total: \(dailyTotal)")
+                            }
+                        }
+                        
+                        // Move to previous week
+                        currentDate = calendar.date(byAdding: .day, value: -7, to: currentDate)!
+                        currentWeek += 1
+                    }
+                    
+                    print("Final weekly totals: \(weeklyTotals)")
+                    stats.weeklyHistory = weeklyTotals
+                    stats.weeklyScore = Double(weeklyTotals[0])  // Current week's total
+                    
+                    completion(.success(stats))
+                } catch {
+                    completion(.failure(error))
+                }
+            }.resume()
+        }
+        
+        func clearCache() {
+            cachedEmissionsData = nil
+            lastFetchTime = nil
+        }
+    }
+
+}
+extension GameScene {
+
+    func showPieChart() {
+        let loadingView = LoadingDotsView(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
+        loadingView.center = view?.center ?? CGPoint(x: 0, y: 0)
+        loadingView.backgroundColor = .clear
+        view?.addSubview(loadingView)
+        
+        guard let username = UserDefaults.standard.string(forKey: "userFullName") else {
+            loadingView.removeFromSuperview()
+            print("No username found")
             return
         }
         
-        let parameters: [String: Any] = [
-            "username": username,
-            "emissions": emissions
-        ]
-        
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = try? JSONSerialization.data(withJSONObject: parameters)
-        
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            if let error = error {
-                print("Error: \(error.localizedDescription)")
-                completion(false)
-                return
-            }
-            
-            guard let httpResponse = response as? HTTPURLResponse,
-                  (200...299).contains(httpResponse.statusCode) else {
-                print("Invalid response")
-                completion(false)
-                return
-            }
-            
-            completion(true)
-        }
-        
-        task.resume()
-    }
-}
-extension GameScene {
-    func showPieChart() {
-        carLabel.text = "Today's Emissions"
-        viewLeaderboardButton.isHidden = true
-        myProgressButton.isHidden = true
-        myBadgesButton.isHidden = true
-
-        if dailyCarEmissions < 0 {
-            dailyCarEmissions = 0
-        }
-        let pieChartView = PieChartView(userEmissions: (dailyCarEmissions), food: FOOD, energy: ENERGY, goods: GOODS)
-        pieChartHostingController = UIHostingController(rootView: pieChartView)
-        
-        if let view = self.view, let hostingController = pieChartHostingController {
-            // Remove any existing pie chart view
-            view.subviews.first(where: { $0.tag == 100 })?.removeFromSuperview()
-            
-            // Set the frame to cover a portion of the screen
-            let width: CGFloat = view.bounds.width * 0.9
-            let height: CGFloat = view.bounds.height * 0.7
-            let x = (view.bounds.width - width) / 2
-            let y = (view.bounds.height - height) / 2
-            
-            hostingController.view.frame = CGRect(x: x, y: y, width: width, height: height)
-            
-            // Add corner radius for a nicer look
-            hostingController.view.layer.cornerRadius = 10
-            hostingController.view.clipsToBounds = true
-            hostingController.view.tag = 100
-            
-            view.addSubview(hostingController.view)
-            
-            // Animate the presentation
-            hostingController.view.alpha = 0
-            UIView.animate(withDuration: 0.3) {
-                hostingController.view.alpha = 1
+        EmissionsCache.shared.getEmissionsData(username: username) { [weak self] result in
+            DispatchQueue.main.async {
+                guard let self = self else { return }
+                loadingView.stopAnimation()
+                loadingView.removeFromSuperview()
+                
+                switch result {
+                case .success(let stats):
+                    // Get today's date in the format used by the backend
+                    let today = ISO8601DateFormatter().string(from: Date()).prefix(10)
+                    let todayString = String(today)
+                    
+                    // Get current day's emissions from the stats
+                    let currentDayEmissions = stats.emissions[todayString] ?? DailyEmissions(carEmissions: 0, food: 0, energy: 0, goods: 0)
+                    
+                    let pieChartView = PieChartView(
+                        userEmissions: currentDayEmissions.carEmissions, // Use car emissions from the response
+                        food: currentDayEmissions.food,
+                        energy: currentDayEmissions.energy,
+                        goods: currentDayEmissions.goods
+                    )
+                    
+                    print("Debug - Pie Chart Values:")
+                    print("Car Emissions: \(currentDayEmissions.carEmissions)")
+                    print("Food: \(currentDayEmissions.food)")
+                    print("Energy: \(currentDayEmissions.energy)")
+                    print("Goods: \(currentDayEmissions.goods)")
+                    
+                    self.pieChartHostingController = UIHostingController(rootView: pieChartView)
+                    
+                    if let view = self.view {
+                        let width: CGFloat = view.bounds.width * 0.9
+                        let height: CGFloat = view.bounds.height * 0.7
+                        let x = (view.bounds.width - width) / 2
+                        let y = (view.bounds.height - height) / 2
+                        
+                        self.pieChartHostingController?.view.frame = CGRect(x: x, y: y, width: width, height: height)
+                        self.pieChartHostingController?.view.tag = 100
+                        view.addSubview(self.pieChartHostingController!.view)
+                    }
+                    
+                case .failure(let error):
+                    print("Failed to load pie chart data: \(error)")
+                    if let viewController = self.view?.window?.rootViewController {
+                        let alert = UIAlertController(title: "Error",
+                                                    message: "Failed to load data. Please try again.",
+                                                    preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "OK", style: .default))
+                        viewController.present(alert, animated: true)
+                    }
+                }
             }
         }
-        
-        homeButton.addTarget(self, action: #selector(homeButtonTapped), for: .touchUpInside)
     }
 }
 
@@ -2174,6 +2653,8 @@ struct LeaderboardPreview: View {
     }
 }
 
+
+
 struct EmissionBar: View {
     let username: String
     let emission: Double
@@ -2194,6 +2675,8 @@ struct EmissionBar: View {
         .background(Color.white) // Added this line to ensure the entire bar has a white background
     }
 }
+
+
 
 struct ProfileView: View {
     let username: String
@@ -2316,6 +2799,76 @@ struct CarbonOffsetPurchaseView: View {
         .background(Color.white)
         .cornerRadius(20)
         .shadow(radius: 10)
+    }
+    
+}
+
+struct LoadingView: View {
+    @State private var isSpinning = false
+    @State private var isPulsing = false
+    let message: String
+    
+    var body: some View {
+        ZStack {
+            // Background overlay
+            Color.black.opacity(0.3)
+                .edgesIgnoringSafeArea(.all)
+            
+            // Loading container
+            VStack {
+                ZStack {
+                    // Spinning circle
+                    Circle()
+                        .stroke(Color.white, lineWidth: 4)
+                        .frame(width: 90, height: 90)
+                        .rotationEffect(Angle(degrees: isSpinning ? 360 : 0))
+                        .animation(Animation.linear(duration: 1.0).repeatForever(autoreverses: false), value: isSpinning)
+                    
+                    // Logo
+                    Image("leaf_logo") // Make sure to add your logo to Assets.xcassets
+                        .resizable()
+                        .renderingMode(.template)
+                        .foregroundColor(.white)
+                        .frame(width: 50, height: 50)
+                        .scaleEffect(isPulsing ? 1.1 : 0.9)
+                        .animation(Animation.easeInOut(duration: 1.0).repeatForever(autoreverses: true), value: isPulsing)
+                }
+                
+                Text(message)
+                    .font(.system(size: 16, weight: .medium))
+                    .foregroundColor(.white)
+                    .padding(.top, 8)
+            }
+            .padding(40)
+            .background(Color.black.opacity(0.7))
+            .cornerRadius(20)
+        }
+        .onAppear {
+            isSpinning = true
+            isPulsing = true
+        }
+    }
+}
+
+// Helper extension for GameScene
+extension GameScene {
+    func showLoadingView(withMessage message: String) -> UIViewController {
+        let loadingView = LoadingView(message: message)
+        let hostingController = UIHostingController(rootView: loadingView)
+        hostingController.view.backgroundColor = .clear
+        
+        if let view = self.view {
+            hostingController.view.frame = view.bounds
+            view.addSubview(hostingController.view)
+        }
+        
+        return hostingController
+    }
+    
+    func hideLoadingView(_ loadingViewController: UIViewController) {
+        DispatchQueue.main.async {
+            loadingViewController.view.removeFromSuperview()
+        }
     }
 }
 
@@ -2442,6 +2995,117 @@ extension GameScene: ASAuthorizationControllerDelegate {
 extension GameScene: ASAuthorizationControllerPresentationContextProviding {
     func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
         return self.view!.window!
+    }
+}
+
+class LoadingDotsView: UIView {
+    private var dotViews: [UIView] = []
+    private var displayLink: CADisplayLink?
+    private var startTime: CFTimeInterval = 0
+    private var loadingLabel: UILabel!
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupLabel()
+        setupDots()
+        startAnimation()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        setupLabel()
+        setupDots()
+        startAnimation()
+    }
+    
+    private func setupLabel() {
+        loadingLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 20))
+        loadingLabel.text = "Loading"
+        loadingLabel.textColor = .white
+        loadingLabel.textAlignment = .center
+        loadingLabel.font = UIFont.systemFont(ofSize: 14)
+        addSubview(loadingLabel)
+    }
+    
+    private func setupDots() {
+        for i in 0..<3 {
+            let dot = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 10))
+            dot.backgroundColor = .white
+            dot.layer.cornerRadius = 5
+            dot.center = CGPoint(x: center.x + CGFloat(i - 1) * 20, y: center.y)
+            addSubview(dot)
+            dotViews.append(dot)
+        }
+        centerDotsAndLabel()
+    }
+    
+    private func centerDotsAndLabel() {
+        // Center label above dots
+        loadingLabel.center = CGPoint(x: bounds.width / 2, y: bounds.height / 2 - 35)
+        
+        // Center dots below label
+        let totalWidth = CGFloat(dotViews.count - 1) * 20
+        let startX = (bounds.width - totalWidth) / 2
+        
+        for (index, dot) in dotViews.enumerated() {
+            dot.center = CGPoint(x: startX + CGFloat(index) * 20, y: bounds.height / 2 + 10)
+        }
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        centerDotsAndLabel()
+    }
+    
+    private func startAnimation() {
+        startTime = CACurrentMediaTime()
+        displayLink = CADisplayLink(target: self, selector: #selector(updateAnimation))
+        displayLink?.add(to: .main, forMode: .common)
+    }
+    
+    @objc private func updateAnimation() {
+        let elapsed = CACurrentMediaTime() - startTime
+        
+        for (index, dot) in dotViews.enumerated() {
+            let delay = Double(index) * 0.2
+            let y = -10 * sin(2 * .pi * (elapsed - delay))
+            dot.transform = CGAffineTransform(translationX: 0, y: y)
+        }
+    }
+    
+    func stopAnimation() {
+        displayLink?.invalidate()
+        displayLink = nil
+    }
+    
+    deinit {
+        stopAnimation()
+    }
+}
+extension GameScene: UNUserNotificationCenterDelegate {
+    func userNotificationCenter(
+        _ center: UNUserNotificationCenter,
+        willPresent notification: UNNotification,
+        withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void
+    ) {
+        if notification.request.identifier == "midnight_update" {
+            // Check if it's Monday
+            let calendar = Calendar.current
+            if calendar.component(.weekday, from: Date()) == 2 {
+                // It's Monday, reset to 0
+                self.lastNightWeeklyScore = 0
+            } else {
+                // Not Monday, store current weekly score
+                self.lastNightWeeklyScore = Double(self.weekByWeek[4])
+            }
+            UserDefaults.standard.synchronize()
+            
+            // Perform midnight tasks
+            self.performMidnightTasks()
+            completionHandler([])
+        } else {
+            completionHandler([.banner, .sound])
+        }
     }
 }
 

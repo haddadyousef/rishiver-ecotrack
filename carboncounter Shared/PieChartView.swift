@@ -32,6 +32,14 @@ struct PieChartView: View {
     
     var slices: [(Double, Color)] {
         let total = Double(userEmissions + food + energy + goods)
+        if total == 0 {
+            return [
+                (0.25, .blue),
+                (0.25, .green),
+                (0.25, .orange),
+                (0.25, .red)
+            ]
+        }
         return [
             (Double(userEmissions) / total, .blue),
             (Double(food) / total, .green),
@@ -41,32 +49,62 @@ struct PieChartView: View {
     }
     
     var body: some View {
-        VStack {
-            Text("Today's Emissions")
-                .font(.title)
-                .padding()
-            
-            ZStack {
-                ForEach(0..<slices.count, id: \.self) { index in
-                    PieSlice(startAngle: .degrees(sliceStartDegree(for: index)),
-                             endAngle: .degrees(sliceEndDegree(for: index)))
-                        .fill(slices[index].1)
-                        .scaleEffect(1.0 + sliceOffsets[index])
-                        .animation(.spring(response: 0.5, dampingFraction: 0.5, blendDuration: 0.5), value: sliceOffsets[index])
+        GeometryReader { geometry in
+            VStack(spacing: 20) {
+                Spacer()
+                
+                Text("Today's Emissions")
+                    .font(.title)
+                
+                Text("Total: \(userEmissions + food + energy + goods)g CO₂")
+                    .font(.subheadline)
+                    .foregroundColor(.gray)
+                
+                ZStack {
+                    ForEach(0..<slices.count, id: \.self) { index in
+                        PieSlice(startAngle: .degrees(sliceStartDegree(for: index)),
+                                 endAngle: .degrees(sliceEndDegree(for: index)))
+                            .fill(slices[index].1)
+                            .scaleEffect(1.0 + sliceOffsets[index])
+                            .animation(.spring(response: 0.5, dampingFraction: 0.5, blendDuration: 0.5), value: sliceOffsets[index])
+                    }
                 }
+                .frame(width: min(geometry.size.width * 0.65, 250),
+                       height: min(geometry.size.width * 0.65, 250))
+                .padding(.vertical, 20)
+                
+                VStack(alignment: .leading, spacing: 15) {
+                    let total = Double(userEmissions + food + energy + goods)
+                    
+                    LegendItem(color: .blue,
+                              label: "Car Emissions",
+                              value: userEmissions,
+                              percentage: total > 0 ? String(format: " (%.1f%%)", (Double(userEmissions) / total) * 100) : "")
+                        .opacity(userEmissions > 0 ? 1 : 0.5)
+                    
+                    LegendItem(color: .green,
+                              label: "Food",
+                              value: food,
+                              percentage: total > 0 ? String(format: " (%.1f%%)", (Double(food) / total) * 100) : "")
+                        .opacity(food > 0 ? 1 : 0.5)
+                    
+                    LegendItem(color: .orange,
+                              label: "Energy",
+                              value: energy,
+                              percentage: total > 0 ? String(format: " (%.1f%%)", (Double(energy) / total) * 100) : "")
+                        .opacity(energy > 0 ? 1 : 0.5)
+                    
+                    LegendItem(color: .red,
+                              label: "Goods",
+                              value: goods,
+                              percentage: total > 0 ? String(format: " (%.1f%%)", (Double(goods) / total) * 100) : "")
+                        .opacity(goods > 0 ? 1 : 0.5)
+                }
+                .padding(.horizontal)
+                
+                Spacer()
             }
-            .frame(width: 200, height: 200)
-            .onAppear {
-                animateSlices()
-            }
-            
-            VStack(alignment: .leading, spacing: 10) {
-                LegendItem(color: .blue, label: "Car Emissions", value: userEmissions)
-                LegendItem(color: .green, label: "Food", value: food)
-                LegendItem(color: .orange, label: "Energy", value: energy)
-                LegendItem(color: .red, label: "Goods", value: goods)
-            }
-            .padding()
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
     }
     
@@ -100,6 +138,7 @@ struct LegendItem: View {
     let color: Color
     let label: String
     let value: Int
+    let percentage: String
     
     var body: some View {
         HStack {
@@ -107,8 +146,8 @@ struct LegendItem: View {
                 .fill(color)
                 .frame(width: 20, height: 20)
             Text(label)
-            Spacer()
-            Text("\(value)")
+            Text("\(value)g\(percentage)")
+                .foregroundColor(.gray)
         }
     }
 }
