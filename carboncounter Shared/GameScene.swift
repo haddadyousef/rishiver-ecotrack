@@ -1761,11 +1761,11 @@ class GameScene: SKScene, UITextFieldDelegate, CLLocationManagerDelegate {
                 
                 switch result {
                 case .success(let stats):
-                    let weeklyTotals = stats.weeklyHistory
-                    self.weekByWeek = Array(weeklyTotals.reversed())
-                    
-                    // Initialize the histogramHostingController before adding its view
-                    let histogramView = HistogramView(dayByDay: self.dayByDay, weekByWeek: self.weekByWeek)
+                    // Pass the reversed weekly history
+                    let histogramView = HistogramView(
+                        dayByDay: stats.dailyHistory,
+                        weekByWeek: stats.weeklyHistory.reversed()
+                    )
                     self.histogramHostingController = UIHostingController(rootView: histogramView)
                     
                     if let hostingController = self.histogramHostingController, let view = self.view {
@@ -1784,8 +1784,8 @@ class GameScene: SKScene, UITextFieldDelegate, CLLocationManagerDelegate {
                     // Show error in game scene
                     if let viewController = self.view?.window?.rootViewController {
                         let alert = UIAlertController(title: "Error",
-                                                    message: "Failed to load data. Please try again.",
-                                                    preferredStyle: .alert)
+                                                      message: "Failed to load data. Please try again.",
+                                                      preferredStyle: .alert)
                         alert.addAction(UIAlertAction(title: "OK", style: .default))
                         viewController.present(alert, animated: true)
                     }
@@ -2010,15 +2010,15 @@ class GameScene: SKScene, UITextFieldDelegate, CLLocationManagerDelegate {
     struct DailyHistogram: View {
         let emissions: [DailyEmissions]
         
-        // Ensure we always have 7 days of data
+        // Use the exact backend data
         private var normalizedEmissions: [DailyEmissions] {
             let emptyEmission = DailyEmissions(carEmissions: 0, food: 0, energy: 0, goods: 0)
             var result = Array(repeating: emptyEmission, count: 7)
             
-            // Fill with actual data from the end
-            let startIndex = max(0, result.count - emissions.count)
-            for (index, emission) in emissions.suffix(7).enumerated() {
-                result[startIndex + index] = emission
+            // Ensure we only display the last 7 days of data
+            let recentEmissions = emissions.suffix(7)
+            for (index, emission) in recentEmissions.enumerated() {
+                result[index] = emission
             }
             
             return result
@@ -2332,7 +2332,7 @@ extension GameScene {
     class LeaderboardCache {
         static let shared = LeaderboardCache()
         
-        private let cacheExpirationInterval: TimeInterval = 300 // 5 minutes
+        private let cacheExpirationInterval: TimeInterval = 1200 // 5 minutes
         private var lastFetchTime: Date?
         private var cachedLeaderboardData: [LeaderboardEntry]?
         private var isLoading: Bool = false
@@ -2399,7 +2399,7 @@ extension GameScene {
     class EmissionsCache {
         static let shared = EmissionsCache()
         
-        private let cacheExpirationInterval: TimeInterval = 300 // 5 minutes
+        private let cacheExpirationInterval: TimeInterval = 1200 // 5 minutes
         private var lastFetchTime: Date?
         private var cachedEmissionsData: UserStats?
         private var isLoading: Bool = false
@@ -2411,7 +2411,11 @@ extension GameScene {
             var weeklyTotals = [0, 0, 0, 0, 0]
 
             // Get start of current week (Monday)
-            let weekStart = calendar.date(from: calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: today))!
+            let weekStart = calendar.nextDate(
+                after: today,
+                matching: DateComponents(weekday: 2), // Monday is weekday 2 in the Gregorian calendar
+                matchingPolicy: .previousTimePreservingSmallerComponents
+            )!
             
             // Sort dates in descending order (newest first)
             let sortedDates = emissions.keys.sorted(by: >)
