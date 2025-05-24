@@ -1,10 +1,3 @@
-//
-//  PieChartView.swift
-//  carboncounter
-//
-//  Created by Neven on 7/28/24.
-//
-
 import Foundation
 import SwiftUI
 
@@ -50,16 +43,36 @@ struct PieChartView: View {
     
     var body: some View {
         GeometryReader { geometry in
-            VStack(spacing: 20) {
-                Spacer()
+            let availableWidth = geometry.size.width
+            let availableHeight = geometry.size.height
+            
+            // Calculate sizes based on available space
+            let padding: CGFloat = 20
+            let titleHeight: CGFloat = 80
+            let legendHeight: CGFloat = 120 // Fixed height for 4 legend items
+            let chartAreaHeight = availableHeight - titleHeight - legendHeight - (padding * 3)
+            
+            // Pie chart size - constrained by both width and available height
+            let maxChartSize = min(availableWidth * 0.7, chartAreaHeight)
+            let chartSize = max(maxChartSize, 100) // Minimum size
+            
+            VStack(spacing: padding) {
+                // Title section - fixed height
+                VStack(spacing: 8) {
+                    Text("Today's Emissions")
+                        .font(.title2)
+                        .fontWeight(.bold)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.5)
+                    
+                    Text("Total: \(userEmissions + food + energy + goods)g CO₂")
+                        .font(.subheadline)
+                        .foregroundColor(.gray)
+                        .lineLimit(1)
+                }
+                .frame(height: titleHeight)
                 
-                Text("Today's Emissions")
-                    .font(.title)
-                
-                Text("Total: \(userEmissions + food + energy + goods)g CO₂")
-                    .font(.subheadline)
-                    .foregroundColor(.gray)
-                
+                // Pie chart - constrained size
                 ZStack {
                     ForEach(0..<slices.count, id: \.self) { index in
                         PieSlice(startAngle: .degrees(sliceStartDegree(for: index)),
@@ -69,42 +82,64 @@ struct PieChartView: View {
                             .animation(.spring(response: 0.5, dampingFraction: 0.5, blendDuration: 0.5), value: sliceOffsets[index])
                     }
                 }
-                .frame(width: min(geometry.size.width * 0.65, 250),
-                       height: min(geometry.size.width * 0.65, 250))
-                .padding(.vertical, 20)
+                .frame(width: chartSize, height: chartSize)
+                .clipped() // Ensure chart doesn't overflow
                 
-                VStack(alignment: .leading, spacing: 15) {
-                    let total = Double(userEmissions + food + energy + goods)
+                // Legend section with scroll indicator
+                ZStack(alignment: .trailing) {
+                    ScrollView(.vertical, showsIndicators: false) {
+                        VStack(alignment: .leading, spacing: 8) {
+                            let total = Double(userEmissions + food + energy + goods)
+                            
+                            LegendItem(color: .blue,
+                                      label: "Car Emissions",
+                                      value: userEmissions,
+                                      percentage: total > 0 ? String(format: " (%.1f%%)", (Double(userEmissions) / total) * 100) : "")
+                                .opacity(userEmissions > 0 ? 1 : 0.5)
+                            
+                            LegendItem(color: .green,
+                                      label: "Food",
+                                      value: food,
+                                      percentage: total > 0 ? String(format: " (%.1f%%)", (Double(food) / total) * 100) : "")
+                                .opacity(food > 0 ? 1 : 0.5)
+                            
+                            LegendItem(color: .orange,
+                                      label: "Energy",
+                                      value: energy,
+                                      percentage: total > 0 ? String(format: " (%.1f%%)", (Double(energy) / total) * 100) : "")
+                                .opacity(energy > 0 ? 1 : 0.5)
+                            
+                            LegendItem(color: .red,
+                                      label: "Goods",
+                                      value: goods,
+                                      percentage: total > 0 ? String(format: " (%.1f%%)", (Double(goods) / total) * 100) : "")
+                                .opacity(goods > 0 ? 1 : 0.5)
+                        }
+                        .padding(.trailing, 8) // Add padding to make room for scroll indicator
+                    }
                     
-                    LegendItem(color: .blue,
-                              label: "Car Emissions",
-                              value: userEmissions,
-                              percentage: total > 0 ? String(format: " (%.1f%%)", (Double(userEmissions) / total) * 100) : "")
-                        .opacity(userEmissions > 0 ? 1 : 0.5)
-                    
-                    LegendItem(color: .green,
-                              label: "Food",
-                              value: food,
-                              percentage: total > 0 ? String(format: " (%.1f%%)", (Double(food) / total) * 100) : "")
-                        .opacity(food > 0 ? 1 : 0.5)
-                    
-                    LegendItem(color: .orange,
-                              label: "Energy",
-                              value: energy,
-                              percentage: total > 0 ? String(format: " (%.1f%%)", (Double(energy) / total) * 100) : "")
-                        .opacity(energy > 0 ? 1 : 0.5)
-                    
-                    LegendItem(color: .red,
-                              label: "Goods",
-                              value: goods,
-                              percentage: total > 0 ? String(format: " (%.1f%%)", (Double(goods) / total) * 100) : "")
-                        .opacity(goods > 0 ? 1 : 0.5)
+                    // Custom scroll indicator
+                    VStack {
+                        Spacer()
+                        
+                        // Scroll indicator line
+                        Rectangle()
+                            .fill(Color.gray.opacity(0.4))
+                            .frame(width: 2, height: legendHeight * 0.8)
+                            .cornerRadius(1)
+                        
+                        Spacer()
+                    }
+                    .padding(.trailing, 2)
                 }
-                .padding(.horizontal)
-                
-                Spacer()
+                .frame(maxHeight: legendHeight)
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .padding(padding)
+            .frame(width: availableWidth, height: availableHeight)
+        }
+        .clipped() // Final safety net to prevent any overflow
+        .onAppear {
+            animateSlices()
         }
     }
     
@@ -141,13 +176,25 @@ struct LegendItem: View {
     let percentage: String
     
     var body: some View {
-        HStack {
+        HStack(spacing: 8) {
             Circle()
                 .fill(color)
-                .frame(width: 20, height: 20)
+                .frame(width: 16, height: 16)
+            
             Text(label)
+                .font(.caption)
+                .fontWeight(.medium)
+                .lineLimit(1)
+                .minimumScaleFactor(0.8)
+            
+            Spacer()
+            
             Text("\(value)g\(percentage)")
+                .font(.caption2)
                 .foregroundColor(.gray)
+                .lineLimit(1)
+                .minimumScaleFactor(0.8)
         }
+        .frame(height: 24) // Fixed height for consistent spacing
     }
 }
