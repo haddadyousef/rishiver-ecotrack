@@ -6,11 +6,17 @@ import UserNotifications
 import Foundation
 import PassKit
 import AuthenticationServices
-import Stripe
+//import Stripe
 import BackgroundTasks
 
 
 class GameScene: SKScene, UITextFieldDelegate, CLLocationManagerDelegate {
+    
+    var signInOverlay: UIView!
+    var usernameTextField: UITextField!
+    var signInButton: UIButton!
+    var createAccountLabel: UILabel!
+    var overlayBlurView: UIVisualEffectView!
 
     private var cachedLeaderboardPosition: Int?
     private var lastLeaderboardFetch: Date?
@@ -22,7 +28,7 @@ class GameScene: SKScene, UITextFieldDelegate, CLLocationManagerDelegate {
     var homeButton: UIButton!
     var welcome = SKLabelNode()
     var startScreen = true
-    var getStarted = SKLabelNode()
+    var getStartedButton: UIButton!
     var carLabel = SKLabelNode()
     var progress = SKLabelNode()
     var drivingStatusLabel: SKLabelNode?
@@ -221,6 +227,7 @@ class GameScene: SKScene, UITextFieldDelegate, CLLocationManagerDelegate {
     @objc func checkTime() {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "HH:mm"
+        dateFormatter.timeZone = .pst
         let currentTime = dateFormatter.string(from: Date())
         
         // Update FOOD, GOODS, and ENERGY every 2 minutes
@@ -260,17 +267,20 @@ class GameScene: SKScene, UITextFieldDelegate, CLLocationManagerDelegate {
         updateWeeklyHistogram()
         hideAppleSignInButton()
         super.didMove(to: view)
+        if UIDevice.isIPad10thGeneration {
+            ecotrack.isHidden = true
+        }
         
         // Setup welcome and get started labels
         welcome.text = "Welcome to your personal carbon accountant"
         welcome.zPosition = 2
-        welcome.fontSize = 16
-        welcome.position = CGPoint(x: 0, y: 250)
+        welcome.fontSize = 14
+        welcome.position = CGPoint(x: 0, y: 162.5)
         welcome.fontColor = SKColor.white
         welcome.fontName = "AvenirNext-Bold"
         addChild(welcome)
         
-        StripeAPI.defaultPublishableKey = "pk_live_51Q9qgvIkPhKQ4Pu3bt6Dj2uXUEVHCX39Y4r9WmracCglvD1J52Ued55IbJR4i4WTRkqHRTViUAksYhV0cYUbdriX00LtKC7lPS"
+//        StripeAPI.defaultPublishableKey = "pk_live_51Q9qgvIkPhKQ4Pu3bt6Dj2uXUEVHCX39Y4r9WmracCglvD1J52Ued55IbJR4i4WTRkqHRTViUAksYhV0cYUbdriX00LtKC7lPS"
         
         fullNameTextField = UITextField(frame: CGRect(x: (size.width - 280) / 2, y: size.height / 2 - 20, width: 280, height: 40))
         guard let fullNameTextField = fullNameTextField else { return }
@@ -327,19 +337,29 @@ class GameScene: SKScene, UITextFieldDelegate, CLLocationManagerDelegate {
             //self.addChild(drivingStatusLabel)
         }
         
-        getStarted.text = "Get Started"
-        getStarted.fontSize = 40
-        getStarted.position = CGPoint(x: 0, y: 0)
-        getStarted.fontColor = SKColor.white
-        getStarted.zPosition = 2
-        getStarted.fontName = "AvenirNext-Bold"
-        addChild(getStarted)
+        getStartedButton = UIButton(type: .system)
+        getStartedButton.setTitle("Get Started", for: .normal)
+        getStartedButton.titleLabel?.font = UIFont(name: "AvenirNext-Bold", size: 24)
+        getStartedButton.setTitleColor(.white, for: .normal)
+        getStartedButton.backgroundColor = .systemGreen
+        getStartedButton.layer.cornerRadius = 10
+        getStartedButton.addTarget(self, action: #selector(getStartedButtonTapped), for: .touchUpInside)
+        getStartedButton.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(getStartedButton)
+
+        // Position the button in the center of the screen
+        NSLayoutConstraint.activate([
+            getStartedButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            getStartedButton.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            getStartedButton.widthAnchor.constraint(equalToConstant: 200),
+            getStartedButton.heightAnchor.constraint(equalToConstant: 50)
+        ])
 
 
         
         ecotrack.text = "EcoTrack"
         ecotrack.fontSize = 30
-        ecotrack.position = CGPoint(x:0, y:-350)
+        ecotrack.position = CGPoint(x:0, y:325)
         ecotrack.fontColor = SKColor.white
         ecotrack.zPosition = 2
         ecotrack.fontName = "AvenirNext-Bold"
@@ -447,24 +467,1044 @@ class GameScene: SKScene, UITextFieldDelegate, CLLocationManagerDelegate {
 //SETUP METHODS----------------------------------
     
     func showGetStartedScreen() {
-        // Show the welcome and get started labels
+        // Show the welcome label and get started button
         welcome.isHidden = false
-        getStarted.isHidden = false
+        getStartedButton.isHidden = false
         
         // Remove any existing Apple ID button
         view?.viewWithTag(100)?.removeFromSuperview()
+        
+        guard let view = self.view else { return }
+        
+        // Show the ecotrack SKLabelNode and adjust its position
+        ecotrack.isHidden = true
+        // Move the ecotrack label down a bit (adjust the y value as needed)
+        ecotrack.position = CGPoint(x: 0, y: 285)  // Original was y: 325, now lowered to 300
+        
+        // Add YouTube button to the top-right corner
+        let youtubeButton = UIButton(type: .system)
+        youtubeButton.tag = 201 // Tag for easy removal later
+        
+        // Use YouTube icon or SF Symbol as fallback
+        if let youtubeImage = UIImage(named: "youtube-icon") {
+            youtubeButton.setImage(youtubeImage, for: .normal)
+        } else {
+            let symbolConfig = UIImage.SymbolConfiguration(pointSize: 22, weight: .medium)
+            let playImage = UIImage(systemName: "play.rectangle.fill", withConfiguration: symbolConfig)?.withTintColor(.red, renderingMode: .alwaysOriginal)
+            youtubeButton.setImage(playImage, for: .normal)
+        }
+        
+        youtubeButton.backgroundColor = UIColor.white.withAlphaComponent(0.2)
+        youtubeButton.layer.cornerRadius = 20
+        youtubeButton.translatesAutoresizingMaskIntoConstraints = false
+        youtubeButton.addTarget(self, action: #selector(youtubeButtonTapped), for: .touchUpInside)
+        view.addSubview(youtubeButton)
+        
+        // Position the YouTube button in the top-right corner
+        NSLayoutConstraint.activate([
+            youtubeButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
+            youtubeButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20), // More to the right
+            youtubeButton.widthAnchor.constraint(equalToConstant: 40),
+            youtubeButton.heightAnchor.constraint(equalToConstant: 40)
+        ])
+        
+        // Add a bouncing "About Us" label at the bottom
+        let aboutUsButton = UIButton(type: .system)
+        aboutUsButton.tag = 202 // Tag for easy removal later
+        aboutUsButton.setTitle("About Us", for: .normal)
+        aboutUsButton.setTitleColor(.white, for: .normal)
+        aboutUsButton.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .medium)
+        aboutUsButton.translatesAutoresizingMaskIntoConstraints = false
+        aboutUsButton.addTarget(self, action: #selector(aboutUsButtonTapped), for: .touchUpInside)
+        view.addSubview(aboutUsButton)
+        
+        NSLayoutConstraint.activate([
+            aboutUsButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            aboutUsButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
+            aboutUsButton.widthAnchor.constraint(equalToConstant: 120),
+            aboutUsButton.heightAnchor.constraint(equalToConstant: 44)
+        ])
+    }
+    // Handle YouTube button tap
+    @objc func youtubeButtonTapped() {
+        // Open YouTube channel URL
+        if let youtubeURL = URL(string: "https://www.youtube.com/@EcoTrack-r7l") {
+            if UIApplication.shared.canOpenURL(youtubeURL) {
+                UIApplication.shared.open(youtubeURL, options: [:], completionHandler: nil)
+            }
+        }
+    }
+
+    // Handle About Us button tap
+    @objc func aboutUsButtonTapped() {
+        // Create and show About Us view
+        showAboutUsOverlay()
+    }
+
+    func showAboutUsOverlay() {
+        guard let view = self.view else { return }
+        
+        // Overlay container with background blur
+        let overlayView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
+        overlayView.tag = 203
+        overlayView.frame = view.bounds
+        overlayView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        overlayView.alpha = 0
+        view.addSubview(overlayView)
+        
+        // About Us container
+        let aboutContainer = UIView()
+        aboutContainer.backgroundColor = UIColor.systemBackground.withAlphaComponent(0.9)
+        aboutContainer.layer.cornerRadius = 16
+        aboutContainer.translatesAutoresizingMaskIntoConstraints = false
+        overlayView.contentView.addSubview(aboutContainer)
+        
+        // Initial position off-screen (for animation)
+        NSLayoutConstraint.activate([
+            aboutContainer.leadingAnchor.constraint(equalTo: overlayView.contentView.leadingAnchor, constant: 20),
+            aboutContainer.trailingAnchor.constraint(equalTo: overlayView.contentView.trailingAnchor, constant: -20),
+            aboutContainer.heightAnchor.constraint(equalToConstant: 400),
+            // Position below screen initially (will animate up)
+            aboutContainer.topAnchor.constraint(equalTo: overlayView.contentView.bottomAnchor)
+        ])
+        
+        view.layoutIfNeeded() // Force layout before animation
+        
+        // About Us title
+        let titleLabel = UILabel()
+        titleLabel.text = "About EcoTrack"
+        titleLabel.font = UIFont.systemFont(ofSize: 24, weight: .bold)
+        titleLabel.textAlignment = .center
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        aboutContainer.addSubview(titleLabel)
+        
+        // Close button
+        let closeButton = UIButton(type: .system)
+        closeButton.setImage(UIImage(systemName: "xmark.circle.fill"), for: .normal)
+        closeButton.tintColor = .systemGray
+        closeButton.translatesAutoresizingMaskIntoConstraints = false
+        closeButton.addTarget(self, action: #selector(closeAboutUs), for: .touchUpInside)
+        aboutContainer.addSubview(closeButton)
+        
+        // About Us content
+        let contentText = UITextView()
+        contentText.text = """
+        EcoTrack is a personal carbon footprint tracker that helps you monitor and reduce your environmental impact.
+        
+        Our mission is to make carbon tracking simple and accessible for everyone. By understanding your daily carbon emissions, you can make more informed choices that benefit the planet.
+        
+        The EcoTrack team is passionate about environmental sustainability and leveraging technology to create positive change in the world.
+        
+        Version 1.0
+        © 2025 EcoTrack Team
+        """
+        contentText.font = UIFont.systemFont(ofSize: 16)
+        contentText.textAlignment = .left
+        contentText.isEditable = false
+        contentText.backgroundColor = .clear
+        contentText.translatesAutoresizingMaskIntoConstraints = false
+        aboutContainer.addSubview(contentText)
+        
+        NSLayoutConstraint.activate([
+            titleLabel.topAnchor.constraint(equalTo: aboutContainer.topAnchor, constant: 20),
+            titleLabel.leadingAnchor.constraint(equalTo: aboutContainer.leadingAnchor),
+            titleLabel.trailingAnchor.constraint(equalTo: aboutContainer.trailingAnchor),
+            
+            closeButton.topAnchor.constraint(equalTo: aboutContainer.topAnchor, constant: 16),
+            closeButton.trailingAnchor.constraint(equalTo: aboutContainer.trailingAnchor, constant: -16),
+            closeButton.widthAnchor.constraint(equalToConstant: 32),
+            closeButton.heightAnchor.constraint(equalToConstant: 32),
+            
+            contentText.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 16),
+            contentText.leadingAnchor.constraint(equalTo: aboutContainer.leadingAnchor, constant: 20),
+            contentText.trailingAnchor.constraint(equalTo: aboutContainer.trailingAnchor, constant: -20),
+            contentText.bottomAnchor.constraint(equalTo: aboutContainer.bottomAnchor, constant: -20)
+        ])
+        
+        // Animate the overlay and about container
+        UIView.animate(withDuration: 0.3, animations: {
+            overlayView.alpha = 1
+        }, completion: { _ in
+            // Change the container's position constraint
+            overlayView.contentView.constraints.first { $0.firstItem === aboutContainer && $0.firstAttribute == .top }?.isActive = false
+            
+            NSLayoutConstraint.activate([
+                aboutContainer.centerYAnchor.constraint(equalTo: overlayView.contentView.centerYAnchor)
+            ])
+            
+            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.5, options: [], animations: {
+                overlayView.contentView.layoutIfNeeded()
+            }, completion: nil)
+        })
+    }
+
+    @objc func closeAboutUs() {
+        guard let overlayView = view?.viewWithTag(203) as? UIVisualEffectView else { return }
+        
+        UIView.animate(withDuration: 0.3, animations: {
+            overlayView.alpha = 0
+        }, completion: { _ in
+            overlayView.removeFromSuperview()
+        })
     }
     
-    @objc func getStartedTapped() {
+    @objc func getStartedButtonTapped() {
         welcome.isHidden = true
-        getStarted.isHidden = true
+        getStartedButton.isHidden = true
         
-        // Show Apple ID sign-in button
-        if !isAuthenticated {
-            startSignInWithAppleFlow()
-            showAppleSignInButton()
+        // Show sign-in overlay instead of the Apple sign-in button
+        showSignInOverlay()
+    }
+    
+    func showSignInOverlay() {
+        // Create blur effect for the background
+        let blurEffect = UIBlurEffect(style: .dark)
+        overlayBlurView = UIVisualEffectView(effect: blurEffect)
+        overlayBlurView.frame = view?.bounds ?? CGRect.zero
+        overlayBlurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        view?.addSubview(overlayBlurView)
+        
+        // Create the sign-in overlay container
+        signInOverlay = UIView()
+        signInOverlay.backgroundColor = .white
+        signInOverlay.layer.cornerRadius = 15
+        signInOverlay.translatesAutoresizingMaskIntoConstraints = false
+        view?.addSubview(signInOverlay)
+        
+        // Create title label
+        let titleLabel = UILabel()
+        titleLabel.text = "Sign In"
+        titleLabel.font = UIFont(name: "AvenirNext-Bold", size: 22)
+        titleLabel.textAlignment = .center
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        signInOverlay.addSubview(titleLabel)
+        
+        // Create username text field
+        usernameTextField = UITextField()
+        usernameTextField.placeholder = "Enter your username"
+        usernameTextField.borderStyle = .roundedRect
+        usernameTextField.autocorrectionType = .no
+        usernameTextField.returnKeyType = .done
+        usernameTextField.delegate = self
+        usernameTextField.translatesAutoresizingMaskIntoConstraints = false
+        signInOverlay.addSubview(usernameTextField)
+        
+        // Create sign in button
+        signInButton = UIButton(type: .system)
+        signInButton.setTitle("Sign In", for: .normal)
+        signInButton.titleLabel?.font = UIFont(name: "AvenirNext-Bold", size: 18)
+        signInButton.backgroundColor = .systemGreen
+        signInButton.setTitleColor(.white, for: .normal)
+        signInButton.layer.cornerRadius = 10
+        signInButton.addTarget(self, action: #selector(signInButtonTapped), for: .touchUpInside)
+        signInButton.translatesAutoresizingMaskIntoConstraints = false
+        signInOverlay.addSubview(signInButton)
+        
+        // Create "Don't have an account?" label
+        createAccountLabel = UILabel()
+        createAccountLabel.text = "Don't have an account?"
+        createAccountLabel.font = UIFont.systemFont(ofSize: 16)
+        createAccountLabel.textColor = .systemBlue
+        createAccountLabel.textAlignment = .center
+        createAccountLabel.isUserInteractionEnabled = true
+        createAccountLabel.translatesAutoresizingMaskIntoConstraints = false
+        signInOverlay.addSubview(createAccountLabel)
+        
+        // Add tap gesture to the label
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(createAccountTapped))
+        createAccountLabel.addGestureRecognizer(tapGesture)
+        
+        // Setup constraints
+        NSLayoutConstraint.activate([
+            signInOverlay.centerXAnchor.constraint(equalTo: view!.centerXAnchor),
+            signInOverlay.centerYAnchor.constraint(equalTo: view!.centerYAnchor),
+            signInOverlay.widthAnchor.constraint(equalToConstant: 300),
+            signInOverlay.heightAnchor.constraint(equalToConstant: 250),
+            
+            titleLabel.topAnchor.constraint(equalTo: signInOverlay.topAnchor, constant: 20),
+            titleLabel.centerXAnchor.constraint(equalTo: signInOverlay.centerXAnchor),
+            
+            usernameTextField.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 30),
+            usernameTextField.leadingAnchor.constraint(equalTo: signInOverlay.leadingAnchor, constant: 20),
+            usernameTextField.trailingAnchor.constraint(equalTo: signInOverlay.trailingAnchor, constant: -20),
+            usernameTextField.heightAnchor.constraint(equalToConstant: 40),
+            
+            signInButton.topAnchor.constraint(equalTo: usernameTextField.bottomAnchor, constant: 30),
+            signInButton.leadingAnchor.constraint(equalTo: signInOverlay.leadingAnchor, constant: 20),
+            signInButton.trailingAnchor.constraint(equalTo: signInOverlay.trailingAnchor, constant: -20),
+            signInButton.heightAnchor.constraint(equalToConstant: 45),
+            
+            createAccountLabel.topAnchor.constraint(equalTo: signInButton.bottomAnchor, constant: 20),
+            createAccountLabel.centerXAnchor.constraint(equalTo: signInOverlay.centerXAnchor)
+        ])
+    }
+    
+    @objc func signInButtonTapped() {
+        guard let username = usernameTextField.text, !username.isEmpty else {
+            // Show an alert if username is empty
+            let alert = UIAlertController(title: "Error", message: "Please enter a username", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default))
+            view?.window?.rootViewController?.present(alert, animated: true)
+            return
         }
+        
+        // Show loading indicator
+        let loadingView = LoadingDotsView(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
+        loadingView.center = view?.center ?? CGPoint(x: 0, y: 0)
+        loadingView.backgroundColor = .clear
+        view?.addSubview(loadingView)
+        
+        // Check if the username exists in the backend
+        checkUsernameExists(username: username) { [weak self] exists in
+            guard let self = self else { return }
+            
+            DispatchQueue.main.async {
+                loadingView.stopAnimation()
+                loadingView.removeFromSuperview()
+                
+                if exists {
+                    // Username exists, save it and load user data
+                    UserDefaults.standard.set(username, forKey: "userFullName")
+                    UserDefaults.standard.synchronize()
+                    
+                    // Remove the sign-in overlay
+                    self.removeSignInOverlay()
+                    
+                    // Load user data and set up home page
+                    self.loadUserData(username: username)
+                } else {
+                    // Username doesn't exist, show error
+                    let alert = UIAlertController(title: "User Not Found",
+                                                 message: "No account found with this username. Do you want to create a new account?",
+                                                 preferredStyle: .alert)
+                    
+                    alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+                    alert.addAction(UIAlertAction(title: "Create Account", style: .default) { _ in
+                        self.createAccountTapped()
+                    })
+                    
+                    self.view?.window?.rootViewController?.present(alert, animated: true)
+                }
+            }
+        }
+    }
 
+    // Add this method to check if a username exists in the backend
+    func checkUsernameExists(username: String, completion: @escaping (Bool) -> Void) {
+        guard let url = URL(string: "https://functionappbackend.azurewebsites.net/api/GetUserEmissions") else {
+            completion(false)
+            return
+        }
+        
+        var components = URLComponents(url: url, resolvingAgainstBaseURL: true)
+        components?.queryItems = [URLQueryItem(name: "username", value: username)]
+        
+        guard let finalUrl = components?.url else {
+            completion(false)
+            return
+        }
+        
+        URLSession.shared.dataTask(with: finalUrl) { data, response, error in
+            if let error = error {
+                print("Error checking username: \(error)")
+                completion(false)
+                return
+            }
+            
+            if let httpResponse = response as? HTTPURLResponse {
+                if httpResponse.statusCode == 200 {
+                    if let data = data, !data.isEmpty {
+                        do {
+                            // Try to decode the response
+                            let stats = try JSONDecoder().decode(UserStats.self, from: data)
+                            // If we can decode the data and the username matches, the user exists
+                            completion(stats.username == username)
+                        } catch {
+                            // If we can't decode the response, assume the user doesn't exist
+                            print("Error decoding user data: \(error)")
+                            completion(false)
+                        }
+                    } else {
+                        // Empty data means no user found
+                        completion(false)
+                    }
+                } else {
+                    // Non-200 status code means something went wrong
+                    completion(false)
+                }
+            } else {
+                // No HTTP response means something went wrong
+                completion(false)
+            }
+        }.resume()
+    }
+
+    // Add this method to load user data from the backend
+    func loadUserData(username: String) {
+        // Show loading indicator
+        let loadingViewController = showLoadingView(withMessage: "Loading your data...")
+        
+        // Fetch user's emissions data
+        EmissionsCache.shared.getEmissionsData(username: username, forceRefresh: true) { [weak self] result in
+            guard let self = self else { return }
+            
+            DispatchQueue.main.async {
+                self.hideLoadingView(loadingViewController)
+                
+                switch result {
+                case .success(let stats):
+                    // Update local state with the data from the backend
+                    self.FOOD = stats.currentDayEmissions.food
+                    self.ENERGY = stats.currentDayEmissions.energy
+                    self.GOODS = stats.currentDayEmissions.goods
+                    self.dailyCarEmissions = stats.currentDayEmissions.carEmissions
+                    self.weekByWeek = stats.weeklyHistory
+                    self.dayByDay = stats.dailyHistory
+                    
+                    // Save the updated values
+                    self.saveArrays()
+                    
+                    // Fetch car details specifically as they might be stored differently
+                    self.fetchUserCarDetails(username: username) { carFound in
+                        if carFound {
+                            // Car details found, go straight to home
+                            self.setupHomePage()
+                        } else {
+                            // Car details missing, show car selection overlay
+                            self.showCarSelectionOverlay()
+                        }
+                    }
+                    
+                case .failure(let error):
+                    print("Failed to load user data: \(error)")
+                    // Show error message
+                    let alert = UIAlertController(title: "Error",
+                                                 message: "Failed to load your data. Please try again.",
+                                                 preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: .default))
+                    self.view?.window?.rootViewController?.present(alert, animated: true)
+                }
+            }
+        }
+    }
+    
+    func fetchUserCarDetails(username: String, completion: @escaping (Bool) -> Void) {
+        // For this example, I'll assume the car details are stored in UserDefaults
+        // In a real app, you might want to fetch them from the backend
+        if let savedCarYear = UserDefaults.standard.string(forKey: "carYear"),
+           let savedCarMake = UserDefaults.standard.string(forKey: "carMake"),
+           let savedCarModel = UserDefaults.standard.string(forKey: "carModel"),
+           !savedCarYear.isEmpty && !savedCarMake.isEmpty && !savedCarModel.isEmpty {
+            
+            // Car details found, update local properties
+            carYear = savedCarYear
+            carMake = savedCarMake
+            carModel = savedCarModel
+            completion(true)
+            
+        } else {
+            // No car details found
+            completion(false)
+        }
+    }
+
+    // Add this method to show car selection in a modal overlay
+    func showCarSelectionOverlay() {
+        // Create the overlay container
+        let overlayView = UIView()
+        overlayView.backgroundColor = UIColor.black.withAlphaComponent(0.7)
+        overlayView.translatesAutoresizingMaskIntoConstraints = false
+        view?.addSubview(overlayView)
+        
+        // Make the overlay fill the screen
+        NSLayoutConstraint.activate([
+            overlayView.topAnchor.constraint(equalTo: view!.topAnchor),
+            overlayView.leadingAnchor.constraint(equalTo: view!.leadingAnchor),
+            overlayView.trailingAnchor.constraint(equalTo: view!.trailingAnchor),
+            overlayView.bottomAnchor.constraint(equalTo: view!.bottomAnchor)
+        ])
+        
+        // Create the car selection window
+        let windowView = UIView()
+        windowView.backgroundColor = .white
+        windowView.layer.cornerRadius = 15
+        windowView.translatesAutoresizingMaskIntoConstraints = false
+        overlayView.addSubview(windowView)
+        
+        // Size and position the window
+        NSLayoutConstraint.activate([
+            windowView.centerXAnchor.constraint(equalTo: overlayView.centerXAnchor),
+            windowView.centerYAnchor.constraint(equalTo: overlayView.centerYAnchor),
+            windowView.widthAnchor.constraint(equalTo: overlayView.widthAnchor, multiplier: 0.9),
+            windowView.heightAnchor.constraint(equalTo: overlayView.heightAnchor, multiplier: 0.7)
+        ])
+        
+        // Create a container view to hold all content and center it vertically
+        let containerView = UIView()
+        containerView.translatesAutoresizingMaskIntoConstraints = false
+        windowView.addSubview(containerView)
+        
+        // Center the container vertically and horizontally
+        NSLayoutConstraint.activate([
+            containerView.centerXAnchor.constraint(equalTo: windowView.centerXAnchor),
+            containerView.centerYAnchor.constraint(equalTo: windowView.centerYAnchor),
+            containerView.widthAnchor.constraint(equalTo: windowView.widthAnchor, multiplier: 0.9),
+            // Let the height be determined by content
+        ])
+        
+        // Add a title label
+        let titleLabel = UILabel()
+        titleLabel.text = "Select Your Car"
+        titleLabel.font = UIFont(name: "AvenirNext-Bold", size: 22)
+        titleLabel.textAlignment = .center
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        containerView.addSubview(titleLabel)
+        
+        NSLayoutConstraint.activate([
+            titleLabel.topAnchor.constraint(equalTo: containerView.topAnchor),
+            titleLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
+            titleLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor)
+        ])
+        
+        // Create and configure the picker views
+        yearPickerView = createPickerView()
+        makePickerView = createPickerView()
+        modelPickerView = createPickerView()
+        
+        // Set up picker views data sources and delegates
+        yearPickerView.dataSource = self
+        yearPickerView.delegate = self
+        makePickerView.dataSource = self
+        makePickerView.delegate = self
+        modelPickerView.dataSource = self
+        modelPickerView.delegate = self
+        
+        // Create label for each picker
+        let yearLabel = UILabel()
+        yearLabel.text = "Year"
+        yearLabel.textAlignment = .center
+        yearLabel.font = UIFont.systemFont(ofSize: 14, weight: .medium)
+        
+        let makeLabel = UILabel()
+        makeLabel.text = "Make"
+        makeLabel.textAlignment = .center
+        makeLabel.font = UIFont.systemFont(ofSize: 14, weight: .medium)
+        
+        let modelLabel = UILabel()
+        modelLabel.text = "Model"
+        modelLabel.textAlignment = .center
+        modelLabel.font = UIFont.systemFont(ofSize: 14, weight: .medium)
+        
+        let labelStackView = UIStackView(arrangedSubviews: [yearLabel, makeLabel, modelLabel])
+        labelStackView.axis = .horizontal
+        labelStackView.distribution = .fillEqually
+        labelStackView.spacing = 10
+        labelStackView.translatesAutoresizingMaskIntoConstraints = false
+        containerView.addSubview(labelStackView)
+        
+        NSLayoutConstraint.activate([
+            labelStackView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 40),
+            labelStackView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
+            labelStackView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
+            labelStackView.heightAnchor.constraint(equalToConstant: 20)
+        ])
+        
+        // Create a stack view for the pickers
+        let pickerStackView = UIStackView(arrangedSubviews: [yearPickerView, makePickerView, modelPickerView])
+        pickerStackView.axis = .horizontal
+        pickerStackView.distribution = .fillEqually
+        pickerStackView.spacing = 10
+        pickerStackView.translatesAutoresizingMaskIntoConstraints = false
+        containerView.addSubview(pickerStackView)
+        
+        NSLayoutConstraint.activate([
+            pickerStackView.topAnchor.constraint(equalTo: labelStackView.bottomAnchor, constant: 5),
+            pickerStackView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
+            pickerStackView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
+            pickerStackView.heightAnchor.constraint(equalToConstant: 200)
+        ])
+        
+        // Create a confirmation button
+        let confirmButton = UIButton(type: .system)
+        confirmButton.setTitle("Confirm", for: .normal)
+        confirmButton.titleLabel?.font = UIFont(name: "AvenirNext-Bold", size: 18)
+        confirmButton.backgroundColor = .systemGreen
+        confirmButton.setTitleColor(.white, for: .normal)
+        confirmButton.layer.cornerRadius = 10
+        confirmButton.translatesAutoresizingMaskIntoConstraints = false
+        confirmButton.addTarget(self, action: #selector(confirmCarSelection), for: .touchUpInside)
+        containerView.addSubview(confirmButton)
+        
+        NSLayoutConstraint.activate([
+            confirmButton.topAnchor.constraint(equalTo: pickerStackView.bottomAnchor, constant: 40),
+            confirmButton.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
+            confirmButton.widthAnchor.constraint(equalToConstant: 200),
+            confirmButton.heightAnchor.constraint(equalToConstant: 50),
+            confirmButton.bottomAnchor.constraint(equalTo: containerView.bottomAnchor)
+        ])
+        
+        // Initialize the picker data
+        if let csvData = loadCSVFile() {
+            carData = csvData
+            years = Array(Set(carData.map { $0[0] })).sorted()
+            if let firstYear = years.first {
+                carYear = firstYear
+                makes = Array(Set(carData.filter { $0[0] == carYear }.map { $0[1] })).sorted()
+                if let firstMake = makes.first {
+                    carMake = firstMake
+                    models = Array(Set(carData.filter { $0[0] == carYear && $0[1] == carMake }.map { $0[2] })).sorted()
+                    carModel = models.first ?? ""
+                }
+            }
+        }
+        
+        // Refresh the pickers
+        yearPickerView.reloadAllComponents()
+        makePickerView.reloadAllComponents()
+        modelPickerView.reloadAllComponents()
+        
+        // Set the initial selected rows
+        yearPickerView.selectRow(0, inComponent: 0, animated: false)
+        makePickerView.selectRow(0, inComponent: 0, animated: false)
+        modelPickerView.selectRow(0, inComponent: 0, animated: false)
+    }
+
+    @objc func confirmCarSelection() {
+        // Save the selected car information
+        UserDefaults.standard.set(carYear, forKey: "carYear")
+        UserDefaults.standard.set(carMake, forKey: "carMake")
+        UserDefaults.standard.set(carModel, forKey: "carModel")
+        UserDefaults.standard.synchronize()
+        
+        // Update location tracker with car details
+        locationTracker.setCarDetails(year: carYear, make: carMake, model: carModel, list: carData)
+        
+        // Remove the overlay and proceed to home
+        if let overlayView = view?.subviews.first(where: { $0.backgroundColor?.isEqual(UIColor.black.withAlphaComponent(0.7)) ?? false }) {
+            UIView.animate(withDuration: 0.3, animations: {
+                overlayView.alpha = 0
+            }) { _ in
+                overlayView.removeFromSuperview()
+                self.setupHomePage()
+            }
+        } else {
+            // In case we can't find the overlay, still go to home
+            setupHomePage()
+        }
+    }
+
+    @objc func createAccountTapped() {
+        // Remove the sign-in overlay
+        removeSignInOverlay()
+        
+        // Show car selection overlay for new users
+        showCarSelectionForNewUser()
+    }
+    
+    func showCarSelectionForNewUser() {
+        // Create the overlay container
+        let overlayView = UIView()
+        overlayView.backgroundColor = UIColor.black.withAlphaComponent(0.7)
+        overlayView.translatesAutoresizingMaskIntoConstraints = false
+        view?.addSubview(overlayView)
+        
+        // Make the overlay fill the screen
+        NSLayoutConstraint.activate([
+            overlayView.topAnchor.constraint(equalTo: view!.topAnchor),
+            overlayView.leadingAnchor.constraint(equalTo: view!.leadingAnchor),
+            overlayView.trailingAnchor.constraint(equalTo: view!.trailingAnchor),
+            overlayView.bottomAnchor.constraint(equalTo: view!.bottomAnchor)
+        ])
+        
+        // Create the car selection window
+        let windowView = UIView()
+        windowView.backgroundColor = .white
+        windowView.layer.cornerRadius = 15
+        windowView.translatesAutoresizingMaskIntoConstraints = false
+        overlayView.addSubview(windowView)
+        
+        // Size and position the window
+        NSLayoutConstraint.activate([
+            windowView.centerXAnchor.constraint(equalTo: overlayView.centerXAnchor),
+            windowView.centerYAnchor.constraint(equalTo: overlayView.centerYAnchor),
+            windowView.widthAnchor.constraint(equalTo: overlayView.widthAnchor, multiplier: 0.9),
+            windowView.heightAnchor.constraint(equalTo: overlayView.heightAnchor, multiplier: 0.7)
+        ])
+        
+        // Create a container view to hold all content and center it vertically
+        let containerView = UIView()
+        containerView.translatesAutoresizingMaskIntoConstraints = false
+        windowView.addSubview(containerView)
+        
+        // Center the container vertically and horizontally
+        NSLayoutConstraint.activate([
+            containerView.centerXAnchor.constraint(equalTo: windowView.centerXAnchor),
+            containerView.centerYAnchor.constraint(equalTo: windowView.centerYAnchor),
+            containerView.widthAnchor.constraint(equalTo: windowView.widthAnchor, multiplier: 0.9),
+            // Let the height be determined by content
+        ])
+        
+        // Add a title label
+        let titleLabel = UILabel()
+        titleLabel.text = "Select Your Car"
+        titleLabel.font = UIFont(name: "AvenirNext-Bold", size: 22)
+        titleLabel.textAlignment = .center
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        containerView.addSubview(titleLabel)
+        
+        NSLayoutConstraint.activate([
+            titleLabel.topAnchor.constraint(equalTo: containerView.topAnchor),
+            titleLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
+            titleLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor)
+        ])
+        
+        // Create and configure the picker views
+        yearPickerView = createPickerView()
+        makePickerView = createPickerView()
+        modelPickerView = createPickerView()
+        
+        // Set up picker views data sources and delegates
+        yearPickerView.dataSource = self
+        yearPickerView.delegate = self
+        makePickerView.dataSource = self
+        makePickerView.delegate = self
+        modelPickerView.dataSource = self
+        modelPickerView.delegate = self
+        
+        // Create label for each picker
+        let yearLabel = UILabel()
+        yearLabel.text = "Year"
+        yearLabel.textAlignment = .center
+        yearLabel.font = UIFont.systemFont(ofSize: 14, weight: .medium)
+        
+        let makeLabel = UILabel()
+        makeLabel.text = "Make"
+        makeLabel.textAlignment = .center
+        makeLabel.font = UIFont.systemFont(ofSize: 14, weight: .medium)
+        
+        let modelLabel = UILabel()
+        modelLabel.text = "Model"
+        modelLabel.textAlignment = .center
+        modelLabel.font = UIFont.systemFont(ofSize: 14, weight: .medium)
+        
+        let labelStackView = UIStackView(arrangedSubviews: [yearLabel, makeLabel, modelLabel])
+        labelStackView.axis = .horizontal
+        labelStackView.distribution = .fillEqually
+        labelStackView.spacing = 10
+        labelStackView.translatesAutoresizingMaskIntoConstraints = false
+        containerView.addSubview(labelStackView)
+        
+        NSLayoutConstraint.activate([
+            labelStackView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 40),
+            labelStackView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
+            labelStackView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
+            labelStackView.heightAnchor.constraint(equalToConstant: 20)
+        ])
+        
+        // Create a stack view for the pickers
+        let pickerStackView = UIStackView(arrangedSubviews: [yearPickerView, makePickerView, modelPickerView])
+        pickerStackView.axis = .horizontal
+        pickerStackView.distribution = .fillEqually
+        pickerStackView.spacing = 10
+        pickerStackView.translatesAutoresizingMaskIntoConstraints = false
+        containerView.addSubview(pickerStackView)
+        
+        NSLayoutConstraint.activate([
+            pickerStackView.topAnchor.constraint(equalTo: labelStackView.bottomAnchor, constant: 5),
+            pickerStackView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
+            pickerStackView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
+            pickerStackView.heightAnchor.constraint(equalToConstant: 200)
+        ])
+        
+        // Create a next button
+        let nextButton = UIButton(type: .system)
+        nextButton.setTitle("Next", for: .normal)
+        nextButton.titleLabel?.font = UIFont(name: "AvenirNext-Bold", size: 18)
+        nextButton.backgroundColor = .systemGreen
+        nextButton.setTitleColor(.white, for: .normal)
+        nextButton.layer.cornerRadius = 10
+        nextButton.translatesAutoresizingMaskIntoConstraints = false
+        nextButton.addTarget(self, action: #selector(newUserCarSelectionConfirmed), for: .touchUpInside)
+        containerView.addSubview(nextButton)
+        
+        NSLayoutConstraint.activate([
+            nextButton.topAnchor.constraint(equalTo: pickerStackView.bottomAnchor, constant: 40),
+            nextButton.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
+            nextButton.widthAnchor.constraint(equalToConstant: 200),
+            nextButton.heightAnchor.constraint(equalToConstant: 50),
+            nextButton.bottomAnchor.constraint(equalTo: containerView.bottomAnchor)
+        ])
+        
+        // Initialize the picker data
+        if let csvData = loadCSVFile() {
+            carData = csvData
+            years = Array(Set(carData.map { $0[0] })).sorted()
+            if let firstYear = years.first {
+                carYear = firstYear
+                makes = Array(Set(carData.filter { $0[0] == carYear }.map { $0[1] })).sorted()
+                if let firstMake = makes.first {
+                    carMake = firstMake
+                    models = Array(Set(carData.filter { $0[0] == carYear && $0[1] == carMake }.map { $0[2] })).sorted()
+                    carModel = models.first ?? ""
+                }
+            }
+        }
+        
+        // Refresh the pickers
+        yearPickerView.reloadAllComponents()
+        makePickerView.reloadAllComponents()
+        modelPickerView.reloadAllComponents()
+        
+        // Set the initial selected rows
+        yearPickerView.selectRow(0, inComponent: 0, animated: false)
+        makePickerView.selectRow(0, inComponent: 0, animated: false)
+        modelPickerView.selectRow(0, inComponent: 0, animated: false)
+    }
+    
+    @objc func newUserCarSelectionConfirmed() {
+        // Save the selected car information
+        UserDefaults.standard.set(carYear, forKey: "carYear")
+        UserDefaults.standard.set(carMake, forKey: "carMake")
+        UserDefaults.standard.set(carModel, forKey: "carModel")
+        UserDefaults.standard.synchronize()
+        
+        // Update location tracker with car details
+        locationTracker.setCarDetails(year: carYear, make: carMake, model: carModel, list: carData)
+        
+        // Find and remove the car selection overlay
+        if let overlayView = view?.subviews.first(where: { $0.backgroundColor?.isEqual(UIColor.black.withAlphaComponent(0.7)) ?? false }) {
+            overlayView.removeFromSuperview()
+            
+            // Now prompt for user's name
+            showUserNamePrompt()
+        }
+    }
+    
+    func showUserNamePrompt() {
+        // Create the overlay container
+        let overlayView = UIView()
+        overlayView.backgroundColor = UIColor.black.withAlphaComponent(0.7)
+        overlayView.translatesAutoresizingMaskIntoConstraints = false
+        view?.addSubview(overlayView)
+        
+        // Make the overlay fill the screen
+        NSLayoutConstraint.activate([
+            overlayView.topAnchor.constraint(equalTo: view!.topAnchor),
+            overlayView.leadingAnchor.constraint(equalTo: view!.leadingAnchor),
+            overlayView.trailingAnchor.constraint(equalTo: view!.trailingAnchor),
+            overlayView.bottomAnchor.constraint(equalTo: view!.bottomAnchor)
+        ])
+        
+        // Create the name input window
+        let windowView = UIView()
+        windowView.backgroundColor = .white
+        windowView.layer.cornerRadius = 15
+        windowView.translatesAutoresizingMaskIntoConstraints = false
+        overlayView.addSubview(windowView)
+        
+        // Size and position the window
+        NSLayoutConstraint.activate([
+            windowView.centerXAnchor.constraint(equalTo: overlayView.centerXAnchor),
+            windowView.centerYAnchor.constraint(equalTo: overlayView.centerYAnchor),
+            windowView.widthAnchor.constraint(equalTo: overlayView.widthAnchor, multiplier: 0.9),
+            windowView.heightAnchor.constraint(equalToConstant: 250)
+        ])
+        
+        // Add a title label
+        let titleLabel = UILabel()
+        titleLabel.text = "Create Account - Your Name"
+        titleLabel.font = UIFont(name: "AvenirNext-Bold", size: 22)
+        titleLabel.textAlignment = .center
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        windowView.addSubview(titleLabel)
+        
+        NSLayoutConstraint.activate([
+            titleLabel.topAnchor.constraint(equalTo: windowView.topAnchor, constant: 20),
+            titleLabel.leadingAnchor.constraint(equalTo: windowView.leadingAnchor, constant: 20),
+            titleLabel.trailingAnchor.constraint(equalTo: windowView.trailingAnchor, constant: -20)
+        ])
+        
+        // Add instruction text
+        let instructionLabel = UILabel()
+        instructionLabel.text = "This will be shown on the leaderboard"
+        instructionLabel.font = UIFont.systemFont(ofSize: 12)
+        instructionLabel.textAlignment = .center
+        instructionLabel.translatesAutoresizingMaskIntoConstraints = false
+        instructionLabel.numberOfLines = 0
+        windowView.addSubview(instructionLabel)
+        
+        NSLayoutConstraint.activate([
+            instructionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 15),
+            instructionLabel.leadingAnchor.constraint(equalTo: windowView.leadingAnchor, constant: 20),
+            instructionLabel.trailingAnchor.constraint(equalTo: windowView.trailingAnchor, constant: -20)
+        ])
+        
+        // Add name text field
+        let nameTextField = UITextField()
+        nameTextField.placeholder = "Enter your name"
+        nameTextField.borderStyle = .roundedRect
+        nameTextField.autocorrectionType = .no
+        nameTextField.returnKeyType = .done
+        nameTextField.delegate = self
+        nameTextField.translatesAutoresizingMaskIntoConstraints = false
+        windowView.addSubview(nameTextField)
+        
+        NSLayoutConstraint.activate([
+            nameTextField.topAnchor.constraint(equalTo: instructionLabel.bottomAnchor, constant: 20),
+            nameTextField.leadingAnchor.constraint(equalTo: windowView.leadingAnchor, constant: 20),
+            nameTextField.trailingAnchor.constraint(equalTo: windowView.trailingAnchor, constant: -20),
+            nameTextField.heightAnchor.constraint(equalToConstant: 40)
+        ])
+        
+        // Create a finish button
+        let finishButton = UIButton(type: .system)
+        finishButton.setTitle("Finish", for: .normal)
+        finishButton.titleLabel?.font = UIFont(name: "AvenirNext-Bold", size: 18)
+        finishButton.backgroundColor = .systemGreen
+        finishButton.setTitleColor(.white, for: .normal)
+        finishButton.layer.cornerRadius = 10
+        finishButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        // Use a closure to capture the nameTextField reference
+        finishButton.addTarget(self, action: #selector(finishAccountCreation(_:)), for: .touchUpInside)
+        finishButton.tag = 1001 // Just to have a unique identifier
+        
+        // Store the text field in the button's layer using associated objects
+        objc_setAssociatedObject(finishButton, UnsafeRawPointer(bitPattern: 1)!, nameTextField, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        
+        windowView.addSubview(finishButton)
+        
+        NSLayoutConstraint.activate([
+            finishButton.topAnchor.constraint(equalTo: nameTextField.bottomAnchor, constant: 30),
+            finishButton.centerXAnchor.constraint(equalTo: windowView.centerXAnchor),
+            finishButton.widthAnchor.constraint(equalToConstant: 200),
+            finishButton.heightAnchor.constraint(equalToConstant: 50),
+            finishButton.bottomAnchor.constraint(lessThanOrEqualTo: windowView.bottomAnchor, constant: -20)
+        ])
+        
+        // Focus the text field
+        nameTextField.becomeFirstResponder()
+    }
+
+    @objc func finishAccountCreation(_ sender: UIButton) {
+        // Retrieve the text field from associated objects
+        guard let nameTextField = objc_getAssociatedObject(sender, UnsafeRawPointer(bitPattern: 1)!) as? UITextField,
+              let name = nameTextField.text, !name.isEmpty else {
+            // Show alert if name is empty
+            let alert = UIAlertController(title: "Error", message: "Please enter your name", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default))
+            view?.window?.rootViewController?.present(alert, animated: true)
+            return
+        }
+        
+        // Save the name to UserDefaults
+        UserDefaults.standard.set(name, forKey: "userFullName")
+        UserDefaults.standard.synchronize()
+        
+        // Find and remove the name input overlay
+        if let overlayView = view?.subviews.first(where: { $0.backgroundColor?.isEqual(UIColor.black.withAlphaComponent(0.7)) ?? false }) {
+            UIView.animate(withDuration: 0.3, animations: {
+                overlayView.alpha = 0
+            }) { _ in
+                overlayView.removeFromSuperview()
+                
+                // Create a new account on the backend
+                self.createNewAccountOnBackend(username: name)
+            }
+        }
+    }
+
+    func createNewAccountOnBackend(username: String) {
+        // Show loading indicator
+        let loadingView = LoadingDotsView(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
+        loadingView.center = view?.center ?? CGPoint(x: 0, y: 0)
+        loadingView.backgroundColor = .clear
+        view?.addSubview(loadingView)
+        
+        // Create parameters for the new account
+        let parameters: [String: Any] = [
+            "username": username,
+            "food": 0,
+            "energy": 0,
+            "goods": 0,
+            "car": 0
+        ]
+        
+        guard let url = URL(string: "https://functionappbackend.azurewebsites.net/api/UpdateEmissions") else {
+            loadingView.removeFromSuperview()
+            showAccountCreationError()
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        do {
+            request.httpBody = try JSONSerialization.data(withJSONObject: parameters)
+            
+            URLSession.shared.dataTask(with: request) { [weak self] data, response, error in
+                DispatchQueue.main.async {
+                    loadingView.stopAnimation()
+                    loadingView.removeFromSuperview()
+                    
+                    guard let self = self else { return }
+                    
+                    if let error = error {
+                        print("Error creating account: \(error)")
+                        self.showAccountCreationError()
+                        return
+                    }
+                    
+                    if (200...299).contains((response as? HTTPURLResponse)?.statusCode ?? 0) {
+                        // Account created successfully
+                        self.showAccountCreationSuccess()
+                        
+                        // Initialize the emissions data
+                        self.FOOD = 0
+                        self.ENERGY = 0
+                        self.GOODS = 0
+                        self.dailyCarEmissions = 0
+                        self.saveArrays()
+                        
+                        // Set up the home page
+                        self.setupHomePage()
+                    } else {
+                        self.showAccountCreationError()
+                    }
+                }
+            }.resume()
+        } catch {
+            loadingView.removeFromSuperview()
+            showAccountCreationError()
+        }
+    }
+
+    func showAccountCreationSuccess() {
+        let alert = UIAlertController(title: "Success", message: "Your account has been created successfully!", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        view?.window?.rootViewController?.present(alert, animated: true)
+    }
+
+    func showAccountCreationError() {
+        let alert = UIAlertController(title: "Error", message: "There was a problem creating your account. Please try again.", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        view?.window?.rootViewController?.present(alert, animated: true)
+    }
+    
+    
+    
+    
+
+    func removeSignInOverlay() {
+        // Remove the overlay with animation
+        UIView.animate(withDuration: 0.3, animations: {
+            self.overlayBlurView.alpha = 0
+            self.signInOverlay.alpha = 0
+        }) { _ in
+            self.overlayBlurView.removeFromSuperview()
+            self.signInOverlay.removeFromSuperview()
+        }
     }
     
     @objc func doneButtonPressed() {
@@ -539,7 +1579,10 @@ class GameScene: SKScene, UITextFieldDelegate, CLLocationManagerDelegate {
 
     
     func setupMidnightTimer() {
-        let midnight = Calendar.current.nextDate(after: Date(), matching: DateComponents(hour: 0, minute: 0), matchingPolicy: .nextTime)!
+        
+        var calendar = Calendar.current
+        calendar.timeZone = .pst
+        let midnight = calendar.nextDate(after: Date(), matching: DateComponents(hour: 0, minute: 0), matchingPolicy: .nextTime)!
         let timer = Timer(fire: midnight, interval: 86400, repeats: true) { _ in
             self.performMidnightTasks()
         }
@@ -689,19 +1732,30 @@ class GameScene: SKScene, UITextFieldDelegate, CLLocationManagerDelegate {
     }
 
     func performMidnightTasks() {
-        EmissionsCache.shared.clearCache()
-        // Only reset car emissions if it's a new day
-        let calendar = Calendar.current
+        var calendar = Calendar.current
+        calendar.timeZone = .pst
         let lastUpdate = UserDefaults.standard.object(forKey: "lastEmissionsUpdate") as? Date ?? Date()
         if !calendar.isDate(lastUpdate, inSameDayAs: Date()) {
+            // Reset ALL daily emissions
             dailyCarEmissions = 0
+            FOOD = 0
+            ENERGY = 0
+            GOODS = 0
             UserDefaults.standard.set(Date(), forKey: "lastEmissionsUpdate")
-        } // Only reset car emissions locally
-        saveArrays()
-        
-        // Fetch updated data from backend
-        if let username = UserDefaults.standard.string(forKey: "userFullName") {
-            fetchUserEmissions(username: username)
+            
+            // Send reset to backend FIRST
+            updateEmissionsOnBackend()
+            
+            // Then save arrays
+            saveArrays()
+            
+            // Clear cache AFTER reset is complete
+            EmissionsCache.shared.clearCache()
+            
+            // Now fetch the fresh data
+            if let username = UserDefaults.standard.string(forKey: "userFullName") {
+                fetchUserEmissions(username: username)
+            }
         }
     }
     
@@ -842,14 +1896,7 @@ class GameScene: SKScene, UITextFieldDelegate, CLLocationManagerDelegate {
 
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for touch in touches {
-            let location = touch.location(in: self)
-            
-            if startScreen == true && getStarted.contains(location) {
-                getStartedTapped()
 
-            }
-        }
     }
     
     func startSimulatedTrip() {
@@ -1047,10 +2094,150 @@ class GameScene: SKScene, UITextFieldDelegate, CLLocationManagerDelegate {
         if !locationTracker.isDriving {
             // Get the emissions from the last driving interval
             let emissions = locationTracker.calculateAndPrintEmissions()
+            print("Driving stopped. Emissions: \(emissions) grams")
             
-            // Update dayByDay, weekByWeek, and allTimeEmissions
-            handleDrivingStopped()
+            // Update local storage
+            dailyCarEmissions += Int(emissions)
+            saveArrays()
+            
+            // Update UI
+            updateUIWithNewEmissions()
+            
+            // Send to backend
+            updateEmissionsOnBackend()
         }
+    }
+    
+    func updateEmissionsOnBackend() {
+        let username = UserDefaults.standard.string(forKey: "userFullName") ?? "DefaultUser"
+        
+        // First, fetch the latest data from the backend
+        guard let url = URL(string: "https://functionappbackend.azurewebsites.net/api/GetUserEmissions") else { return }
+        
+        var components = URLComponents(url: url, resolvingAgainstBaseURL: true)
+        components?.queryItems = [URLQueryItem(name: "username", value: username)]
+        
+        guard let fetchUrl = components?.url else { return }
+        
+        // Show a small loading indicator if needed
+        let loadingTag = 9999
+        if let existingLoading = self.view?.viewWithTag(loadingTag) {
+            existingLoading.removeFromSuperview()
+        }
+        
+        print("Fetching latest emission values before update...")
+        
+        URLSession.shared.dataTask(with: fetchUrl) { [weak self] data, response, error in
+            guard let self = self else { return }
+            
+            if let error = error {
+                print("Error fetching latest emissions: \(error)")
+                self.sendLocalEmissionsToBackend(username: username)
+                return
+            }
+            
+            guard let data = data else {
+                print("No data received when fetching emissions")
+                self.sendLocalEmissionsToBackend(username: username)
+                return
+            }
+            
+            do {
+                // Decode the response to get the latest values
+                let stats = try JSONDecoder().decode(UserStats.self, from: data)
+                
+                // Get today's date in the format used by the backend
+                let today = ISO8601DateFormatter().string(from: Date()).prefix(10)
+                let todayString = String(today)
+                
+                // Get the latest values for today
+                if let todayEmissions = stats.emissions[todayString] {
+                    // Use the backend values for FOOD, ENERGY, GOODS
+                    let parameters: [String: Any] = [
+                        "username": username,
+                        "food": todayEmissions.food,
+                        "energy": todayEmissions.energy,
+                        "goods": todayEmissions.goods,
+                        "car": self.dailyCarEmissions  // Use our local car emissions value
+                    ]
+                    
+                    self.sendUpdatedEmissionsToBackend(parameters: parameters)
+                } else {
+                    // If no data for today, use our local values
+                    self.sendLocalEmissionsToBackend(username: username)
+                }
+                
+            } catch {
+                print("Error decoding emissions data: \(error)")
+                self.sendLocalEmissionsToBackend(username: username)
+            }
+        }.resume()
+    }
+
+    // Helper method to send local values
+    private func sendLocalEmissionsToBackend(username: String) {
+        let parameters: [String: Any] = [
+            "username": username,
+            "food": self.FOOD,
+            "energy": self.ENERGY,
+            "goods": self.GOODS,
+            "car": self.dailyCarEmissions
+        ]
+        
+        sendUpdatedEmissionsToBackend(parameters: parameters)
+    }
+
+    // Helper method to send the actual request
+    private func sendUpdatedEmissionsToBackend(parameters: [String: Any]) {
+        guard let url = URL(string: "https://functionappbackend.azurewebsites.net/api/UpdateEmissions") else { return }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        do {
+            request.httpBody = try JSONSerialization.data(withJSONObject: parameters)
+            
+            print("Sending updated emissions to backend with car: \(parameters["car"] ?? "unknown")")
+            
+            URLSession.shared.dataTask(with: request) { [weak self] data, response, error in
+                if let error = error {
+                    print("Error updating emissions: \(error)")
+                    return
+                }
+                
+                if (200...299).contains((response as? HTTPURLResponse)?.statusCode ?? 0) {
+                    print("Emissions updated successfully on backend")
+                    
+                    // Update local values to match what was sent
+                    DispatchQueue.main.async {
+                        self?.FOOD = parameters["food"] as? Int ?? self?.FOOD ?? 0
+                        self?.ENERGY = parameters["energy"] as? Int ?? self?.ENERGY ?? 0
+                        self?.GOODS = parameters["goods"] as? Int ?? self?.GOODS ?? 0
+                        // Don't update dailyCarEmissions since that's what we just sent
+                        
+                        // Clear cache to force refresh on next fetch
+                        EmissionsCache.shared.clearCache()
+                    }
+                }
+            }.resume()
+        } catch {
+            print("Error serializing parameters: \(error)")
+        }
+    }
+    
+    func updateUIWithNewEmissions() {
+        // Update histograms and charts if they're currently displayed
+        if pieChartHostingController != nil {
+            showPieChart()
+        }
+        
+        if histogramHostingController != nil {
+            displayHistogram()
+        }
+        
+        // Update profile if displayed
+        updateProfile()
     }
 
     func updateLocalEmissions(emissions: Double) {
@@ -1336,16 +2523,33 @@ class GameScene: SKScene, UITextFieldDelegate, CLLocationManagerDelegate {
         
         view.addSubview(hostingController.view)
         
-        // Create "Buy Carbon Offsets" button
-        let donateButton = UIButton(type: .system)
-        donateButton.setTitle("Buy Carbon Offsets", for: .normal)
-        donateButton.titleLabel?.font = UIFont(name: "AvenirNext-Bold", size: 18)
-        donateButton.setTitleColor(.white, for: .normal)
-        donateButton.backgroundColor = .green
-        donateButton.layer.cornerRadius = 10
-        donateButton.addTarget(self, action: #selector(self.donateCarbonCredits), for: .touchUpInside)
+        // Create "Delete Account" button (red)
+        let deleteButton = UIButton(type: .system)
+        deleteButton.setTitle("Delete Account", for: .normal)
+        deleteButton.titleLabel?.font = UIFont(name: "AvenirNext-Bold", size: 18)
+        deleteButton.setTitleColor(.white, for: .normal)
+        deleteButton.backgroundColor = .systemRed
+        deleteButton.layer.cornerRadius = 10
+        deleteButton.addTarget(self, action: #selector(self.deleteAccountButtonTapped), for: .touchUpInside)
         
-        donateButton.frame = CGRect(
+        // Create "Sign Out" button (light green)
+        let signOutButton = UIButton(type: .system)
+        signOutButton.setTitle("Sign Out", for: .normal)
+        signOutButton.titleLabel?.font = UIFont(name: "AvenirNext-Bold", size: 18)
+        signOutButton.setTitleColor(.white, for: .normal)
+        signOutButton.backgroundColor = UIColor(red: 144/255, green: 238/255, blue: 144/255, alpha: 1.0) // Light green
+        signOutButton.layer.cornerRadius = 10
+        signOutButton.addTarget(self, action: #selector(self.signOutButtonTapped), for: .touchUpInside)
+        
+        // Position the buttons
+        deleteButton.frame = CGRect(
+            x: 20,
+            y: hostingController.view.frame.maxY - 100, // Position above the sign out button
+            width: view.bounds.width - 40,
+            height: 50
+        )
+        
+        signOutButton.frame = CGRect(
             x: 20,
             y: hostingController.view.frame.maxY - 40,
             width: view.bounds.width - 40,
@@ -1354,17 +2558,272 @@ class GameScene: SKScene, UITextFieldDelegate, CLLocationManagerDelegate {
         
         // Animate the presentation
         hostingController.view.alpha = 0
-        donateButton.alpha = 0
+        deleteButton.alpha = 0
+        signOutButton.alpha = 0
         UIView.animate(withDuration: 0.3) {
             hostingController.view.alpha = 1
-            donateButton.alpha = 1
+            deleteButton.alpha = 1
+            signOutButton.alpha = 1
             view.backgroundColor = .black
         }
-        view.addSubview(donateButton)
+        
+        view.addSubview(deleteButton)
+        view.addSubview(signOutButton)
         
         // Update the carLabel
         self.carLabel.text = "My Profile"
     }
+    
+    @objc func signOutButtonTapped() {
+        // Show confirmation alert
+        let alert = UIAlertController(title: "Sign Out",
+                                     message: "Are you sure you want to sign out? This will clear all your local data.",
+                                     preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        alert.addAction(UIAlertAction(title: "Sign Out", style: .destructive) { [weak self] _ in
+            self?.performSignOut()
+        })
+        
+        view?.window?.rootViewController?.present(alert, animated: true)
+    }
+
+    func performSignOut() {
+        // Clear user-related data from UserDefaults
+        let userDefaultsKeys = [
+            "userFullName",
+            "carYear",
+            "carMake",
+            "carModel",
+            "ENERGY",
+            "FOOD",
+            "GOODS",
+            "totalKg",
+            "dailyCarEmissions",
+            "carbonOffsetsPurchased",
+            "offsetGrams",
+            "dayByDay",
+            "weekByWeek"
+        ]
+        
+        for key in userDefaultsKeys {
+            UserDefaults.standard.removeObject(forKey: key)
+        }
+        UserDefaults.standard.synchronize()
+        
+        // Reset local variables
+        carYear = ""
+        carMake = ""
+        carModel = ""
+        ENERGY = 0
+        FOOD = 0
+        GOODS = 0
+        dailyCarEmissions = 0
+        totalKg = 0
+        carbonOffsetsPurchased = 0
+        offsetGrams = 0
+        dayByDay = Array(repeating: DailyEmissions(carEmissions: 0, food: 0, energy: 0, goods: 0), count: 7)
+        weekByWeek = [0, 0, 0, 0, 0]
+        
+        // Clear caches
+        EmissionsCache.shared.clearCache()
+        LeaderboardCache.shared.clearCache()
+        
+        // Dismiss profile view and clear UI
+        if let hostingController = self.profileHostingController {
+            UIView.animate(withDuration: 0.3, animations: {
+                hostingController.view.alpha = 0
+                self.view?.backgroundColor = .white
+            }) { _ in
+                hostingController.view.removeFromSuperview()
+                self.profileHostingController = nil
+                
+                // Clear all UIKit subviews except the basic scene nodes
+                self.view?.subviews.forEach { $0.removeFromSuperview() }
+                
+                // Make sure nodes are shown
+                self.welcome.isHidden = false
+                self.ecotrack.isHidden = true
+                self.background.isHidden = false
+                
+                // Recreate the Get Started button first
+                self.createGetStartedButton()
+                
+                // Then show the full Get Started screen (which includes About Us)
+                self.showGetStartedScreen()
+            }
+        } else {
+            // If profile view is not showing
+            self.view?.subviews.forEach { $0.removeFromSuperview() }
+            
+            // Make sure nodes are shown
+            self.welcome.isHidden = false
+            self.ecotrack.isHidden = true
+            self.background.isHidden = false
+            
+            // Recreate the Get Started button first
+            self.createGetStartedButton()
+            
+            // Then show the full Get Started screen
+            self.showGetStartedScreen()
+        }
+    }
+    
+    func createGetStartedButton() {
+        guard let view = self.view else { return }
+        
+        // Create a new Get Started button
+        getStartedButton = UIButton(type: .system)
+        getStartedButton.setTitle("Get Started", for: .normal)
+        getStartedButton.titleLabel?.font = UIFont(name: "AvenirNext-Bold", size: 24)
+        getStartedButton.setTitleColor(.white, for: .normal)
+        getStartedButton.backgroundColor = .systemGreen
+        getStartedButton.layer.cornerRadius = 10
+        getStartedButton.addTarget(self, action: #selector(getStartedButtonTapped), for: .touchUpInside)
+        getStartedButton.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(getStartedButton)
+        
+        // Position the button in the center of the screen
+        NSLayoutConstraint.activate([
+            getStartedButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            getStartedButton.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            getStartedButton.widthAnchor.constraint(equalToConstant: 200),
+            getStartedButton.heightAnchor.constraint(equalToConstant: 50)
+        ])
+        
+        // Make sure the button is visible
+        getStartedButton.isHidden = false
+    }
+    
+    @objc func deleteAccountButtonTapped() {
+        // Show confirmation alert
+        let alert = UIAlertController(title: "Delete Account",
+                                     message: "Are you sure you want to delete your account? This action cannot be undone.",
+                                     preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        alert.addAction(UIAlertAction(title: "Delete", style: .destructive) { [weak self] _ in
+            // Simply perform the same actions as sign out
+            self?.performSignOut()
+            
+            // Show success message
+            let alert = UIAlertController(title: "Account Deleted",
+                                         message: "Your account has been deleted.",
+                                         preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default))
+            self?.view?.window?.rootViewController?.present(alert, animated: true)
+        })
+        
+        view?.window?.rootViewController?.present(alert, animated: true)
+    }
+
+    func performDeleteAccount() {
+        // Show loading indicator
+        let loadingViewController = showLoadingView(withMessage: "Deleting account...")
+        
+        // Get the username
+        guard let username = UserDefaults.standard.string(forKey: "userFullName") else {
+            hideLoadingView(loadingViewController)
+            return
+        }
+        
+        // Call API to delete the account on the server
+        deleteAccountOnBackend(username: username) { [weak self] success in
+            guard let self = self else { return }
+            
+            DispatchQueue.main.async {
+                self.hideLoadingView(loadingViewController)
+                
+                if success {
+                    // If successful, perform the same actions as sign out
+                    self.performSignOut()
+                    
+                    // Show success message
+                    let alert = UIAlertController(title: "Account Deleted",
+                                                 message: "Your account has been successfully deleted.",
+                                                 preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: .default))
+                    self.view?.window?.rootViewController?.present(alert, animated: true)
+                } else {
+                    // Show error message
+                    let alert = UIAlertController(title: "Error",
+                                                 message: "Failed to delete your account. Please try again later.",
+                                                 preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: .default))
+                    self.view?.window?.rootViewController?.present(alert, animated: true)
+                }
+            }
+        }
+    }
+
+    func deleteAccountOnBackend(username: String, completion: @escaping (Bool) -> Void) {
+        // Create the request URL
+        guard let url = URL(string: "https://functionappbackend.azurewebsites.net/api/DeleteUser") else {
+            completion(false)
+            return
+        }
+        
+        // Create the request parameters
+        let parameters: [String: Any] = [
+            "username": username
+        ]
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        // Convert parameters to JSON data
+        do {
+            request.httpBody = try JSONSerialization.data(withJSONObject: parameters)
+        } catch {
+            print("Error serializing delete request parameters: \(error)")
+            completion(false)
+            return
+        }
+        
+        // Make the request
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                print("Error deleting account: \(error)")
+                completion(false)
+                return
+            }
+            
+            // Check the response status code
+            if let httpResponse = response as? HTTPURLResponse {
+                completion((200...299).contains(httpResponse.statusCode))
+            } else {
+                completion(false)
+            }
+        }.resume()
+    }
+    
+    func recreateGetStartedButton() {
+        guard let view = self.view else { return }
+        
+        // Create a new Get Started button
+        getStartedButton = UIButton(type: .system)
+        getStartedButton.setTitle("Get Started", for: .normal)
+        getStartedButton.titleLabel?.font = UIFont(name: "AvenirNext-Bold", size: 24)
+        getStartedButton.setTitleColor(.white, for: .normal)
+        getStartedButton.backgroundColor = .systemGreen
+        getStartedButton.layer.cornerRadius = 10
+        getStartedButton.addTarget(self, action: #selector(getStartedButtonTapped), for: .touchUpInside)
+        getStartedButton.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(getStartedButton)
+        
+        // Position the button in the center of the screen
+        NSLayoutConstraint.activate([
+            getStartedButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            getStartedButton.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            getStartedButton.widthAnchor.constraint(equalToConstant: 200),
+            getStartedButton.heightAnchor.constraint(equalToConstant: 50)
+        ])
+        
+        // Make sure the button is visible
+        getStartedButton.isHidden = false
+    }
+
 
 
 
@@ -1422,7 +2881,8 @@ class GameScene: SKScene, UITextFieldDelegate, CLLocationManagerDelegate {
     func setupHomePage() {
         hideAppleSignInButton()
         welcome.isHidden = true
-        getStarted.isHidden = true
+        getStartedButton.isHidden = true
+        ecotrack.isHidden = true
         // Clear existing views
         self.view?.subviews.forEach { $0.removeFromSuperview() }
         dismissProfile()
@@ -2016,9 +3476,14 @@ class GameScene: SKScene, UITextFieldDelegate, CLLocationManagerDelegate {
             var result = Array(repeating: emptyEmission, count: 7)
             
             // Ensure we only display the last 7 days of data
+            // Ensure we only display the last 7 days of data
             let recentEmissions = emissions.suffix(7)
-            for (index, emission) in recentEmissions.enumerated() {
-                result[index] = emission
+            for (i, emission) in recentEmissions.enumerated() {
+                // Place the most recent emission (last in the array) at index 6 (rightmost)
+                let index = 6 - (recentEmissions.count - 1 - i)
+                if index >= 0 {
+                    result[index] = emission
+                }
             }
             
             return result
@@ -2063,6 +3528,8 @@ class GameScene: SKScene, UITextFieldDelegate, CLLocationManagerDelegate {
         
         static func getDayLabel(for index: Int) -> String {
             let daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+            var calendar = Calendar.current
+            calendar.timeZone = .pst
             let todayIndex = Calendar.current.component(.weekday, from: Date()) - 1
             return daysOfWeek[(todayIndex - (6 - index) + 7) % 7]
         }
@@ -2137,6 +3604,10 @@ class GameScene: SKScene, UITextFieldDelegate, CLLocationManagerDelegate {
         textField.resignFirstResponder()
         return true
     }
+}
+
+extension TimeZone {
+    static let pst = TimeZone(identifier: "America/Los_Angeles")!
 }
 
 // Conform to UIPickerViewDataSource and UIPickerViewDelegate
@@ -2452,55 +3923,46 @@ extension GameScene {
             guard let finalUrl = urlComponents?.url else { return }
             
             URLSession.shared.dataTask(with: finalUrl) { data, response, error in
-                if let error = error {
-                    completion(.failure(error))
-                    return
-                }
-                
-                guard let data = data else {
-                    completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "No data received"])))
-                    return
-                }
+                // Error handling code remains the same
                 
                 do {
-                    var stats = try JSONDecoder().decode(UserStats.self, from: data)
+                    var stats = try JSONDecoder().decode(UserStats.self, from: data!)
                     
                     let calendar = Calendar.current
-                    let today = Date()
                     var weeklyTotals = [0, 0, 0, 0, 0]
                     
                     // Sort dates from newest to oldest
                     let sortedDates = stats.emissions.keys.sorted(by: >)
                     
-                    // Start from today and work backwards
-                    var currentDate = today
-                    var currentWeek = 0
+                    // Get today's date
+                    let today = Date()
                     
-                    while currentWeek < 5 {
-                        // Find Monday of current week
-                        let currentWeekday = calendar.component(.weekday, from: currentDate)
-                        let daysToMonday = (currentWeekday + 6) % 7  // Changed from +5 to +6
-                        let monday = calendar.date(byAdding: .day, value: -daysToMonday, to: currentDate)!
+                    // Find this Monday (the Monday of the current week)
+                    var todayComponents = calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: today)
+                    todayComponents.weekday = 2 // Monday is weekday 2 in Gregorian calendar
+                    let thisMonday = calendar.date(from: todayComponents)!
+                    
+                    print("Today: \(today), This Monday: \(thisMonday)")
+                    
+                    // Process each date
+                    for dateStr in sortedDates {
+                        guard let date = ISO8601DateFormatter().date(from: dateStr + "T00:00:00Z") else { continue }
                         
-                        // Get next Monday (end of week)
-                        let nextMonday = calendar.date(byAdding: .day, value: 7, to: monday)!
+                        // Get the Monday of this date's week
+                        var dateComponents = calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: date)
+                        dateComponents.weekday = 2 // Monday
+                        let dateMonday = calendar.date(from: dateComponents)!
                         
-                        // Sum up emissions for this week
-                        for dateStr in sortedDates {
-                            guard let date = ISO8601DateFormatter().date(from: dateStr + "T00:00:00Z") else { continue }
-                            
-                            // If date is between Monday and next Monday, add to this week's total
-                            if date >= monday && date < nextMonday {
-                                let emission = stats.emissions[dateStr]!
-                                let dailyTotal = emission.carEmissions + emission.food + emission.energy + emission.goods
-                                weeklyTotals[currentWeek] += dailyTotal
-                                print("Date: \(dateStr), Week: \(currentWeek + 1), Monday: \(monday), Daily Total: \(dailyTotal)")
-                            }
+                        // Calculate weeks difference
+                        let weeksDiff = calendar.dateComponents([.weekOfYear], from: dateMonday, to: thisMonday).weekOfYear ?? 0
+                        
+                        // If within the last 5 weeks
+                        if weeksDiff >= 0 && weeksDiff < 5 {
+                            let emission = stats.emissions[dateStr]!
+                            let dailyTotal = emission.carEmissions + emission.food + emission.energy + emission.goods
+                            weeklyTotals[weeksDiff] += dailyTotal
+                            print("Date: \(dateStr), Week: \(weeksDiff + 1), Monday: \(dateMonday), Daily Total: \(dailyTotal)")
                         }
-                        
-                        // Move to previous week
-                        currentDate = calendar.date(byAdding: .day, value: -7, to: currentDate)!
-                        currentWeek += 1
                     }
                     
                     print("Final weekly totals: \(weeklyTotals)")
@@ -3112,5 +4574,23 @@ extension GameScene: UNUserNotificationCenterDelegate {
         }
     }
 }
-
+extension UIDevice {
+    static var isIPad10thGeneration: Bool {
+        // iPad 10th gen has model identifier "iPad13,18" or "iPad13,19"
+        var systemInfo = utsname()
+        uname(&systemInfo)
+        let modelCode = withUnsafePointer(to: &systemInfo.machine) {
+            $0.withMemoryRebound(to: CChar.self, capacity: 1) {
+                ptr in String(validatingUTF8: ptr)
+            }
+        }
+        
+        // Check for iPad 10th generation model identifiers
+        return modelCode == "iPad13,18" || modelCode == "iPad13,19" ||
+               // For Simulator testing:
+               (UIDevice.current.userInterfaceIdiom == .pad &&
+                UIScreen.main.bounds.size.height == 2360 &&
+                UIScreen.main.bounds.size.width == 1640)
+    }
+}
 
